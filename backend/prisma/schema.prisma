@@ -1,0 +1,23 @@
+generator client {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Food {
+  id        Int     @id @default(autoincrement())
+  food_name String
+  category  String
+  calories  Float
+  protein   Float
+  fat       Float
+  carbs     Float
+  fiber     Float?
+  sugar     Float?
+  sodium    Float?
+  cholesterol Float?
+}
