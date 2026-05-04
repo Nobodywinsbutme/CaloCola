@@ -169,25 +169,25 @@ raw_data = """
 def get_category(stt):
     """Hàm phân loại dựa trên STT"""
     if 1 <= stt <= 9:
-        return "Ngũ cốc và sản phẩm chế biến từ chúng"
+        return "Ngũ cốc"
     elif 10 <= stt <= 18:
-        return "Khoai củ và các sản phẩm chế biến từ chúng"
+        return "Khoai củ"
     elif 19 <= stt <= 27:
-        return "Hạt, quả giàu protein, chất béo và chế phẩm"
+        return "Hạt"
     elif 28 <= stt <= 80:
-        return "THỊT VÀ SẢN PHẨM CHẾ BIẾN"
+        return "Thịt"
     elif 81 <= stt <= 114:
-        return "THỦY SẢN VÀ SẢN PHẨM CHẾ BIẾN"
+        return "Thuỷ sản"
     elif 115 <= stt <= 121:
-        return "TRỨNG VÀ SẢN PHẨM CHẾ BIẾN"
+        return "Trứng"
     elif 122 <= stt <= 135:
-        return "ĐỒ HỘP"
+        return "Đồ hộp"
     elif 136 <= stt <= 148:
-        return "ĐỒ NGỌT (ĐƯỜNG, BÁNH, MỨT, KẸO)"
+        return "Đồ ngọt"
     elif 149 <= stt <= 158:
-        return "GIA VỊ, NƯỚC CHẤM"
+        return "Gia vị"
     elif 159 <= stt <= 162:
-        return "NƯỚC GIẢI KHÁT"
+        return "Nước giải khát"
     else:
         return "Khác"
 
