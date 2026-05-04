@@ -15,7 +15,6 @@ const CHART_HEIGHT = 280
 const ROW_HEIGHT = 44       
 const TOP_PAD = 18
 const BOTTOM_PAD = 44
-const LEFT_PAD_OVERALL = 40
 const LEFT_PAD_BYCAT = 140   
 
 export default function BeeswarmPage() {
@@ -62,7 +61,15 @@ export default function BeeswarmPage() {
 
   function drawChart() {
     const svg    = d3.select(svgRef.current)
-    svg.selectAll('*').remove()
+    
+    // Only clear non-essential elements; keep circles for smooth transitions
+    const isFirstDraw = svg.selectAll('circle').empty()
+    
+    if (isFirstDraw) {
+      svg.selectAll('*').remove()
+    } else {
+      svg.selectAll('g').remove()  // clear axes and labels, keep circles
+    }
 
     const width = wrapRef.current.clientWidth
     const height =
@@ -70,7 +77,8 @@ export default function BeeswarmPage() {
         ? Math.max(CHART_HEIGHT, categories.length * ROW_HEIGHT + TOP_PAD + BOTTOM_PAD)
         : CHART_HEIGHT
 
-    const marginLeft = viewMode === 'byCategory' ? LEFT_PAD_BYCAT : LEFT_PAD_OVERALL
+    // Keep the chart X position fixed so bubbles only move vertically.
+    const marginLeft = LEFT_PAD_BYCAT
 
     svg.attr('width', width).attr('height', height)
 
@@ -124,16 +132,37 @@ export default function BeeswarmPage() {
 
     for (let i = 0; i < 300; i++) sim.tick()
 
-    // Draw circles
-    svg.selectAll('circle')
-      .data(nodes)
-      .join('circle')
+    // Draw circles with smooth transitions
+    const circleSelection = svg.selectAll('circle')
+      .data(nodes, (d, i) => d.food_name ?? i)  // use food_name as key for consistency
+      .join(
+        enter =>
+          enter
+            .append('circle')
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .attr('r', d => d.r)
+            .attr('fill', d => colorMap[d.category] || FALLBACK_COLOR)
+            .attr('fill-opacity', 0.75)
+            .attr('stroke', d => colorMap[d.category] || FALLBACK_COLOR)
+            .attr('stroke-width', 1)
+            .style('cursor', 'pointer'),
+        update => update,
+        exit => exit.remove()
+      )
+      // Animate to new positions smoothly
+      .transition()
+      .duration(600)  // 600ms animation
+      .ease(d3.easeLinear)
       .attr('cx', d => d.x)
       .attr('cy', d => d.y)
       .attr('r', d => d.r)
       .attr('fill', d => colorMap[d.category] || FALLBACK_COLOR)
-      .attr('fill-opacity', 0.75)
       .attr('stroke', d => colorMap[d.category] || FALLBACK_COLOR)
+    
+    // Attach event handlers (re-apply after transitions)
+    svg.selectAll('circle')
+      .attr('fill-opacity', 0.75)
       .attr('stroke-width', 1)
       .style('cursor', 'pointer')
       .on('mouseenter', (event, d) => {
@@ -165,9 +194,10 @@ export default function BeeswarmPage() {
         setTooltip({ visible: false, x: 0, y: 0, food: null })
       })
 
-    // Draw category labels on Y-axis (only in "by category" mode)
+    // Draw left-side labels for both modes.
     if (viewMode === 'byCategory') {
       svg.append('g')
+        .attr('class', 'labels')
         .selectAll('text')
         .data(categories)
         .join('text')
@@ -175,9 +205,22 @@ export default function BeeswarmPage() {
         .attr('y', cat => yScale(cat))
         .attr('text-anchor', 'end')
         .attr('dominant-baseline', 'middle')
-        .attr('fill', '#6B7280')   // gray-500
+        .attr('fill', '#6B7280')
         .attr('font-size', 11)
         .text(cat => cat)
+    } else {
+      svg.append('g')
+        .attr('class', 'labels')
+        .selectAll('text')
+        .data(['All categories'])
+        .join('text')
+        .attr('x', marginLeft - 12)
+        .attr('y', yCenter)
+        .attr('text-anchor', 'end')
+        .attr('dominant-baseline', 'middle')
+        .attr('fill', '#6B7280')
+        .attr('font-size', 11)
+        .text(label => label)
     }
 
     // Draw vertical lines for average calories in each category (only in "by category" mode)
@@ -191,6 +234,7 @@ export default function BeeswarmPage() {
       })
 
       svg.append('g')
+        .attr('class', 'avg-lines')
         .selectAll('line')
         .data(avgByCat)
         .join('line')
@@ -198,7 +242,7 @@ export default function BeeswarmPage() {
         .attr('x2', d => xScale(d.avg))
         .attr('y1', d => yScale(d.category) - 16)
         .attr('y2', d => yScale(d.category) + 16)
-        .attr('stroke', '#9CA3AF')       // gray-400
+        .attr('stroke', '#9CA3AF')
         .attr('stroke-width', 1.25)
         .attr('stroke-dasharray', '3,3')
         .attr('opacity', 0.9)
