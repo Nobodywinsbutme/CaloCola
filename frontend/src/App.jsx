@@ -1,31 +1,28 @@
-import { useState } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
-import Sidebar from './components/Sidebar'
-import BeeswarmPage   from './pages/BeeswarmPage'
-import PyramidPage    from './pages/PyramidPage'
-import TrackerPage    from './pages/TrackerPage'
-import RadarPage      from './pages/RadarPage'
-import CalculatorPage from './pages/CalculatorPage'
-
-const PAGES = {
-  beeswarm:   <BeeswarmPage />,
-  pyramid:    <PyramidPage />,
-  tracker:    <TrackerPage />,
-  radar:      <RadarPage />,
-  calculator: <CalculatorPage />,
-}
+import Navbar from './components/ui/Navbar'
+import Explorer from './pages/Explorer'
+import Strategy from './pages/Strategy'
+import Analysis from './pages/Analysis'
+import Planner from './pages/Planner'
 
 export default function App() {
-  const [active, setActive] = useState('beeswarm')
-
   return (
     <AppProvider>
-      <div className="flex min-h-screen">
-        <Sidebar active={active} onSelect={setActive} />
-        <main className="ml-52 flex-1 min-h-screen bg-gray-50">
-          {PAGES[active]}
-        </main>
-      </div>
+      <BrowserRouter>
+        <div className="app-shell">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Explorer />} />
+              <Route path="/strategy" element={<Strategy />} />
+              <Route path="/analysis" element={<Analysis />} />
+              <Route path="/planner" element={<Planner />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+        </div>
+      </BrowserRouter>
     </AppProvider>
   )
 }
