@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { getFoods } from '../services/foodsApi'
+import { getFoods } from '../services/foods/foodsApi'
+import { login as loginApi, register as registerApi } from '../services/auth/authApi'
+import { updateUserProfile } from '../services/user_profile/userProfileApi'
 
 const AppContext = createContext()
 
@@ -7,6 +9,12 @@ export function AppProvider({ children }) {
   const [foods, setFoods] = useState([])
   const [loading, setLoading] = useState(true)
   const [foodsError, setFoodsError] = useState(null)
+
+  // Auth state
+  const [user, setUser] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('jwt') || null)
+  const [authLoading, setAuthLoading] = useState(false)
+  const [authError, setAuthError] = useState(null)
 
   const [tdee, setTdee] = useState(2000)
 
@@ -55,6 +63,62 @@ export function AppProvider({ children }) {
     setMacros({ protein, fat, carbs })
   }
 
+  // Auth methods
+  const register = async (email, password, name, height, weight, age, gender, activityLevel, goal) => {
+    setAuthLoading(true)
+    setAuthError(null)
+    try {
+      await registerApi(email, password, name)
+      
+      // Auto-login after register
+      const data = await loginApi(email, password)
+      setToken(data.access_token)
+      localStorage.setItem('jwt', data.access_token)
+      setUser(data.user)
+
+      // Update profile with health data
+      await updateUserProfile(data.access_token, {
+        height,
+        weight,
+        age,
+        gender,
+        activityLevel,
+        goal,
+      })
+
+      return true
+    } catch (err) {
+      setAuthError(err.message || 'Registration failed')
+      return false
+    } finally {
+      setAuthLoading(false)
+    }
+  }
+
+  const login = async (email, password) => {
+    setAuthLoading(true)
+    setAuthError(null)
+    try {
+      const data = await loginApi(email, password)
+      setToken(data.access_token)
+      localStorage.setItem('jwt', data.access_token)
+      setUser(data.user)
+      return true
+    } catch (err) {
+      setAuthError(err.message || 'Login failed')
+      return false
+    } finally {
+      setAuthLoading(false)
+    }
+  }
+
+  const logout = () => {
+    setUser(null)
+    setToken(null)
+    localStorage.removeItem('jwt')
+  }
+
+  const isAuthenticated = !!token && !!user
 
   return (
     <AppContext.Provider
@@ -67,6 +131,14 @@ export function AppProvider({ children }) {
         consumed, 
         addFood, 
         updateTargets,
+        user,
+        token,
+        authLoading,
+        authError,
+        login,
+        register,
+        logout,
+        isAuthenticated,
       }}
     >
       {children}
