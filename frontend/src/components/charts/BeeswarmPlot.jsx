@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { forceCollide, forceSimulation, forceX, forceY, scaleLinear, scaleSqrt } from 'd3'
+import { easeLinear, forceCollide, forceSimulation, forceX, forceY, scaleLinear, scaleSqrt, select } from 'd3'
 
 const DEFAULT_HEIGHT = 280
 
@@ -23,6 +23,17 @@ export default function BeeswarmPlot({ foods, nutrient, mode, filterCategory, co
   const [nodes, setNodes] = useState([])
   const [height, setHeight] = useState(DEFAULT_HEIGHT)
   const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, food: null })
+  //animation 
+  const circleRefs = useRef(new Map())
+  const previousPositionsRef = useRef(new Map())
+
+  const setCircleRef = id => el => {
+    if (el) {
+      circleRefs.current.set(id, el)
+    } else {
+      circleRefs.current.delete(id)
+    }
+  }
 
   const categories = useMemo(() => {
     const set = new Set(foods.map(f => f.category))
@@ -31,7 +42,7 @@ export default function BeeswarmPlot({ foods, nutrient, mode, filterCategory, co
 
   useEffect(() => {
     if (mode === 'category') {
-      setHeight(Math.max(280, categories.length * 54 + 80))
+      setHeight(Math.max(280, categories.length * 90 + 100))
     } else {
       setHeight(DEFAULT_HEIGHT)
     }
@@ -75,6 +86,40 @@ export default function BeeswarmPlot({ foods, nutrient, mode, filterCategory, co
     setNodes(nodesCopy)
     return () => sim.stop()
   }, [layout, foods, nutrient, mode, height, categories])
+
+  //animation 
+  useEffect(() => {
+    if (!nodes.length) return
+
+    const previousPositions = previousPositionsRef.current
+
+    nodes.forEach(node => {
+      previousPositions.set(node.id, previousPositions.get(node.id) ?? { x: node.x, y: node.y })
+    })
+
+    nodes.forEach(node => {
+      const element = circleRefs.current.get(node.id)
+      if (!element) return
+
+      const previous = previousPositions.get(node.id) ?? { x: node.x, y: node.y }
+      const circle = select(element)
+
+      circle.interrupt()
+      circle
+        .attr('cx', previous.x)
+        .attr('cy', previous.y)
+        .transition()
+        .duration(600)
+        .ease(easeLinear)
+        .attr('cx', node.x)
+        .attr('cy', node.y)
+    })
+
+    previousPositions.clear()
+    nodes.forEach(node => {
+      previousPositions.set(node.id, { x: node.x, y: node.y })
+    })
+  }, [nodes])
 
   const ticks = useMemo(() => layout ? layout.xScale.ticks(6) : [], [layout])
 
@@ -124,6 +169,8 @@ export default function BeeswarmPlot({ foods, nutrient, mode, filterCategory, co
             return (
               <circle
                 key={node.id}
+                //animation 
+                ref={setCircleRef(node.id)}
                 cx={node.x} cy={node.y} r={node.radius}
                 fill={colorMap[node.category] ?? 'var(--hi)'}
                 className={active ? 'bee-dot' : 'bee-dot dim'}

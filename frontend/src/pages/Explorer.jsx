@@ -1,21 +1,8 @@
 import { useMemo, useState } from 'react'
 import BeeswarmPlot from '../components/charts/BeeswarmPlot'
 import { useApp } from '../context/AppContext'
+import {buildColorMap} from '../config/categoryColors'
 
-const PALETTE_MAP = {
-  Vegetable: '#6effc4', Meat: '#ff5a5a', Fruit: '#ffc147',
-  Grain: '#ffd766', Fastfood: '#b094ff', Nuts: '#e07b1a', 'VN Dishes': '#2ee8c8',
-  'Bánh mì': '#ff8a4c', 'Món nước': '#5bbcff', 'Món cuốn': '#2ee8c8',
-  Cơm: '#ffd766', Canh: '#7ae1ff', 'Đồ uống': '#b094ff',
-  Rau: '#6effc4', Thịt: '#ff5a5a', 'Tráng miệng': '#ff79b0',
-}
-const PALETTE_CYCLE = ['#6effc4', '#ff5a5a', '#ffc147', '#ffd766', '#b094ff', '#e07b1a', '#2ee8c8', '#5bbcff', '#ff79b0']
-
-const EMOJIS = {
-  Vegetable: '🥦', Meat: '🥩', Fruit: '🍎', Grain: '🌾', Fastfood: '🍔', Nuts: '🥜', 'VN Dishes': '🇻🇳',
-  'Bánh mì': '🥖', 'Món nước': '🍜', 'Món cuốn': '🥢', Cơm: '🍚', Canh: '🥣',
-  'Đồ uống': '🧋', Rau: '🥬', Thịt: '🍖', 'Tráng miệng': '🍮',
-}
 
 const WEEK = [
   { day: 'Sat', h: 72, col: 'var(--hi)' },
@@ -34,15 +21,12 @@ export default function Explorer() {
   const [filterCategory, setFilterCategory] = useState('all')
 
   const categories = useMemo(() => {
-    const set = new Set(foods.map(f => f.category))
-    return Array.from(set).sort((a, b) => a.localeCompare(b))
+    if (!Array.isArray(foods) || foods.length === 0) return []
+    return [...new Set(foods.map(food => food.category).filter(Boolean))].sort((a, b) => a.localeCompare(b))
   }, [foods])
 
-  const colorMap = useMemo(() => {
-    const map = {}
-    categories.forEach((cat, i) => { map[cat] = PALETTE_MAP[cat] ?? PALETTE_CYCLE[i % PALETTE_CYCLE.length] })
-    return map
-  }, [categories])
+
+  const colorMap = useMemo(() => buildColorMap(categories), [categories])
 
   const visibleCount = filterCategory === 'all' ? foods.length : foods.filter(f => f.category === filterCategory).length
 
@@ -70,7 +54,7 @@ export default function Explorer() {
               className={`pill${filterCategory === cat ? ' active' : ''}`}
               onClick={() => setFilterCategory(cat)}
             >
-              {EMOJIS[cat] ?? ''} {cat}
+              {cat}
             </button>
           ))}
         </div>
