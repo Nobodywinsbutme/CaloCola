@@ -1,6 +1,8 @@
+// This is your Prisma schema file.
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
-  provider             = "prisma-client-py"
-  interface            = "asyncio"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,16 +10,113 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ================= USERS & AUTHENTICATION =================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // Should be hashed with bcrypt
+  name      String?
+  
+  profile   UserProfile?
+  intakes   DailyIntake[]
+  totals    DailyTotal[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ================= USER PROFILES & HEALTH METRICS =================
+
+model UserProfile {
+  id             String  @id @default(cuid())
+  userId         String  @unique
+  user           User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Personal metrics
+  height         Float   // cm
+  weight         Float   // kg
+  age            Int     // years
+  gender         String  // "Male" | "Female"
+  activityLevel  String  // "Sedentary" | "Lightly Active" | "Moderately Active" | "Very Active" | "Extremely Active"
+  goal           String  // "Lose" | "Maintain" | "Gain"
+  
+  // Calculated metrics
+  bmr            Float   // Basal Metabolic Rate (kcal)
+  tdee           Float   // Total Daily Energy Expenditure (kcal)
+  
+  // Daily targets
+  calorieTarget  Float   // kcal
+  proteinTarget  Float   // grams
+  fatTarget      Float   // grams
+  carbTarget     Float   // grams
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ================= FOODS (from foods.json) =================
+// This table can be used to sync/validate foods.json data
+
 model Food {
-  id        Int     @id @default(autoincrement())
-  food_name String
-  category  String
-  calories  Float
-  protein   Float
-  fat       Float
-  carbs     Float
-  fiber     Float?
-  sugar     Float?
-  sodium    Float?
-  cholesterol Float?
+  id          String @id // References food ID from foods.json
+  name        String @unique
+  category    String // Food category
+  
+  // All values per 100g
+  calories    Float  // kcal per 100g
+  protein     Float  // grams per 100g
+  fat         Float  // grams per 100g
+  carbs       Float  // grams per 100g
+  
+  intakes     DailyIntake[]
+  
+  createdAt   DateTime @default(now())
+}
+
+// ================= DAILY TRACKING - INTAKES =================
+// Stores individual food entries logged by the user
+// Multiple entries per day, one row per food item consumed
+
+model DailyIntake {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  foodId    String   // References food ID from foods.json or Food table
+  food      Food?    @relation(fields: [foodId], references: [id])
+  quantity  Float    // grams consumed
+  mealType  String   // "Breakfast" | "Lunch" | "Dinner" | "Snack"
+  intakeDate DateTime @db.Date // YYYY-MM-DD format for grouping
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Index for efficient daily queries
+  @@index([userId, intakeDate])
+}
+
+// ================= DAILY TRACKING - AGGREGATES =================
+// Stores aggregated daily totals (sum of all intakes per day)
+// One record per user per day, calculated from DAILY_INTAKES
+
+model DailyTotal {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  trackDate    DateTime @db.Date // YYYY-MM-DD format
+  
+  // Aggregated daily totals (sum of all intakes for this day)
+  totalCalories Float
+  totalProtein  Float   // grams
+  totalFat      Float   // grams
+  totalCarbs    Float   // grams
+  
+  calculatedAt DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Unique constraint: one record per user per day
+  @@unique([userId, trackDate])
+  @@index([userId, trackDate])
 }
