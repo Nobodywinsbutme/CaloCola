@@ -78,13 +78,6 @@ body::before {
 
 .nav-tools { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 
-.nav-search {
-  background: var(--ink3); border: 1px solid var(--line2); border-radius: 8px;
-  padding: 5px 10px; font-size: 12px; color: var(--t1); font-family: var(--f);
-  outline: none; width: 150px; transition: border-color .15s;
-}
-.nav-search:focus { border-color: var(--hi); }
-
 .nav-avatar {
   width: 28px; height: 28px; border-radius: 50%;
   background: linear-gradient(135deg, var(--hi), var(--teal));
@@ -98,7 +91,7 @@ body::before {
 
 .nav-link {
   font-size: 12px; font-weight: 600; color: var(--t2); text-decoration: none;
-  padding: 5px 10px; border-radius: 6px; transition: all .15s;
+  padding: 5px 20px; border-radius: 6px; transition: all .15s;
   cursor: pointer;
 }
 .nav-link:hover { color: var(--t1); background: var(--ink3); }
@@ -112,7 +105,7 @@ body::before {
 
 .nav-logout {
   background: none; border: none; font-size: 12px; font-weight: 600;
-  color: var(--t2); padding: 5px 10px; border-radius: 6px;
+  color: var(--t2); padding: 5px 20px; border-radius: 6px;
   cursor: pointer; transition: all .15s; font-family: var(--f);
 }
 .nav-logout:hover { color: var(--t1); background: var(--ink3); }

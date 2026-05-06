@@ -54,8 +54,7 @@ export default function Navbar() {
           ))}
         </nav>
         <div className="nav-tools">
-          <input className="nav-search" type="text" placeholder="Search food…" />
-          {isAuthenticated ? (
+            {isAuthenticated ? (
             <div className="nav-auth">
               <div
                 className="nav-avatar"

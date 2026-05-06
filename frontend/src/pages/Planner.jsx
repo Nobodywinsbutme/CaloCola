@@ -98,20 +98,7 @@ export default function Planner() {
           })}
         </div>
 
-        {/* AI mockup */}
-        <div className="card">
-          <div className="section-title">Future AI Integration (Stretch Goal)</div>
-          <div className="ai-box">
-            <div className="ai-icon">📷</div>
-            <div className="ai-title">Snap Your Plate</div>
-            <div className="ai-text">AI food recognition will detect items and auto-fill your tracker</div>
-            <div className="ai-cta">Coming Soon — Upload Photo</div>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 10 }}>
-            <span className="itag">🤖 OpenCV / YOLO architecture planned</span>
-            <span className="itag">📱 mobile camera integration</span>
-          </div>
-        </div>
+       
       </div>
 
       {/* Main log + recommendations */}
