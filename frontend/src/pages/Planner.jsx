@@ -1,187 +1,329 @@
-import { useState } from 'react'
-import ProgressRing from '../components/charts/ProgressRing'
-import RadarChart from '../components/charts/RadarChart'
+import { useEffect, useMemo, useState } from 'react'
+import AddFoodModal from '../components/ui/AddFoodModal'
+import EnergySummary from '../components/ui/EnergySummary'
 import { useApp } from '../context/AppContext'
+import { deleteIntake, updateIntake } from '../services/daily_tracking/dailyTrackingApi'
 
-const MEAL_LOG = [
-  {
-    id: 'breakfast', label: 'Breakfast', kcal: 148, color: 'var(--amber)', open: true,
-    foods: [
-      { name: 'Spinach (50g)', kcal: '12 kcal', macro: 'P:1.4 F:0.2 C:1.7g', col: '#6effc4' },
-      { name: 'Oatmeal (100g)', kcal: '136 kcal', macro: 'P:4.7 F:2.6 C:24g', col: '#ffd766' },
-    ]
-  },
-  {
-    id: 'lunch', label: 'Lunch', kcal: 227, color: 'var(--teal)', open: true,
-    foods: [
-      { name: 'Phở Bò (350g)', kcal: '227 kcal', macro: 'P:18 F:6 C:26g', col: '#2ee8c8' },
-    ]
-  },
-  {
-    id: 'dinner', label: 'Dinner', kcal: 0, color: 'var(--blue)', open: false, foods: [] },
-]
 
-const RECS = [
-  { name: 'Chicken Breast', sub: '+38g protein · 165 kcal' },
-  { name: 'Brown Rice', sub: '+45g carbs · 123 kcal' },
-  { name: 'Cơm tấm (200g)', sub: '+32g carbs · 280 kcal' },
-  { name: 'Greek Yogurt', sub: '+17g protein · 97 kcal' },
-  { name: 'Almonds (30g)', sub: '+6g protein · 173 kcal' },
-]
-
-const ALMOND_RADAR = [80, 65, 30, 88, 20, 95, 55, 40]
 
 export default function Planner() {
-  const { consumed, macros, tdee } = useApp()
-  const remaining = Math.max(0, tdee - consumed.kcal)
-  const [openMeals, setOpenMeals] = useState(() => {
-    const state = {}
-    MEAL_LOG.forEach(m => { state[m.id] = m.open })
-    return state
-  })
+  const { intakes, token, refreshDailyTotals, refreshDailyIntakes } = useApp()
+  const [isAddFoodOpen, setIsAddFoodOpen] = useState(false)
+  const [dateOffset, setDateOffset] = useState(0)
+  const [editingId, setEditingId] = useState(null)
+  const [editQuantity, setEditQuantity] = useState('')
+  const [editMealType, setEditMealType] = useState('Breakfast')
+  const [actionError, setActionError] = useState('')
+  const [actionLoading, setActionLoading] = useState(false)
+  const MEAL_ORDER = ['Uncategorized', 'Breakfast', 'Lunch', 'Dinner', 'Snack']
+  const MEAL_COLORS = {
+    Uncategorized: 'var(--line2)',
+    Breakfast: 'var(--blue)',
+    Lunch: 'var(--pink)',
+    Dinner: 'var(--teal)',
+    Snack: 'var(--amber)',
+  }
 
-  const toggleMeal = id => setOpenMeals(prev => ({ ...prev, [id]: !prev[id] }))
+  const selectedDate = useMemo(() => {
+    const base = new Date()
+    base.setHours(12, 0, 0, 0)
+    base.setDate(base.getDate() + dateOffset)
+    return base
+  }, [dateOffset])
 
-  const macroPairs = [
-    { label: 'Protein', val: consumed.protein, max: macros.protein, col: 'var(--blue)' },
-    { label: 'Fat', val: consumed.fat, max: macros.fat, col: 'var(--amber)' },
-    { label: 'Carbs', val: consumed.carbs, max: macros.carbs, col: 'var(--pink)' },
-  ]
+  const selectedDateIso = selectedDate.toISOString().split('T')[0]
+
+  const dateLabel = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const compare = new Date(selectedDate)
+    compare.setHours(0, 0, 0, 0)
+    const diffDays = Math.round((compare - today) / 86400000)
+
+    if (diffDays === 0) return 'Today'
+    if (diffDays === -1) return 'Yesterday'
+    if (diffDays === 1) return 'Tomorrow'
+    return selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    })
+  }, [selectedDate])
+
+  const meals = useMemo(() => {
+    const map = new Map()
+    MEAL_ORDER.forEach((label) => {
+      map.set(label, {
+        id: label,
+        label,
+        kcal: 0,
+        protein: 0,
+        fat: 0,
+        carbs: 0,
+        foods: [],
+      })
+    })
+
+    intakes.forEach((intake) => {
+      const mealLabel = MEAL_ORDER.includes(intake.mealType) ? intake.mealType : 'Uncategorized'
+      const meal = map.get(mealLabel)
+      const food = intake.food || intake.foodItem || {}
+      const qty = Number(intake.quantity || 0)
+      const ratio = qty ? qty / 100 : 1
+      const kcal = Math.round((Number(food.calories) || 0) * ratio)
+      const protein = Math.round((Number(food.protein) || 0) * ratio)
+      const fat = Math.round((Number(food.fat) || 0) * ratio)
+      const carbs = Math.round((Number(food.carbs) || 0) * ratio)
+
+      meal.kcal += kcal
+      meal.protein += protein
+      meal.fat += fat
+      meal.carbs += carbs
+
+      meal.foods.push({
+        intakeId: intake.id,
+        name: food.name || intake.foodName || 'Food',
+        qty: qty ? `${qty} g` : '-',
+        quantity: qty || 0,
+        mealType: mealLabel,
+        kcal,
+        col: MEAL_COLORS[mealLabel],
+      })
+    })
+
+    return MEAL_ORDER.map((label) => {
+      const meal = map.get(label)
+      return {
+        ...meal,
+        macro: `${meal.protein}p · ${meal.fat}f · ${meal.carbs}c`,
+      }
+    })
+  }, [intakes])
+
+  const [openMeals, setOpenMeals] = useState({})
+  useEffect(() => {
+    setOpenMeals((prev) => {
+      const next = { ...prev }
+      meals.forEach((meal) => {
+        if (next[meal.id] === undefined) next[meal.id] = true
+      })
+      return next
+    })
+  }, [meals])
+
+  const toggleMeal = (id) => setOpenMeals((prev) => ({ ...prev, [id]: !prev[id] }))
+
+  useEffect(() => {
+    refreshDailyTotals(selectedDateIso)
+    refreshDailyIntakes(selectedDateIso)
+  }, [selectedDateIso, refreshDailyTotals, refreshDailyIntakes])
+
+  const handleEdit = (food) => {
+    setEditingId(food.intakeId)
+    setEditQuantity(food.quantity)
+    setEditMealType(food.mealType || 'Breakfast')
+    setActionError('')
+  }
+
+  const handleCancelEdit = () => {
+    setEditingId(null)
+    setEditQuantity('')
+    setEditMealType('Breakfast')
+    setActionError('')
+  }
+
+  const handleSaveEdit = async (intakeId) => {
+    if (!token) return
+    const qty = Number(editQuantity)
+    if (!qty || qty <= 0) {
+      setActionError('Quantity must be greater than 0.')
+      return
+    }
+    setActionLoading(true)
+    setActionError('')
+    try {
+      await updateIntake(token, intakeId, {
+        quantity: qty,
+        mealType: editMealType,
+      })
+      await refreshDailyTotals(selectedDateIso)
+      await refreshDailyIntakes(selectedDateIso)
+      handleCancelEdit()
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update intake.')
+    } finally {
+      setActionLoading(false)
+    }
+  }
+
+  const handleDelete = async (intakeId) => {
+    if (!token) return
+    setActionLoading(true)
+    setActionError('')
+    try {
+      await deleteIntake(token, intakeId)
+      await refreshDailyTotals(selectedDateIso)
+      await refreshDailyIntakes(selectedDateIso)
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete intake.')
+    } finally {
+      setActionLoading(false)
+    }
+  }
 
   return (
-    <section className="page">
+    <section className="page planner-page">
       <div className="page-head">
         <div>
-          <h1>Automated Meal Construction & Food Detail</h1>
-          <p>Gap-filling algorithm · food detail deep dive · stretch goal AI integration mockup</p>
+          <h1>Planner</h1>
+          <p>Daily log and nutrition targets overview.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button className="btn btn-ghost" style={{ padding: '5px 10px' }}>←</button>
-          <div style={{ fontSize: 17, fontWeight: 800 }}>Wednesday, 23 Apr 2026</div>
-          <button className="btn btn-ghost" style={{ padding: '5px 10px' }}>→</button>
+          <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev - 1)}>←</button>
+          <div style={{ fontSize: 17, fontWeight: 800 }}>{dateLabel}</div>
+          <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev + 1)}>→</button>
           <span className="badge warn" style={{ marginLeft: 8 }}>🔥 5 day streak</span>
         </div>
       </div>
 
-      {/* Top row: ring + macros + AI */}
-      <div className="grid-three">
-        {/* Progress ring */}
-        <div className="card">
-          <div className="section-title">Daily Progress Ring</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <ProgressRing value={consumed.kcal} max={tdee} size={96} stroke={10} color="var(--amber)" />
-            <div>
-              <div style={{ fontSize: 12.5, color: 'var(--t2)' }}>Goal: <b style={{ color: 'var(--t1)' }}>{tdee} kcal</b></div>
-              <div style={{ color: 'var(--hi)', fontSize: 13, fontWeight: 700, marginTop: 3 }}>{remaining} remaining</div>
-              <div style={{ fontSize: 11, color: 'var(--t3)', marginTop: 4 }}>{Math.round(consumed.kcal / tdee * 100)}% complete</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Live macro bars */}
-        <div className="card">
-          <div className="section-title">Live Macro Progress</div>
-          {macroPairs.map(m => {
-            const pct = Math.round(m.val / m.max * 100)
-            const over = pct > 100
-            return (
-              <div key={m.label} className="bar-row">
-                <div className="bar-meta">
-                  <span style={{ color: m.col }}>{m.label}</span>
-                  <span style={{ color: over ? 'var(--red)' : 'inherit' }}>{m.val}/{m.max}g · {pct}%</span>
-                </div>
-                <div className="bar-track">
-                  <div className="bar-fill" style={{ background: over ? 'var(--red)' : m.col, width: `${Math.min(pct, 100)}%` }} />
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-       
+      {/* Dashboard summary */}
+      <div className="planner-summary">
+        <EnergySummary />
       </div>
 
-      {/* Main log + recommendations */}
-      <div className="grid-planner">
-        {/* Left: meal log + food detail */}
-        <div>
-          <div className="section-title" style={{ marginBottom: 10 }}>Meal Log</div>
-          {MEAL_LOG.map(meal => (
-            <div key={meal.id} className="meal-section">
-              <div className="meal-header" onClick={() => toggleMeal(meal.id)}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: meal.color }} />
-                <div className="meal-name">{meal.label}</div>
-                <div className="meal-kcal">{meal.kcal} kcal</div>
-                <div className={`meal-chevron${openMeals[meal.id] ? ' open' : ''}`}>▼</div>
+      <div className="planner-grid">
+        <div className="planner-main">
+          <div className="card planner-log">
+            <div className="planner-log-toolbar">
+              <div className="planner-tabs">
+                <button type="button" className="tab active">Food</button>
+                <button type="button" className="tab">Exercise</button>
               </div>
-              {openMeals[meal.id] && (
-                <div className="meal-body">
-                  {meal.foods.map(food => (
-                    <div key={food.name} className="food-row">
-                      <div className="food-dot" style={{ background: food.col }} />
-                      <div className="food-name">{food.name}</div>
-                      <div className="food-cals">{food.kcal} · {food.macro}</div>
-                    </div>
-                  ))}
-                  <input type="text" placeholder={`+ Add food to ${meal.label}…`} style={{ marginTop: 4, fontSize: 12 }} />
-                </div>
-              )}
+              <div className="planner-actions">
+                <button type="button" className="btn btn-ghost" onClick={() => setIsAddFoodOpen(true)}>+ Add food</button>
+                <button type="button" className="btn btn-ghost">+ Add exercise</button>
+              </div>
             </div>
-          ))}
 
-          <hr className="divider" />
+            {actionError && <div className="meal-error">{actionError}</div>}
 
-          {/* Food detail */}
-          <div className="section-title" style={{ marginBottom: 10 }}>Food Detail — Almonds</div>
-          <div className="grid-two" style={{ gap: 12 }}>
-            <div className="card">
-              <div className="badge" style={{ background: 'rgba(224,123,26,.18)', color: '#e07b1a', marginBottom: 8 }}>
-                <div className="bdot" style={{ background: '#e07b1a' }} /> Nuts
-              </div>
-              <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -.3, marginBottom: 2 }}>Almonds</div>
-              <div style={{ color: '#e07b1a', fontSize: 22, fontWeight: 800 }}>5.76 <span style={{ fontSize: 12, color: 'var(--t2)', fontWeight: 400 }}>cal/g</span></div>
-              <hr className="divider" />
-              <div style={{ fontSize: 11, color: 'var(--t2)', marginBottom: 8 }}>
-                Serving: <b style={{ color: 'var(--hi)' }}>100g</b> = <b>576 kcal</b>
-              </div>
-              <button className="btn btn-hi btn-full" style={{ marginTop: 4 }}>+ Add to Today</button>
-            </div>
-            <div className="card">
-              <div className="section-title">In Nuts Category</div>
-              <div className="grid-two" style={{ gap: 7 }}>
-                {[['Cashews', '5.53', '-0.23', 'var(--hi)'], ['Walnuts', '6.54', '+0.78', 'var(--red)'], ['Peanuts', '5.67', '-0.09', 'var(--hi)'], ['Pistachio', '5.57', '-0.19', 'var(--hi)']].map(([n, v, d, c]) => (
-                  <div key={n} className="sim-card">
-                    <div className="sim-name">{n}</div>
-                    <div className="sim-val">{v} <span style={{ color: c }}>{d}</span></div>
+            <div>
+              {meals.map((meal) => (
+                <div key={meal.id} className="meal-section">
+                  <div className="meal-header" onClick={() => toggleMeal(meal.id)}>
+                    <span className="meal-name">{meal.label}</span>
+                    <span className="meal-macro">{meal.kcal} kcal · {meal.macro}</span>
+                    <span className={`meal-chevron ${openMeals[meal.id] ? 'open' : ''}`}>▾</span>
                   </div>
-                ))}
-              </div>
+                  {openMeals[meal.id] && (
+                    <div className="meal-body">
+                      {meal.foods.length === 0 ? (
+                        <div className="meal-empty">No entries yet.</div>
+                      ) : (
+                        meal.foods.map((food, idx) => (
+                          <div key={`${meal.id}-${idx}`} className="food-row">
+                            <span className="food-dot" style={{ background: food.col }} />
+                            <span className="food-name">{food.name}</span>
+                            {editingId === food.intakeId ? (
+                              <div className="food-edit">
+                                <input
+                                  type="number"
+                                  min="1"
+                                  value={editQuantity}
+                                  onChange={(e) => setEditQuantity(e.target.value)}
+                                />
+                                <select value={editMealType} onChange={(e) => setEditMealType(e.target.value)}>
+                                  <option value="Breakfast">Breakfast</option>
+                                  <option value="Lunch">Lunch</option>
+                                  <option value="Dinner">Dinner</option>
+                                  <option value="Snack">Snack</option>
+                                </select>
+                                <button type="button" className="btn btn-hi" onClick={() => handleSaveEdit(food.intakeId)} disabled={actionLoading}>Save</button>
+                                <button type="button" className="btn btn-ghost" onClick={handleCancelEdit} disabled={actionLoading}>Cancel</button>
+                              </div>
+                            ) : (
+                              <>
+                                <span className="food-qty">{food.qty}</span>
+                                <span className="food-cals">{food.kcal} kcal</span>
+                                {food.intakeId && (
+                                  <span className="food-actions">
+                                    <button type="button" className="btn btn-ghost" onClick={() => handleEdit(food)}>Edit</button>
+                                    <button type="button" className="btn btn-ghost" onClick={() => handleDelete(food.intakeId)} disabled={actionLoading}>Delete</button>
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Right: recommendations + radar */}
-        <div>
-          <div className="section-title" style={{ marginBottom: 10 }}>Algorithmic Recommendations</div>
-          {RECS.map(rec => (
-            <div key={rec.name} className="rec-card">
-              <div className="rec-info">
-                <div className="rec-name">{rec.name}</div>
-                <div className="rec-sub">{rec.sub}</div>
-              </div>
-              <button className="rec-add">+ Add</button>
-            </div>
-          ))}
-
-          <hr className="divider" />
-          <div className="section-title" style={{ marginBottom: 8 }}>Food Detail Radar</div>
-          <RadarChart values={ALMOND_RADAR} color="#ff79b0" fillColor="rgba(255,121,176,0.2)" />
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', fontSize: 10.5, marginTop: 6 }}>
-            <span style={{ color: 'var(--pink)' }}>■ Almonds</span>
-            <span style={{ color: 'var(--teal)' }}>-- RDI</span>
+        <aside className="planner-side">
+          <div className="card planner-date">
+            <button type="button" className="btn btn-ghost" onClick={() => setDateOffset((prev) => prev - 1)}>←</button>
+            <div className="planner-date-label">{dateLabel}</div>
+            <button type="button" className="btn btn-ghost" onClick={() => setDateOffset((prev) => prev + 1)}>→</button>
           </div>
-        </div>
+
+          <div className="card planner-targets">
+            <div className="planner-targets-title">Daily Target Editor</div>
+            <div className="planner-targets-sub">Thu - Default Macronutrient Targets</div>
+          </div>
+
+          <div className="card planner-water">
+            <div className="planner-water-head">
+              <div>
+                <div className="planner-water-title">Water</div>
+                <div className="planner-water-sub">48 / 64 fl oz</div>
+              </div>
+              <button type="button" className="btn btn-ghost">▴</button>
+            </div>
+
+            <div className="planner-water-cups">
+              <div className="water-cup full" />
+              <div className="water-cup full" />
+              <div className="water-cup full" />
+              <div className="water-cup full" />
+              <div className="water-cup full" />
+              <div className="water-cup full" />
+              <div className="water-cup" />
+              <div className="water-cup" />
+            </div>
+
+            <div className="planner-water-tip">
+              Water added here will contribute to your total water target.
+            </div>
+
+            <div className="planner-water-total">
+              <span>Total Water - 55.86 / 125.11 fl oz</span>
+              <span>45%</span>
+            </div>
+            <div className="bar-track">
+              <div className="bar-fill" style={{ width: '45%', background: 'var(--blue)' }} />
+            </div>
+
+            <div className="planner-water-actions">
+              <button type="button" className="btn btn-ghost">+ Add custom</button>
+              <button type="button" className="btn btn-ghost">Water settings</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div>
+        <AddFoodModal
+          isOpen={isAddFoodOpen}
+          onClose={() => setIsAddFoodOpen(false)}
+          intakeDate={selectedDateIso}
+        />
       </div>
     </section>
-  )
+    )
 }
