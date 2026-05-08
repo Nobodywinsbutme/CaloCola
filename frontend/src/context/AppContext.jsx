@@ -25,7 +25,69 @@ export function AppProvider({ children }) {
   const [tdee, setTdee] = useState(2000)
   const [macros, setMacros] = useState({ protein: 120, fat: 70, carbs: 260 })
   const [consumed, setConsumed] = useState({ kcal: 0, protein: 0, fat: 0, carbs: 0 })
+  const [waterTotalMl, setWaterTotalMl] = useState(0)
   const [intakes, setIntakes] = useState([])
+
+  // Global toasts
+  const [toasts, setToasts] = useState([])
+
+  const applyProfile = useCallback((profile) => {
+    setUserProfile(profile)
+    setUser({
+      id: profile?.id,
+      email: profile?.email,
+      name: profile?.name,
+    })
+
+    if (profile?.profile) {
+      const { tdee: profileTdee, proteinTarget, fatTarget, carbTarget } = profile.profile
+      setTdee(profileTdee || 2000)
+      setMacros({
+        protein: proteinTarget || 120,
+        fat: fatTarget || 70,
+        carbs: carbTarget || 260,
+      })
+    }
+  }, [])
+
+  const dismissToast = useCallback((id) => {
+    setToasts(prev => prev.filter(item => item.id !== id))
+  }, [])
+
+  const notify = useCallback((payload) => {
+    const { type = 'error', title, message, duration = 4000 } = payload || {}
+    const id = `${Date.now()}-${Math.round(Math.random() * 10000)}`
+    const toast = { id, type, title, message }
+    setToasts(prev => [...prev, toast])
+    if (duration > 0) {
+      setTimeout(() => dismissToast(id), duration)
+    }
+    return id
+  }, [dismissToast])
+
+  const applyWaterDelta = useCallback((delta) => {
+    setWaterTotalMl(prev => Math.max(0, Math.round(prev + delta)))
+  }, [])
+
+  const applyConsumedDelta = useCallback((delta) => {
+    setConsumed(prev => ({
+      kcal: Math.round(prev.kcal + (delta.kcal || 0)),
+      protein: Math.round(prev.protein + (delta.protein || 0)),
+      fat: Math.round(prev.fat + (delta.fat || 0)),
+      carbs: Math.round(prev.carbs + (delta.carbs || 0)),
+    }))
+  }, [])
+
+  const addLocalIntakes = useCallback((items) => {
+    if (!items || !items.length) return
+    setIntakes(prev => [...items, ...prev])
+  }, [])
+
+  const removeLocalIntakes = useCallback((ids) => {
+    if (!ids || !ids.length) return
+    const idSet = new Set(ids)
+    setIntakes(prev => prev.filter(item => !idSet.has(item.id)))
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -67,23 +129,7 @@ export function AppProvider({ children }) {
         const profile = await getUserProfile(token)
         if (cancelled) return
 
-        setUserProfile(profile)
-        setUser({
-          id: profile?.id,
-          email: profile?.email,
-          name: profile?.name,
-        })
-        
-        // Set TDEE and macro targets from profile
-        if (profile?.profile) {
-          const { tdee: profileTdee, proteinTarget, fatTarget, carbTarget } = profile.profile
-          setTdee(profileTdee || 2000)
-          setMacros({
-            protein: proteinTarget || 120,
-            fat: fatTarget || 70,
-            carbs: carbTarget || 260,
-          })
-        }
+        applyProfile(profile)
 
         // Load today's totals
         const today = new Date().toISOString().split('T')[0]
@@ -97,8 +143,10 @@ export function AppProvider({ children }) {
             fat: Math.round(totals.totalFat || 0),
             carbs: Math.round(totals.totalCarbs || 0),
           })
+          setWaterTotalMl(Math.round(totals.totalWaterMl || 0))
         } else {
           setConsumed({ kcal: 0, protein: 0, fat: 0, carbs: 0 })
+          setWaterTotalMl(0)
         }
 
         const intakeData = await getIntakes(token, today)
@@ -115,7 +163,7 @@ export function AppProvider({ children }) {
     loadProfileAndDailyData()
 
     return () => { cancelled = true }
-  }, [token])
+  }, [token, applyProfile])
 
 
   const addFood = (food, grams = 100) => {
@@ -145,11 +193,22 @@ export function AppProvider({ children }) {
           fat: Math.round(totals.totalFat || 0),
           carbs: Math.round(totals.totalCarbs || 0),
         })
+        setWaterTotalMl(Math.round(totals.totalWaterMl || 0))
       }
     } catch (err) {
       console.error('Error refreshing daily totals:', err)
     }
   }, [token])
+
+  const refreshUserProfile = useCallback(async () => {
+    if (!token) return
+    try {
+      const profile = await getUserProfile(token)
+      applyProfile(profile)
+    } catch (err) {
+      console.error('Error refreshing profile:', err)
+    }
+  }, [token, applyProfile])
 
   const refreshDailyIntakes = useCallback(async (date) => {
     if (!token) return
@@ -230,11 +289,20 @@ export function AppProvider({ children }) {
         tdee,
         macros, 
         consumed, 
+        waterTotalMl,
         intakes,
+        toasts,
+        notify,
+        dismissToast,
+        applyWaterDelta,
+        applyConsumedDelta,
+        addLocalIntakes,
+        removeLocalIntakes,
         addFood, 
         updateTargets,
         refreshDailyTotals,
         refreshDailyIntakes,
+        refreshUserProfile,
         user,
         token,
         authLoading,

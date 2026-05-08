@@ -11,7 +11,7 @@ export class CreateIntakeDto {
   quantity: number;
 
   @IsString()
-  @IsIn(['Breakfast', 'Lunch', 'Dinner', 'Snack'])
+  @IsIn(['Uncategorized', 'Breakfast', 'Lunch', 'Dinner', 'Snack'])
   mealType: string;
 
   @IsDateString()

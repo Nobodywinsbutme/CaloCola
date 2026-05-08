@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateIntakeDto , UpdateIntakeDto , DeleteIntakeDto , IntakeResponseDto } from './dto/index';
+import { CreateIntakeDto , UpdateIntakeDto , DeleteIntakeDto , IntakeResponseDto, CreateWaterIntakeDto } from './dto/index';
 
 
 
@@ -117,6 +117,65 @@ export class DailyTrackingService {
     });
   }
 
+  async addWaterIntake(userId: string, data: CreateWaterIntakeDto) {
+    const intakeDate = this.normalizeDate(data.intakeDate);
+    const intake = await this.prisma.waterIntake.create({
+      data: {
+        userId,
+        intakeDate,
+        amountMl: data.amountMl,
+      },
+    });
+
+    await this.recalculateDailyTotals(userId, intakeDate);
+
+    return intake;
+  }
+
+  async deleteLatestWaterIntake(userId: string, date: string) {
+    if (!date) {
+      return null;
+    }
+    const targetDate = this.normalizeDate(date);
+    const latest = await this.prisma.waterIntake.findFirst({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    if (!latest) {
+      return null;
+    }
+
+    const deleted = await this.prisma.waterIntake.delete({
+      where: { id: latest.id },
+    });
+
+    await this.recalculateDailyTotals(userId, targetDate);
+
+    return deleted;
+  }
+
+  async getWaterIntakes(userId: string, date: string) {
+    if (!date) {
+      return [];
+    }
+    const targetDate = this.normalizeDate(date);
+    return this.prisma.waterIntake.findMany({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
   private async recalculateDailyTotals(userId: string, date: string | Date) {
     const targetDate = this.normalizeDate(date);
     const intakes = await this.prisma.dailyIntake.findMany({
@@ -145,6 +204,18 @@ export class DailyTrackingService {
       }
     }
 
+    const waterIntakes = await this.prisma.waterIntake.findMany({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+    });
+
+    let totalWaterMl = 0;
+    for (const intake of waterIntakes) {
+      totalWaterMl += intake.amountMl;
+    }
+
     await this.prisma.dailyTotal.upsert({
       where: {
         userId_trackDate: {
@@ -157,6 +228,7 @@ export class DailyTrackingService {
         totalProtein,
         totalFat,
         totalCarbs,
+        totalWaterMl,
       },
       create: {
         userId,
@@ -165,6 +237,7 @@ export class DailyTrackingService {
         totalProtein,
         totalFat,
         totalCarbs,
+        totalWaterMl,
       },
     });
   }

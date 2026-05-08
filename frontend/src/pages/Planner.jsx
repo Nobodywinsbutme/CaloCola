@@ -1,20 +1,32 @@
 import { useEffect, useMemo, useState } from 'react'
 import AddFoodModal from '../components/ui/AddFoodModal'
 import EnergySummary from '../components/ui/EnergySummary'
+import WaterSettingsModal from '../components/ui/WaterSettingsModal'
 import { useApp } from '../context/AppContext'
-import { deleteIntake, updateIntake } from '../services/daily_tracking/dailyTrackingApi'
+import { addWaterIntake, deleteIntake, deleteLatestWaterIntake, updateIntake } from '../services/daily_tracking/dailyTrackingApi'
 
 
 
 export default function Planner() {
-  const { intakes, token, refreshDailyTotals, refreshDailyIntakes } = useApp()
+  const {
+    intakes,
+    token,
+    refreshDailyTotals,
+    refreshDailyIntakes,
+    userProfile,
+    waterTotalMl,
+    notify,
+    applyWaterDelta,
+  } = useApp()
   const [isAddFoodOpen, setIsAddFoodOpen] = useState(false)
+  const [isWaterSettingsOpen, setIsWaterSettingsOpen] = useState(false)
   const [dateOffset, setDateOffset] = useState(0)
   const [editingId, setEditingId] = useState(null)
   const [editQuantity, setEditQuantity] = useState('')
   const [editMealType, setEditMealType] = useState('Breakfast')
   const [actionError, setActionError] = useState('')
   const [actionLoading, setActionLoading] = useState(false)
+  const [waterLoading, setWaterLoading] = useState(false)
   const MEAL_ORDER = ['Uncategorized', 'Breakfast', 'Lunch', 'Dinner', 'Snack']
   const MEAL_COLORS = {
     Uncategorized: 'var(--line2)',
@@ -32,6 +44,25 @@ export default function Planner() {
   }, [dateOffset])
 
   const selectedDateIso = selectedDate.toISOString().split('T')[0]
+
+  const waterTargetMl = useMemo(() => {
+    const profile = userProfile?.profile
+    const weight = Number(profile?.weight || 0)
+    const fallbackTarget = weight ? Math.round(weight * 30) : 2000
+    const target = Number(profile?.waterTarget || 0)
+    return Math.round(target || fallbackTarget)
+  }, [userProfile])
+
+  const cupSizeMl = useMemo(() => {
+    const profile = userProfile?.profile
+    const size = Number(profile?.cupSizeMl || 0)
+    return Math.round(size || 250)
+  }, [userProfile])
+
+  const totalWaterMl = Math.max(0, Math.round(Number(waterTotalMl || 0)))
+  const totalCups = Math.max(1, Math.ceil(waterTargetMl / cupSizeMl))
+  const filledCups = Math.min(totalCups, Math.floor(totalWaterMl / cupSizeMl))
+  const waterPercent = waterTargetMl ? Math.min(100, Math.round((totalWaterMl / waterTargetMl) * 100)) : 0
 
   const dateLabel = useMemo(() => {
     const today = new Date()
@@ -88,6 +119,9 @@ export default function Planner() {
         quantity: qty || 0,
         mealType: mealLabel,
         kcal,
+        protein,
+        carbs,
+        fats: fat,
         col: MEAL_COLORS[mealLabel],
       })
     })
@@ -122,7 +156,9 @@ export default function Planner() {
   const handleEdit = (food) => {
     setEditingId(food.intakeId)
     setEditQuantity(food.quantity)
-    setEditMealType(food.mealType || 'Breakfast')
+    // Only allow valid meal types for the edit control (server accepts Breakfast, Lunch, Dinner, Snack)
+    const allowed = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
+    setEditMealType(allowed.includes(food.mealType) ? food.mealType : 'Breakfast')
     setActionError('')
   }
 
@@ -172,6 +208,56 @@ export default function Planner() {
     }
   }
 
+  const handleAddWater = async (amountMl) => {
+    if (!token) {
+      notify({ type: 'error', message: 'Please sign in to add water.' })
+      return false
+    }
+    if (!amountMl || amountMl <= 0) {
+      notify({ type: 'error', message: 'Water amount must be greater than 0.' })
+      return false
+    }
+    setWaterLoading(true)
+    applyWaterDelta(amountMl)
+    try {
+      await addWaterIntake(token, { amountMl, intakeDate: selectedDateIso })
+      await refreshDailyTotals(selectedDateIso)
+      return true
+    } catch (err) {
+      applyWaterDelta(-amountMl)
+      notify({ type: 'error', message: err instanceof Error ? err.message : 'Failed to add water.' })
+      return false
+    } finally {
+      setWaterLoading(false)
+    }
+  }
+
+  const handleRemoveWater = async () => {
+    if (!token) {
+      notify({ type: 'error', message: 'Please sign in to remove water.' })
+      return
+    }
+    if (totalWaterMl <= 0) return
+    const amountMl = Math.min(cupSizeMl, totalWaterMl)
+    setWaterLoading(true)
+    applyWaterDelta(-amountMl)
+    try {
+      await deleteLatestWaterIntake(token, selectedDateIso)
+      await refreshDailyTotals(selectedDateIso)
+    } catch (err) {
+      applyWaterDelta(amountMl)
+      notify({ type: 'error', message: err instanceof Error ? err.message : 'Failed to remove water.' })
+    } finally {
+      setWaterLoading(false)
+    }
+  }
+
+  const handleSaveCustomWater = async (amountMl) => {
+    const ok = await handleAddWater(amountMl)
+    return ok
+  }
+
+
   return (
     <section className="page planner-page">
       <div className="page-head">
@@ -183,7 +269,6 @@ export default function Planner() {
           <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev - 1)}>←</button>
           <div style={{ fontSize: 17, fontWeight: 800 }}>{dateLabel}</div>
           <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev + 1)}>→</button>
-          <span className="badge warn" style={{ marginLeft: 8 }}>🔥 5 day streak</span>
         </div>
       </div>
 
@@ -234,6 +319,7 @@ export default function Planner() {
                                   onChange={(e) => setEditQuantity(e.target.value)}
                                 />
                                 <select value={editMealType} onChange={(e) => setEditMealType(e.target.value)}>
+                                  <option value="Uncategorized">Uncategorized</option>
                                   <option value="Breakfast">Breakfast</option>
                                   <option value="Lunch">Lunch</option>
                                   <option value="Dinner">Dinner</option>
@@ -246,6 +332,9 @@ export default function Planner() {
                               <>
                                 <span className="food-qty">{food.qty}</span>
                                 <span className="food-cals">{food.kcal} kcal</span>
+                                <span className="food-cals">{food.carbs} g</span>
+                                <span className="food-cals">{food.protein} g</span>
+                                <span className="food-cals">{food.fats} g</span>
                                 {food.intakeId && (
                                   <span className="food-actions">
                                     <button type="button" className="btn btn-ghost" onClick={() => handleEdit(food)}>Edit</button>
@@ -281,20 +370,23 @@ export default function Planner() {
             <div className="planner-water-head">
               <div>
                 <div className="planner-water-title">Water</div>
-                <div className="planner-water-sub">48 / 64 fl oz</div>
+                <div className="planner-water-sub">{filledCups} / {totalCups} cups</div>
               </div>
-              <button type="button" className="btn btn-ghost">▴</button>
             </div>
 
-            <div className="planner-water-cups">
-              <div className="water-cup full" />
-              <div className="water-cup full" />
-              <div className="water-cup full" />
-              <div className="water-cup full" />
-              <div className="water-cup full" />
-              <div className="water-cup full" />
-              <div className="water-cup" />
-              <div className="water-cup" />
+            <div className="planner-water-row">
+              <div
+                className="planner-water-cups"
+                style={{ gridTemplateColumns: `repeat(${totalCups}, 1fr)` }}
+              >
+                {Array.from({ length: totalCups }).map((_, idx) => (
+                  <div key={`water-cup-${idx}`} className={`water-cup ${idx < filledCups ? 'full' : ''}`} />
+                ))}
+              </div>
+              <div className="planner-water-controls">
+                <button type="button" className="btn btn-ghost" onClick={handleRemoveWater} disabled={waterLoading || totalWaterMl <= 0}>-</button>
+                <button type="button" className="btn btn-ghost" onClick={() => handleAddWater(cupSizeMl)} disabled={waterLoading}>+</button>
+              </div>
             </div>
 
             <div className="planner-water-tip">
@@ -302,16 +394,24 @@ export default function Planner() {
             </div>
 
             <div className="planner-water-total">
-              <span>Total Water - 55.86 / 125.11 fl oz</span>
-              <span>45%</span>
+              <span>Total Water - {totalWaterMl} / {waterTargetMl} ml</span>
+              <span>{waterPercent}%</span>
             </div>
             <div className="bar-track">
-              <div className="bar-fill" style={{ width: '45%', background: 'var(--blue)' }} />
+              <div className="bar-fill" style={{ width: `${waterPercent}%`, background: 'var(--blue)' }} />
             </div>
 
             <div className="planner-water-actions">
-              <button type="button" className="btn btn-ghost">+ Add custom</button>
-              <button type="button" className="btn btn-ghost">Water settings</button>
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => {
+                  setIsWaterSettingsOpen(true)
+                }}
+                disabled={waterLoading}
+              >
+                Water settings
+              </button>
             </div>
           </div>
         </aside>
@@ -322,6 +422,12 @@ export default function Planner() {
           isOpen={isAddFoodOpen}
           onClose={() => setIsAddFoodOpen(false)}
           intakeDate={selectedDateIso}
+        />
+        <WaterSettingsModal
+          isOpen={isWaterSettingsOpen}
+          onClose={() => setIsWaterSettingsOpen(false)}
+          defaultTarget={waterTargetMl}
+          defaultCupSize={cupSizeMl}
         />
       </div>
     </section>

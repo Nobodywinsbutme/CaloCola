@@ -183,15 +183,22 @@ body::before {
 .planner-water-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .planner-water-title { font-size: 13px; font-weight: 700; }
 .planner-water-sub { font-size: 11px; color: var(--t2); margin-top: 2px; }
+.planner-water-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
 .planner-water-cups {
-  display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 10px;
+  flex: 1;
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px;
 }
+.planner-water-controls { display: flex; flex-direction: column; gap: 6px; }
+.planner-water-controls .btn { padding: 4px 10px; min-width: 32px; justify-content: center; }
 .water-cup {
-  height: 26px; border-radius: 6px; border: 1px solid var(--line2);
+  height: 34px; border-radius: 8px; border: 1px solid var(--line2);
   background: transparent;
 }
 .water-cup.full {
-  background: linear-gradient(180deg, rgba(91,188,255,.45), rgba(91,188,255,.08));
+  background-image: url('../assets/water-cup.svg'), linear-gradient(180deg, rgba(91,188,255,.45), rgba(91,188,255,.08));
+  background-size: 36px 24px, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
   border-color: rgba(91,188,255,.5);
 }
 .planner-water-tip {
@@ -339,6 +346,7 @@ input[type=range] { accent-color: var(--hi); cursor: pointer; padding: 0; backgr
 }
 .food-detail-title { font-size: 12px; color: var(--t2); text-transform: uppercase; letter-spacing: .08em; }
 .food-detail-name { font-size: 14px; font-weight: 700; margin-top: 4px; }
+.food-detail-list { margin-top: 6px; font-size: 11px; color: var(--t2); display: flex; flex-wrap: wrap; gap: 6px; }
 .food-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
 .food-detail-field { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: var(--t2); }
 .food-detail-field input, .food-detail-field select { width: 100%; }
@@ -349,6 +357,9 @@ input[type=range] { accent-color: var(--hi); cursor: pointer; padding: 0; backgr
   background: var(--ink2); border: 1px dashed var(--line2); border-radius: 10px;
   padding: 10px; white-space: pre-wrap;
 }
+
+.water-modal { max-width: 420px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
 
 /* ── PROGRESS BARS ────────────────────────────────── */
 .bar-row { margin-bottom: 9px; }
@@ -563,6 +574,42 @@ input[type=range] { accent-color: var(--hi); cursor: pointer; padding: 0; backgr
 /* ── HELPER ──────────────────────────────────────── */
 .helper { font-size: 12px; color: var(--t2); margin-top: 8px; }
 .hint { display: flex; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--t3); margin-top: 8px; }
+
+/* ── TOASTS ─────────────────────────────────────── */
+.toast-host {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1100;
+}
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line2);
+  background: var(--ink2);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.toast-error { border-color: rgba(255, 90, 90, 0.4); }
+.toast-success { border-color: rgba(110, 255, 196, 0.3); }
+.toast-title { font-size: 12px; font-weight: 700; color: var(--t1); }
+.toast-message { font-size: 11px; color: var(--t2); margin-top: 2px; }
+.toast-close {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--t3);
+  font-size: 12px;
+  cursor: pointer;
+}
+.toast-close:hover { color: var(--t1); }
 
 /* ── SNAP LEGEND ROW ─────────────────────────────── */
 .snap-legend { display: flex; gap: 10px; margin-top: 6px; font-size: 10.5px; align-items: center; }
