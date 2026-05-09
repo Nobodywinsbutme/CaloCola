@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom' // <-- Import useLocation
 import { AppProvider, useApp } from './context/AppContext'
 import Navbar from './components/ui/Navbar'
 import Explorer from './pages/Explorer'
@@ -15,18 +15,24 @@ function ProtectedRoute({ element }) {
 
 function AppRoutes() {
   const { isAuthenticated } = useApp()
+  const location = useLocation() // <-- Get the current route information
+
+  // <-- Check if the current path is login or register
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
 
   return (
     <div className="app-shell">
-      <Navbar />
+      {/* <-- Conditionally render the Navbar: Only show it if we are NOT on an auth page */}
+      {!isAuthPage && <Navbar />}
+      
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Explorer />} />
           <Route path="/strategy" element={<Strategy />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/planner" element={<ProtectedRoute element={<Planner />} />} />
-          <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/planner" replace />} />
-          <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/planner" replace />} />
+          <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" replace />} />
+          <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

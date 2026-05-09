@@ -1,7 +1,9 @@
-import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { useApp } from '../../context/AppContext'
-import EditProfile from '../../pages/EditProfile'
+// src/components/layout/Navbar.jsx
+import { useState, useRef } from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import { useAuth } from '../../context/AppContext'
+import UserProfilePopup from '../ui/UserProfilePopup'
+import AccountSettingsModal from '../ui/AccountSettingsModal' // Import the new modal
 
 const NAV_ITEMS = [
   { to: '/', label: 'Density Explorer', end: true },
@@ -11,30 +13,10 @@ const NAV_ITEMS = [
 ]
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout } = useApp()
+  const { isLoggedIn, getInitials } = useAuth()
   const [showProfile, setShowProfile] = useState(false)
-  const navigate = useNavigate()
-
-  const handleAvatarClick = () => {
-    if (isAuthenticated) {
-      setShowProfile(true)
-    }
-  }
-
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
-
-  const getInitials = (name) => {
-    if (!name) return '?'
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
-  }
+  const [showSettings, setShowSettings] = useState(false) // New state for modal
+  const avatarRef = useRef(null)
 
   return (
     <>
@@ -55,29 +37,36 @@ export default function Navbar() {
         </nav>
         <div className="nav-tools">
           <input className="nav-search" type="text" placeholder="Search food…" />
-          {isAuthenticated ? (
-            <div className="nav-auth">
-              <div
-                className="nav-avatar"
-                onClick={handleAvatarClick}
-                title={user?.email}
+
+          {isLoggedIn ? (
+            <div className="nav-avatar-wrap" ref={avatarRef}>
+              <button
+                id="nav-avatar-btn"
+                className="nav-avatar nav-avatar-active"
+                onClick={() => setShowProfile(p => !p)}
+                title="Your profile"
               >
-                {getInitials(user?.name)}
-              </div>
-              <button className="nav-logout" onClick={handleLogout}>
-                Logout
+                {getInitials()}
               </button>
+              {showProfile && (
+                <UserProfilePopup 
+                  onClose={() => setShowProfile(false)} 
+                  onOpenSettings={() => setShowSettings(true)} // Pass the trigger function
+                />
+              )}
             </div>
           ) : (
-            <div className="nav-auth">
-              <NavLink to="/login" className="nav-link">Login</NavLink>
-              <NavLink to="/register" className="nav-link nav-link-primary">Sign Up</NavLink>
-            </div>
+            <Link to="/login" id="nav-login-btn" className="nav-login-btn">
+              Login
+            </Link>
           )}
         </div>
       </header>
 
-      {showProfile && <EditProfile onClose={() => setShowProfile(false)} />}
+      {/* Render the modal outside the header flow */}
+      {showSettings && (
+        <AccountSettingsModal onClose={() => setShowSettings(false)} />
+      )}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
@@ -34,6 +34,14 @@ export class AuthService {
 
   async register(email: string, password: string, name?: string) {
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const existingUser = await this.usersService.findByEmail(email);
+    
+    if (existingUser) {
+      // Throw a clean error that your React frontend can read
+      throw new ConflictException('An account with this email already exists.');
+    }
+
     const user = await this.usersService.create({
       email,
       password: hashedPassword,
