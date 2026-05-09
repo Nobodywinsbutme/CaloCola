@@ -48,21 +48,6 @@
   letter-spacing: 0.5px;
 }
 
-/* src/styles/register.css */
-
-/* Makes the register card slightly wider to fit the extra elements */
-.auth-card-wide {
-  max-width: 480px;
-}
-
-.auth-optional {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 400;
-  margin-left: 6px;
-  font-style: italic;
-}
-
 /* =========================================
    STEP 2 SPECIFIC LAYOUTS
    ========================================= */
