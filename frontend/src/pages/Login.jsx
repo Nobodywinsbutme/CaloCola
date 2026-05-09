@@ -28,8 +28,8 @@ export default function Login() {
     e.preventDefault()
     if (!form.email.trim()) return setLocalError('Email is required')
     if (!form.password)     return setLocalError('Password is required')
-    const res = await login(form.email.trim(), form.password)
-    if (res.success) navigate('/', { replace: true })
+    const loginSucceeded = await login(form.email.trim(), form.password)
+    if (loginSucceeded) navigate('/', { replace: true })
   }
 
   const displayError = localError || authError
