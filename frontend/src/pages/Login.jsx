@@ -1,116 +1,71 @@
-import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AppContext'
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
-import '../styles/login.css'
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useApp } from '../context/AppContext'
+import '../styles/auth.css'
 
 export default function Login() {
-  const { login, isLoggedIn, loading, authError, clearAuthError } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { login, authLoading, authError } = useApp()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ email: '', password: '' })
-  const [localError, setLocalError] = useState('')
-  const [showPass, setShowPass] = useState(false)
-
-  useEffect(() => {
-    if (isLoggedIn) navigate('/', { replace: true })
-  }, [isLoggedIn, navigate])
-
-  useEffect(() => {
-    clearAuthError()
-  }, [clearAuthError])
-
-  const update = (k, v) => {
-    setLocalError('')
-    setForm(p => ({ ...p, [k]: v }))
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!form.email.trim()) return setLocalError('Email is required')
-    if (!form.password)     return setLocalError('Password is required')
-    const loginSucceeded = await login(form.email.trim(), form.password)
-    if (loginSucceeded) navigate('/', { replace: true })
+    const success = await login(email, password)
+    if (success) navigate('/planner')
   }
 
-  const displayError = localError || authError
-
   return (
-    <div className="auth-bg">
-      <div className="auth-blob auth-blob-1" />
-      <div className="auth-blob auth-blob-2" />
-      <div className="auth-blob auth-blob-3" />
-
-      <div className="auth-card">
-        <div className="auth-logo">
-          <span className="auth-logo-text">CaloCola</span>
-          <div className="auth-logo-sub">Nutrition Intelligence Dashboard</div>
-        </div>
-
-        <h2 className="auth-title">Welcome back</h2>
-
-        {displayError && (
-          <div className="auth-error">
-            <span className="auth-error-icon">⚠</span> {displayError}
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-box">
+          <div className="auth-header">
+            <div className="auth-logo">CaloCola</div>
+            <p className="auth-subtitle">Track your nutrition journey</p>
           </div>
-        )}
 
-        <form onSubmit={handleSubmit} className="auth-form" noValidate>
-          <div className="auth-field">
-            <label className="auth-label">Email address</label>
-            <div className="auth-input-wrap">
-              <Mail className="auth-input-icon" size={18} />
+          <form onSubmit={handleSubmit} className="auth-form">
+            {authError && <div className="auth-error">{authError}</div>}
+
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
               <input
-                id="login-email"
+                id="email"
                 type="email"
-                className="auth-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                value={form.email}
-                onChange={e => update('email', e.target.value)}
-                autoComplete="email"
-                autoFocus
+                required
+                disabled={authLoading}
               />
             </div>
-          </div>
 
-          <div className="auth-field">
-            <label className="auth-label">Password</label>
-            <div className="auth-input-wrap">
-              <Lock className="auth-input-icon" size={18} />
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
               <input
-                id="login-password"
-                type={showPass ? 'text' : 'password'}
-                /* MUST include auth-input-pass so it gets right padding */
-                className="auth-input auth-input-pass" 
-                placeholder="Your password"
-                value={form.password}
-                onChange={e => update('password', e.target.value)}
-                autoComplete="current-password"
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                disabled={authLoading}
               />
-              <button
-                type="button"
-                className="auth-pass-toggle"
-                onClick={() => setShowPass(p => !p)}
-              >
-                {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
             </div>
+
+            <button
+              type="submit"
+              className="auth-button"
+              disabled={authLoading}
+            >
+              {authLoading ? 'Logging in...' : 'Log In'}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            <p>Don't have an account? <Link to="/register">Sign up</Link></p>
           </div>
-
-          <button id="login-submit" type="submit" className="auth-btn" disabled={loading} style={{ cursor: 'pointer' }}>
-            {loading ? <span className="auth-spinner" /> : 'Sign In'}
-          </button>
-        </form>
-
-        <div className="auth-divider"><span>or</span></div>
-
-        <p className="auth-switch">
-          Don't have an account?{' '}
-          <Link to="/register" className="auth-link">Create one</Link>
-        </p>
-
-        <Link to="/" className="auth-guest-link">
-          Continue as guest →
-        </Link>
+        </div>
       </div>
     </div>
   )

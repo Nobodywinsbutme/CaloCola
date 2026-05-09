@@ -90,7 +90,32 @@ body::before {
   background: linear-gradient(135deg, var(--hi), var(--teal));
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 700; color: var(--ink); cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
 }
+.nav-avatar:hover { transform: scale(1.08); box-shadow: 0 4px 12px rgba(110,255,196,.2); }
+
+.nav-auth { display: flex; align-items: center; gap: 8px; }
+
+.nav-link {
+  font-size: 12px; font-weight: 600; color: var(--t2); text-decoration: none;
+  padding: 5px 10px; border-radius: 6px; transition: all .15s;
+  cursor: pointer;
+}
+.nav-link:hover { color: var(--t1); background: var(--ink3); }
+
+.nav-link-primary {
+  background: linear-gradient(135deg, var(--hi), var(--teal));
+  color: var(--ink) !important;
+  font-weight: 700;
+}
+.nav-link-primary:hover { box-shadow: 0 4px 12px rgba(110,255,196,.2); }
+
+.nav-logout {
+  background: none; border: none; font-size: 12px; font-weight: 600;
+  color: var(--t2); padding: 5px 10px; border-radius: 6px;
+  cursor: pointer; transition: all .15s; font-family: var(--f);
+}
+.nav-logout:hover { color: var(--t1); background: var(--ink3); }
 
 /* ── MAIN CONTENT ─────────────────────────────────── */
 .main-content { flex: 1; padding: 22px 20px 40px; }

@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateIntakeDto , UpdateIntakeDto , DeleteIntakeDto , IntakeResponseDto } from './dto/index';
+
+
 
 @Injectable()
 export class DailyTrackingService {
   constructor(private prisma: PrismaService) {}
 
-  async addIntake(userId: string, data: { foodId: string; quantity: number; mealType: string; intakeDate: string }) {
+  async addIntake(userId: string, data: CreateIntakeDto): Promise<IntakeResponseDto> {
     // Create intake record
     const intake = await this.prisma.dailyIntake.create({
       data: {
@@ -18,7 +21,62 @@ export class DailyTrackingService {
     // Recalculate daily totals
     await this.recalculateDailyTotals(userId, data.intakeDate);
 
-    return intake;
+    return this.toIntakeResponse(intake);
+  }
+
+  async updateIntake(userId: string, intakeId: string, data: UpdateIntakeDto): Promise<IntakeResponseDto | null> {
+    const intakeDate = data.intakeDate;
+
+    const existingIntake = await this.prisma.dailyIntake.findFirst({
+      where: {
+        id: intakeId,
+        userId,
+      },
+    });
+
+    if (!existingIntake) {
+      return null;
+    }
+
+    const previousDate = existingIntake.intakeDate.toISOString().slice(0, 10);
+
+    const intake = await this.prisma.dailyIntake.update({
+      where: { id: intakeId },
+      data: {
+        ...data,
+        intakeDate: intakeDate ? new Date(intakeDate) : existingIntake.intakeDate,
+      },
+    });
+
+    const nextDate = intakeDate ?? previousDate;
+    await this.recalculateDailyTotals(userId, previousDate);
+    if (nextDate !== previousDate) {
+      await this.recalculateDailyTotals(userId, nextDate);
+    }
+
+    return this.toIntakeResponse(intake);
+  }
+
+  async deleteIntake(userId: string, intakeId: string): Promise<IntakeResponseDto | null> {
+    const existingIntake = await this.prisma.dailyIntake.findFirst({
+      where: {
+        id: intakeId,
+        userId,
+      },
+    });
+
+    if (!existingIntake) {
+      return null;
+    }
+
+    const deleted = await this.prisma.dailyIntake.delete({
+      where: { id: intakeId },
+    });
+
+    const date = existingIntake.intakeDate.toISOString().slice(0, 10);
+    await this.recalculateDailyTotals(userId, date);
+
+    return this.toIntakeResponse(deleted);
   }
 
   async getDailyTotals(userId: string, date: string) {
@@ -62,6 +120,7 @@ export class DailyTrackingService {
 
     for (const intake of intakes) {
       if (intake.food) {
+        // Nutrient unit is per 100g
         const factor = intake.quantity / 100;
         totalCalories += intake.food.calories * factor;
         totalProtein += intake.food.protein * factor;
@@ -92,5 +151,27 @@ export class DailyTrackingService {
         totalCarbs,
       },
     });
+  }
+
+  private toIntakeResponse(intake: {
+    id: string;
+    userId: string;
+    foodId: string;
+    quantity: number;
+    mealType: string;
+    intakeDate: Date;
+    createdAt: Date;
+    updatedAt: Date;
+  }): IntakeResponseDto {
+    return {
+      id: intake.id,
+      userId: intake.userId,
+      foodId: intake.foodId,
+      quantity: intake.quantity,
+      mealType: intake.mealType,
+      intakeDate: intake.intakeDate,
+      createdAt: intake.createdAt,
+      updatedAt: intake.updatedAt,
+    };
   }
 }
