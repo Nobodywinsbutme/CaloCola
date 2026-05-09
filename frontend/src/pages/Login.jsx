@@ -96,7 +96,7 @@ export default function Login() {
             </div>
           </div>
 
-          <button id="login-submit" type="submit" className="auth-btn" disabled={loading} cursor="pointer">
+          <button id="login-submit" type="submit" className="auth-btn" disabled={loading} style={{ cursor: 'pointer' }}>
             {loading ? <span className="auth-spinner" /> : 'Sign In'}
           </button>
         </form>
