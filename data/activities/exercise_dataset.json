@@ -1,0 +1,2772 @@
+{
+  "exercises": {
+    "Cardio": {
+      "category": "Cardio",
+      "activities": [
+        {
+          "name": "Cycling, mountain bike, bmx",
+          "vn_name": "Cycling, xe đạp leo núi, xe đạp BMX",
+          "calories": {
+            "59_kg": 502,
+            "70_kg": 598,
+            "82_kg": 695,
+            "93_kg": 791
+          },
+          "calories_per_kg": 1.75072971940299
+        },
+        {
+          "name": "Cycling, <10 mph, leisure bicycling",
+          "vn_name": "Cycling, <16 km/h, đạp xe giải trí",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Cycling, >20 mph, racing",
+          "vn_name": "Cycling, >32 km/h, đua xe",
+          "calories": {
+            "59_kg": 944,
+            "70_kg": 1126,
+            "82_kg": 1308,
+            "93_kg": 1489
+          },
+          "calories_per_kg": 3.29497352835821
+        },
+        {
+          "name": "Cycling, 10-11.9 mph, light",
+          "vn_name": "Cycling, 16-19 km/h, nhẹ",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Cycling, 12-13.9 mph, moderate",
+          "vn_name": "Cycling, 19-22 km/h, vừa phải",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Cycling, 14-15.9 mph, vigorous",
+          "vn_name": "Cycling, 23-26 km/h, mạnh mẽ",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Cycling, 16-19 mph, very fast, racing",
+          "vn_name": "Cycling, 26-31 km/h, rất nhanh, đua xe",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Unicycling",
+          "vn_name": "đạp xe một bánh",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Stationary cycling, very light",
+          "vn_name": "đạp xe cố định, rất nhẹ",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Stationary cycling, light",
+          "vn_name": "đạp xe cố định, nhẹ",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985
+        },
+        {
+          "name": "Stationary cycling, moderate",
+          "vn_name": "đạp xe cố định, vừa phải",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Stationary cycling, vigorous",
+          "vn_name": "đạp xe cố định, mạnh mẽ",
+          "calories": {
+            "59_kg": 620,
+            "70_kg": 739,
+            "82_kg": 858,
+            "93_kg": 977
+          },
+          "calories_per_kg": 2.16234753432836
+        },
+        {
+          "name": "Stationary cycling, very vigorous",
+          "vn_name": "đạp xe cố định, very mạnh mẽ",
+          "calories": {
+            "59_kg": 738,
+            "70_kg": 880,
+            "82_kg": 1022,
+            "93_kg": 1163
+          },
+          "calories_per_kg": 2.57464235223881
+        },
+        {
+          "name": "Stair machine",
+          "vn_name": "Stair machine",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Rowing machine, light",
+          "vn_name": "Rowing machine, nhẹ",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Rowing machine, moderate",
+          "vn_name": "Rowing machine, vừa phải",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Rowing machine, vigorous",
+          "vn_name": "Rowing machine, mạnh mẽ",
+          "calories": {
+            "59_kg": 502,
+            "70_kg": 598,
+            "82_kg": 695,
+            "93_kg": 791
+          },
+          "calories_per_kg": 1.75072971940299
+        },
+        {
+          "name": "Rowing machine, very vigorous",
+          "vn_name": "Rowing machine, very mạnh mẽ",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Ski machine",
+          "vn_name": "Ski machine",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Aerobics, low impact",
+          "vn_name": "aerobic, tác động thấp",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Aerobics, high impact",
+          "vn_name": "aerobic, tác động cao",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Aerobics, step aerobics",
+          "vn_name": "aerobic, step aerobic",
+          "calories": {
+            "59_kg": 502,
+            "70_kg": 598,
+            "82_kg": 695,
+            "93_kg": 791
+          },
+          "calories_per_kg": 1.75072971940299
+        },
+        {
+          "name": "Aerobics, general",
+          "vn_name": "aerobic, chung",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254
+        },
+        {
+          "name": "Instructing aerobic class",
+          "vn_name": "Instructing aerobic class",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Water aerobics",
+          "vn_name": "Water aerobic",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        }
+      ]
+    },
+    "Gym & Strength": {
+      "category": "Gym",
+      "activities": [
+        {
+          "name": "Calisthenics, vigorous, pushups, situps…",
+          "vn_name": "tập thể dục thể hình, mạnh mẽ, chống đẩy, gập bụng…",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Calisthenics, light",
+          "vn_name": "tập thể dục thể hình, nhẹ",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Circuit training, minimal rest",
+          "vn_name": "tập vòng, nghỉ tối thiểu",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Weight lifting, body building, vigorous",
+          "vn_name": "nâng tạ, xây dựng cơ bắp, mạnh mẽ",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Weight lifting, light workout",
+          "vn_name": "nâng tạ, nhẹ workout",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Health club exercise",
+          "vn_name": "tập luyện phòng gym",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985
+        },
+        {
+          "name": "Gymnastics",
+          "vn_name": "Gymnastics",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Water aerobics, water calisthenics",
+          "vn_name": "Water aerobic, water tập thể dục thể hình",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        }
+      ]
+    },
+    "Individual Sports": {
+      "category": "Thể Thao Cá Nhân",
+      "activities": [
+        {
+          "name": "Jazzercise",
+          "vn_name": "Jazzercise",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Stretching, hatha yoga",
+          "vn_name": "Stretching, hatha yoga",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Mild stretching",
+          "vn_name": "Mild stretching",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Ballet, twist, jazz, tap",
+          "vn_name": "Ballet, twist, jazz, tap",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Ballroom dancing, slow",
+          "vn_name": "Ballroom dancing, slow",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Ballroom dancing, fast",
+          "vn_name": "Ballroom dancing, fast",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985
+        },
+        {
+          "name": "Running, 5 mph (12 minute mile)",
+          "vn_name": "Running, 5 mph (12 minute mile)",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Running, 5.2 mph (11.5 minute mile)",
+          "vn_name": "Running, 5.2 mph (11.5 minute mile)",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Running, 6 mph (10 min mile)",
+          "vn_name": "Running, 6 mph (10 min mile)",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Running, 6.7 mph (9 min mile)",
+          "vn_name": "Running, 6.7 mph (9 min mile)",
+          "calories": {
+            "59_kg": 649,
+            "70_kg": 774,
+            "82_kg": 899,
+            "93_kg": 1024
+          },
+          "calories_per_kg": 2.2652519880597
+        },
+        {
+          "name": "Running, 7 mph (8.5 min mile)",
+          "vn_name": "Running, 7 mph (8.5 min mile)",
+          "calories": {
+            "59_kg": 679,
+            "70_kg": 809,
+            "82_kg": 940,
+            "93_kg": 1070
+          },
+          "calories_per_kg": 2.36815644179104
+        },
+        {
+          "name": "Running, 7.5mph (8 min mile)",
+          "vn_name": "Running, 7.5mph (8 min mile)",
+          "calories": {
+            "59_kg": 738,
+            "70_kg": 880,
+            "82_kg": 1022,
+            "93_kg": 1163
+          },
+          "calories_per_kg": 2.57464235223881
+        },
+        {
+          "name": "Running, 8 mph (7.5 min mile)",
+          "vn_name": "Running, 8 mph (7.5 min mile)",
+          "calories": {
+            "59_kg": 797,
+            "70_kg": 950,
+            "82_kg": 1103,
+            "93_kg": 1256
+          },
+          "calories_per_kg": 2.77977425671642
+        },
+        {
+          "name": "Running, 8.6 mph (7 min mile)",
+          "vn_name": "Running, 8.6 mph (7 min mile)",
+          "calories": {
+            "59_kg": 826,
+            "70_kg": 985,
+            "82_kg": 1144,
+            "93_kg": 1303
+          },
+          "calories_per_kg": 2.88267871044776
+        },
+        {
+          "name": "Running, 9 mph (6.5 min mile)",
+          "vn_name": "Running, 9 mph (6.5 min mile)",
+          "calories": {
+            "59_kg": 885,
+            "70_kg": 1056,
+            "82_kg": 1226,
+            "93_kg": 1396
+          },
+          "calories_per_kg": 3.08916462089552
+        },
+        {
+          "name": "Running, 10 mph (6 min mile)",
+          "vn_name": "Running, 10 mph (6 min mile)",
+          "calories": {
+            "59_kg": 944,
+            "70_kg": 1126,
+            "82_kg": 1308,
+            "93_kg": 1489
+          },
+          "calories_per_kg": 3.29497352835821
+        },
+        {
+          "name": "Running, 10.9 mph (5.5 min mile)",
+          "vn_name": "Running, 10.9 mph (5.5 min mile)",
+          "calories": {
+            "59_kg": 1062,
+            "70_kg": 1267,
+            "82_kg": 1471,
+            "93_kg": 1675
+          },
+          "calories_per_kg": 3.70659134328358
+        },
+        {
+          "name": "Running, cross country",
+          "vn_name": "Running, cross country",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Running, general",
+          "vn_name": "Running, chung",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Running, stairs, up",
+          "vn_name": "Running, stairs, up",
+          "calories": {
+            "59_kg": 885,
+            "70_kg": 1056,
+            "82_kg": 1226,
+            "93_kg": 1396
+          },
+          "calories_per_kg": 3.08916462089552
+        },
+        {
+          "name": "Track and field (shot, discus)",
+          "vn_name": "Track and field (shot, discus)",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Track and field (high jump, pole vault)",
+          "vn_name": "Track and field (high jump, pole vault)",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Track and field (hurdles)",
+          "vn_name": "Track and field (hurdles)",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Archery",
+          "vn_name": "Archery",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Badminton",
+          "vn_name": "Badminton",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Running, training, pushing wheelchair",
+          "vn_name": "Running, training, pushing wheelchair",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Billiards",
+          "vn_name": "Billiards",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Bowling",
+          "vn_name": "Bowling",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Boxing, in ring",
+          "vn_name": "Boxing, in ring",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Boxing, punching bag",
+          "vn_name": "Boxing, punching bag",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Boxing, sparring",
+          "vn_name": "Boxing, sparring",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Cricket (batting, bowling)",
+          "vn_name": "Cricket (batting, bowling)",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Croquet",
+          "vn_name": "Croquet",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Curling",
+          "vn_name": "Curling",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Darts (wall or lawn)",
+          "vn_name": "Darts (wall or lawn)",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Fencing",
+          "vn_name": "Fencing",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Frisbee playing, general",
+          "vn_name": "Frisbee playing, chung",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Frisbee, ultimate frisbee",
+          "vn_name": "Frisbee, ultimate frisbee",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Golf, general",
+          "vn_name": "Golf, chung",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Golf, walking and carrying clubs",
+          "vn_name": "Golf, walking and carrying clubs",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Golf, driving range",
+          "vn_name": "Golf, driving range",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Golf, miniature golf",
+          "vn_name": "Golf, miniature golf",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Golf, walking and pulling clubs",
+          "vn_name": "Golf, walking and pulling clubs",
+          "calories": {
+            "59_kg": 254,
+            "70_kg": 303,
+            "82_kg": 351,
+            "93_kg": 400
+          },
+          "calories_per_kg": 0.885519904477612
+        },
+        {
+          "name": "Golf, using power cart",
+          "vn_name": "Golf, using power cart",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Hacky sack",
+          "vn_name": "Hacky sack",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Handball",
+          "vn_name": "Handball",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Hockey, field hockey",
+          "vn_name": "Hockey, field hockey",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Hockey, ice hockey",
+          "vn_name": "Hockey, ice hockey",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Riding a horse, general",
+          "vn_name": "Riding a horse, chung",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Horesback riding, saddling horse",
+          "vn_name": "Horesback riding, saddling horse",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Horseback riding, grooming horse",
+          "vn_name": "Horseback riding, grooming horse",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Horseback riding, trotting",
+          "vn_name": "Horseback riding, trotting",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254
+        },
+        {
+          "name": "Horseback riding, walking",
+          "vn_name": "Horseback riding, walking",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Horse racing, galloping",
+          "vn_name": "Horse đua xe, galloping",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Horse grooming, moderate",
+          "vn_name": "Horse grooming, vừa phải",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Horseshoe pitching",
+          "vn_name": "Horseshoe pitching",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Jai alai",
+          "vn_name": "Jai alai",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Martial arts, judo, karate, jujitsu",
+          "vn_name": "Martial arts, judo, karate, jujitsu",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Martial arts, kick boxing",
+          "vn_name": "Martial arts, kick boxing",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Martial arts, tae kwan do",
+          "vn_name": "Martial arts, tae kwan do",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Krav maga training",
+          "vn_name": "Krav maga training",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Juggling",
+          "vn_name": "Juggling",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Kickball",
+          "vn_name": "Kickball",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Lacrosse",
+          "vn_name": "Lacrosse",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Orienteering",
+          "vn_name": "Orienteering",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Playing paddleball",
+          "vn_name": "Playing paddleball",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Paddleball, competitive",
+          "vn_name": "Paddleball, competitive",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Polo",
+          "vn_name": "Polo",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Racquetball, competitive",
+          "vn_name": "Racquetball, competitive",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Playing racquetball",
+          "vn_name": "Playing racquetball",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Rock climbing, ascending rock",
+          "vn_name": "Rock climbing, ascending rock",
+          "calories": {
+            "59_kg": 649,
+            "70_kg": 774,
+            "82_kg": 899,
+            "93_kg": 1024
+          },
+          "calories_per_kg": 2.2652519880597
+        },
+        {
+          "name": "Rock climbing, rappelling",
+          "vn_name": "Rock climbing, rappelling",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Jumping rope, fast",
+          "vn_name": "Jumping rope, fast",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Jumping rope, moderate",
+          "vn_name": "Jumping rope, vừa phải",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Jumping rope, slow",
+          "vn_name": "Jumping rope, slow",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Rugby",
+          "vn_name": "Rugby",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Shuffleboard, lawn bowling",
+          "vn_name": "Shuffleboard, lawn bowling",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Skateboarding",
+          "vn_name": "Skateboarding",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Roller skating",
+          "vn_name": "Roller skating",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Roller blading, in-line skating",
+          "vn_name": "Roller blading, in-line skating",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Sky diving",
+          "vn_name": "Sky diving",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Squash",
+          "vn_name": "Squash",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Table tennis, ping pong",
+          "vn_name": "Table tennis, ping pong",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Tai chi",
+          "vn_name": "Tai chi",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Playing tennis",
+          "vn_name": "Playing tennis",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Tennis, doubles",
+          "vn_name": "Tennis, doubles",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Tennis, singles",
+          "vn_name": "Tennis, singles",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Trampoline",
+          "vn_name": "Trampoline",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Wrestling",
+          "vn_name": "Wrestling",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Wallyball",
+          "vn_name": "Wallyball",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Backpacking, Hiking with pack",
+          "vn_name": "Backpacking, Hiking with pack",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Carrying infant, level ground",
+          "vn_name": "Carrying infant, level ground",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Carrying infant, upstairs",
+          "vn_name": "Carrying infant, upstairs",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Carrying 16 to 24 lbs, upstairs",
+          "vn_name": "Carrying 16 to 24 lbs, upstairs",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Carrying 25 to 49 lbs, upstairs",
+          "vn_name": "Carrying 25 to 49 lbs, upstairs",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Standing, playing with children, light",
+          "vn_name": "Standing, playing with children, nhẹ",
+          "calories": {
+            "59_kg": 165,
+            "70_kg": 197,
+            "82_kg": 229,
+            "93_kg": 261
+          },
+          "calories_per_kg": 0.576806543283582
+        },
+        {
+          "name": "Walk/run, playing with children, moderate",
+          "vn_name": "Walk/run, playing with children, vừa phải",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Walk/run, playing with children, vigorous",
+          "vn_name": "Walk/run, playing with children, mạnh mẽ",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Carrying small children",
+          "vn_name": "Carrying small children",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Loading, unloading car",
+          "vn_name": "Loading, unloading car",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Climbing hills, carrying up to 9 lbs",
+          "vn_name": "Climbing hills, carrying up to 9 lbs",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Climbing hills, carrying 10 to 20 lb",
+          "vn_name": "Climbing hills, carrying 10 to 20 lb",
+          "calories": {
+            "59_kg": 443,
+            "70_kg": 528,
+            "82_kg": 613,
+            "93_kg": 698
+          },
+          "calories_per_kg": 1.5449208119403
+        },
+        {
+          "name": "Climbing hills, carrying 21 to 42 lb",
+          "vn_name": "Climbing hills, carrying 21 to 42 lb",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Climbing hills, carrying over 42 lb",
+          "vn_name": "Climbing hills, carrying over 42 lb",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Walking downstairs",
+          "vn_name": "Walking downstairs",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Hiking, cross country",
+          "vn_name": "Hiking, cross country",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Bird watching",
+          "vn_name": "Bird watching",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Marching, rapidly, military",
+          "vn_name": "Marching, rapidly, military",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254
+        },
+        {
+          "name": "Children's games, hopscotch, dodgeball",
+          "vn_name": "Children's games, hopscotch, dodgeball",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Pushing stroller or walking with children",
+          "vn_name": "Pushing stroller or walking with children",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Pushing a wheelchair",
+          "vn_name": "Pushing a wheelchair",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Race walking",
+          "vn_name": "Race walking",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254
+        },
+        {
+          "name": "Rock climbing, mountain climbing",
+          "vn_name": "Rock climbing, mountain climbing",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Walking using crutches",
+          "vn_name": "Walking using crutches",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Walking the dog",
+          "vn_name": "Walking the dog",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Walking, under 2.0 mph, very slow",
+          "vn_name": "Walking, under 2.0 mph, very slow",
+          "calories": {
+            "59_kg": 118,
+            "70_kg": 141,
+            "82_kg": 163,
+            "93_kg": 186
+          },
+          "calories_per_kg": 0.411617814925373
+        },
+        {
+          "name": "Walking 2.0 mph, slow",
+          "vn_name": "Walking 2.0 mph, slow",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Walking 2.5 mph",
+          "vn_name": "Walking 2.5 mph",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Walking 3.0 mph, moderate",
+          "vn_name": "Walking 3.0 mph, vừa phải",
+          "calories": {
+            "59_kg": 195,
+            "70_kg": 232,
+            "82_kg": 270,
+            "93_kg": 307
+          },
+          "calories_per_kg": 0.679710997014925
+        },
+        {
+          "name": "Walking 3.5 mph, brisk pace",
+          "vn_name": "Walking 3.5 mph, brisk pace",
+          "calories": {
+            "59_kg": 224,
+            "70_kg": 267,
+            "82_kg": 311,
+            "93_kg": 354
+          },
+          "calories_per_kg": 0.782615450746269
+        },
+        {
+          "name": "Walking 3.5 mph, uphill",
+          "vn_name": "Walking 3.5 mph, uphill",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Walking 4.0 mph, very brisk",
+          "vn_name": "Walking 4.0 mph, very brisk",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Walking 4.5 mph",
+          "vn_name": "Walking 4.5 mph",
+          "calories": {
+            "59_kg": 372,
+            "70_kg": 443,
+            "82_kg": 515,
+            "93_kg": 586
+          },
+          "calories_per_kg": 1.29713771940299
+        },
+        {
+          "name": "Walking 5.0 mph",
+          "vn_name": "Walking 5.0 mph",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Boating, power, speed boat",
+          "vn_name": "Boating, power, speed boat",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Canoeing, camping trip",
+          "vn_name": "Canoeing, camping trip",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Canoeing, rowing, light",
+          "vn_name": "Canoeing, rowing, nhẹ",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Canoeing, rowing, moderate",
+          "vn_name": "Canoeing, rowing, vừa phải",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Canoeing, rowing, vigorous",
+          "vn_name": "Canoeing, rowing, mạnh mẽ",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Crew, sculling, rowing, competition",
+          "vn_name": "Crew, sculling, rowing, competition",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239
+        },
+        {
+          "name": "Kayaking",
+          "vn_name": "Kayaking",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Paddle boat",
+          "vn_name": "Paddle boat",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Windsurfing, sailing",
+          "vn_name": "Windsurfing, sailing",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Sailing, competition",
+          "vn_name": "Sailing, competition",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Sailing, yachting, ocean sailing",
+          "vn_name": "Sailing, yachting, ocean sailing",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Skiing, water skiing",
+          "vn_name": "Skiing, water skiing",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Ski mobiling",
+          "vn_name": "Ski mobiling",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Skin diving, fast",
+          "vn_name": "Skin diving, fast",
+          "calories": {
+            "59_kg": 944,
+            "70_kg": 1126,
+            "82_kg": 1308,
+            "93_kg": 1489
+          },
+          "calories_per_kg": 3.29497352835821
+        },
+        {
+          "name": "Skin diving, moderate",
+          "vn_name": "Skin diving, vừa phải",
+          "calories": {
+            "59_kg": 738,
+            "70_kg": 880,
+            "82_kg": 1022,
+            "93_kg": 1163
+          },
+          "calories_per_kg": 2.57464235223881
+        },
+        {
+          "name": "Skin diving, scuba diving",
+          "vn_name": "Skin diving, scuba diving",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Snorkeling",
+          "vn_name": "Snorkeling",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Surfing, body surfing or board surfing",
+          "vn_name": "Surfing, body surfing or board surfing",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Whitewater rafting, kayaking, canoeing",
+          "vn_name": "Whitewater rafting, kayaking, canoeing",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Swimming laps, freestyle, fast",
+          "vn_name": "Swimming laps, freestyle, fast",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Swimming laps, freestyle, slow",
+          "vn_name": "Swimming laps, freestyle, slow",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Swimming backstroke",
+          "vn_name": "Swimming backstroke",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Swimming breaststroke",
+          "vn_name": "Swimming breaststroke",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Swimming butterfly",
+          "vn_name": "Swimming butterfly",
+          "calories": {
+            "59_kg": 649,
+            "70_kg": 774,
+            "82_kg": 899,
+            "93_kg": 1024
+          },
+          "calories_per_kg": 2.2652519880597
+        },
+        {
+          "name": "Swimming leisurely, not laps",
+          "vn_name": "Swimming leisurely, not laps",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Swimming sidestroke",
+          "vn_name": "Swimming sidestroke",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Swimming synchronized",
+          "vn_name": "Swimming synchronized",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Swimming, treading water, fast, vigorous",
+          "vn_name": "Swimming, treading water, fast, mạnh mẽ",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Swimming, treading water, moderate",
+          "vn_name": "Swimming, treading water, vừa phải",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Water polo",
+          "vn_name": "Water polo",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Water jogging",
+          "vn_name": "Water jogging",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Diving, springboard or platform",
+          "vn_name": "Diving, springboard or platform",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Ice skating, < 9 mph",
+          "vn_name": "Ice skating, < 9 mph",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985
+        },
+        {
+          "name": "Ice skating, average speed",
+          "vn_name": "Ice skating, average speed",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Ice skating, rapidly",
+          "vn_name": "Ice skating, rapidly",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Speed skating, ice, competitive",
+          "vn_name": "Speed skating, ice, competitive",
+          "calories": {
+            "59_kg": 885,
+            "70_kg": 1056,
+            "82_kg": 1226,
+            "93_kg": 1396
+          },
+          "calories_per_kg": 3.08916462089552
+        },
+        {
+          "name": "Cross country snow skiing, slow",
+          "vn_name": "Cross country snow skiing, slow",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Cross country skiing, moderate",
+          "vn_name": "Cross country skiing, vừa phải",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Cross country skiing, vigorous",
+          "vn_name": "Cross country skiing, mạnh mẽ",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Cross country skiing, racing",
+          "vn_name": "Cross country skiing, đua xe",
+          "calories": {
+            "59_kg": 826,
+            "70_kg": 985,
+            "82_kg": 1144,
+            "93_kg": 1303
+          },
+          "calories_per_kg": 2.88267871044776
+        },
+        {
+          "name": "Cross country skiing, uphill",
+          "vn_name": "Cross country skiing, uphill",
+          "calories": {
+            "59_kg": 974,
+            "70_kg": 1161,
+            "82_kg": 1348,
+            "93_kg": 1536
+          },
+          "calories_per_kg": 3.39787798208955
+        },
+        {
+          "name": "Snow skiing, downhill skiing, light",
+          "vn_name": "Snow skiing, downhill skiing, nhẹ",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Downhill snow skiing, moderate",
+          "vn_name": "Downhill snow skiing, vừa phải",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Downhill snow skiing, racing",
+          "vn_name": "Downhill snow skiing, đua xe",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Sledding, tobagganing, luge",
+          "vn_name": "Sledding, tobagganing, luge",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Snow shoeing",
+          "vn_name": "Snow shoeing",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Snowmobiling",
+          "vn_name": "Snowmobiling",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Painting",
+          "vn_name": "Painting",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Sit, playing with animals",
+          "vn_name": "Sit, playing with animals",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Walk / run, playing with animals",
+          "vn_name": "Walk / run, playing with animals",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Bathing dog",
+          "vn_name": "Bathing dog",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Mowing lawn, walk, power mower",
+          "vn_name": "Mowing lawn, walk, power mower",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985
+        },
+        {
+          "name": "Mowing lawn, riding mower",
+          "vn_name": "Mowing lawn, riding mower",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Walking, snow blower",
+          "vn_name": "Walking, snow blower",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Riding, snow blower",
+          "vn_name": "Riding, snow blower",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Shoveling snow by hand",
+          "vn_name": "Shoveling snow by hand",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Raking lawn",
+          "vn_name": "Raking lawn",
+          "calories": {
+            "59_kg": 254,
+            "70_kg": 303,
+            "82_kg": 351,
+            "93_kg": 400
+          },
+          "calories_per_kg": 0.885519904477612
+        },
+        {
+          "name": "Gardening, general",
+          "vn_name": "Gardening, chung",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Bagging grass, leaves",
+          "vn_name": "Bagging grass, leaves",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Watering lawn or garden",
+          "vn_name": "Watering lawn or garden",
+          "calories": {
+            "59_kg": 89,
+            "70_kg": 106,
+            "82_kg": 123,
+            "93_kg": 140
+          },
+          "calories_per_kg": 0.310067367164179
+        },
+        {
+          "name": "Weeding, cultivating garden",
+          "vn_name": "Weeding, cultivating garden",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Carpentry, general",
+          "vn_name": "Carpentry, chung",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Carrying heavy loads",
+          "vn_name": "Carrying heavy loads",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Carrying moderate loads upstairs",
+          "vn_name": "Carrying vừa phải loads upstairs",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Taking out trash",
+          "vn_name": "Taking out trash",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Walking, pushing a wheelchair",
+          "vn_name": "Walking, pushing a wheelchair",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Teach physical education,exercise class",
+          "vn_name": "Teach physical education,exercise class",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        }
+      ]
+    },
+    "Team Sports": {
+      "category": "Thể Thao Tập Thể",
+      "activities": [
+        {
+          "name": "Running, on a track, team practice",
+          "vn_name": "Running, on a track, team practice",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Basketball game, competitive",
+          "vn_name": "Basketball game, competitive",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Playing basketball, non game",
+          "vn_name": "Playing basketball, non game",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Basketball, officiating",
+          "vn_name": "Basketball, officiating",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Basketball, shooting baskets",
+          "vn_name": "Basketball, shooting baskets",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239
+        },
+        {
+          "name": "Basketball, wheelchair",
+          "vn_name": "Basketball, wheelchair",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254
+        },
+        {
+          "name": "Coaching: football, basketball, soccer…",
+          "vn_name": "Coaching: football, basketball, soccer…",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Football, competitive",
+          "vn_name": "Football, competitive",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925
+        },
+        {
+          "name": "Football, touch, flag, general",
+          "vn_name": "Football, touch, flag, chung",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Football or baseball, playing catch",
+          "vn_name": "Football or baseball, playing catch",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        },
+        {
+          "name": "Handball, team",
+          "vn_name": "Handball, team",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Soccer, competitive",
+          "vn_name": "Soccer, competitive",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702
+        },
+        {
+          "name": "Playing soccer",
+          "vn_name": "Playing soccer",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388
+        },
+        {
+          "name": "Softball or baseball",
+          "vn_name": "Softball or baseball",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "Softball, officiating",
+          "vn_name": "Softball, officiating",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746
+        },
+        {
+          "name": "Softball, pitching",
+          "vn_name": "Softball, pitching",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612
+        },
+        {
+          "name": "Volleyball, competitive",
+          "vn_name": "Volleyball, competitive",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Playing volleyball",
+          "vn_name": "Playing volleyball",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        },
+        {
+          "name": "Volleyball, beach",
+          "vn_name": "Volleyball, beach",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164
+        },
+        {
+          "name": "Water volleyball",
+          "vn_name": "Water volleyball",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806
+        }
+      ]
+    },
+    "Housework": {
+      "category": "Công Việc Nhà",
+      "activities": [
+        {
+          "name": "General housework",
+          "vn_name": "chung công việc nhà",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Cleaning gutters",
+          "vn_name": "Cleaning gutters",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851
+        },
+        {
+          "name": "General cleaning",
+          "vn_name": "chung cleaning",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478
+        },
+        {
+          "name": "Cleaning, dusting",
+          "vn_name": "Cleaning, dusting",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "weight_categories": [
+      "59 kg",
+      "70 kg",
+      "82 kg",
+      "93 kg"
+    ],
+    "weight_categories_original_lb": [
+      "130 lb",
+      "155 lb",
+      "180 lb",
+      "205 lb"
+    ],
+    "total_activities": 248
+  }
+}

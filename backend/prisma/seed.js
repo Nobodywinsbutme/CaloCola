@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 
 function resolveFoodsPath() {
   const candidates = [
-    path.resolve(process.cwd(), '../data/foods.json'),
-    path.resolve(__dirname, '../../data/foods.json'),
+    path.resolve(process.cwd(), '../data/foods/foods.json'),
+    path.resolve(__dirname, '../../data/foods/foods.json'),
   ];
 
   for (const candidate of candidates) {
