@@ -3,7 +3,7 @@
  * Central place for user profile and health metrics API calls.
  */
 
-const API_BASE = 'http://localhost:8080'
+const API_BASE = '/api'
 
 async function fetchJson(url, options) {
   const res = await fetch(url, options)
