@@ -1,0 +1,2715 @@
+{
+  "exercises": {
+    "Cycling": {
+      "category": "Đạp Xe",
+      "activities": [
+        {
+          "name": "Cycling",
+          "vn_name": "Cycling",
+          "calories": {
+            "59_kg": 502,
+            "70_kg": 598,
+            "82_kg": 695,
+            "93_kg": 791
+          },
+          "calories_per_kg": 1.75072971940299,
+          "merged_from": [
+            "Cycling"
+          ]
+        },
+        {
+          "name": "Cycling, 10-11.9 mph, light",
+          "vn_name": "Cycling, 16-19 km/h, nhẹ",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Cycling, 10-11.9 mph, light"
+          ]
+        },
+        {
+          "name": "Cycling, 12-13.9 mph, moderate",
+          "vn_name": "Cycling, 19-22 km/h, vừa phải",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Cycling, 12-13.9 mph, moderate"
+          ]
+        },
+        {
+          "name": "Cycling, 14-15.9 mph, vigorous",
+          "vn_name": "Cycling, 23-26 km/h, mạnh mẽ",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Cycling, 14-15.9 mph, vigorous"
+          ]
+        },
+        {
+          "name": "Cycling, 16-19 mph, very fast, racing",
+          "vn_name": "Cycling, 26-31 km/h, rất nhanh, đua",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239,
+          "merged_from": [
+            "Cycling, 16-19 mph, very fast, racing"
+          ]
+        },
+        {
+          "name": "Cycling, <10 mph, leisure bicycling",
+          "vn_name": "Cycling, <16 km/h, đạp xe giải trí",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Cycling, <10 mph, leisure bicycling"
+          ]
+        },
+        {
+          "name": "Cycling, >20 mph, racing",
+          "vn_name": "Cycling, >32 km/h, đua",
+          "calories": {
+            "59_kg": 944,
+            "70_kg": 1126,
+            "82_kg": 1308,
+            "93_kg": 1489
+          },
+          "calories_per_kg": 3.29497352835821,
+          "merged_from": [
+            "Cycling, >20 mph, racing"
+          ]
+        },
+        {
+          "name": "Stationary cycling",
+          "vn_name": "đạp xe cố định",
+          "calories": {
+            "59_kg": 455,
+            "70_kg": 542,
+            "82_kg": 629,
+            "93_kg": 716
+          },
+          "calories_per_kg": 1.5856763916417917,
+          "merged_from": [
+            "Stationary cycling, light",
+            "Stationary cycling, moderate",
+            "Stationary cycling, very light",
+            "Stationary cycling, very vigorous",
+            "Stationary cycling, vigorous"
+          ]
+        },
+        {
+          "name": "Unicycling",
+          "vn_name": "đạp xe một bánh",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Unicycling"
+          ]
+        }
+      ]
+    },
+    "Gym_Strength": {
+      "category": "Phòng Tập & Nâng Tạ",
+      "activities": [
+        {
+          "name": "Calisthenics",
+          "vn_name": "tập thể dục thể hình",
+          "calories": {
+            "59_kg": 340,
+            "70_kg": 404,
+            "82_kg": 470,
+            "93_kg": 536
+          },
+          "calories_per_kg": 1.1844167223880588,
+          "merged_from": [
+            "Calisthenics, light",
+            "Calisthenics, vigorous, pushups, situps…"
+          ]
+        },
+        {
+          "name": "Circuit training",
+          "vn_name": "tập vòng",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Circuit training"
+          ]
+        },
+        {
+          "name": "Gymnastics",
+          "vn_name": "thể dục dụng cụ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Gymnastics"
+          ]
+        },
+        {
+          "name": "Health club exercise",
+          "vn_name": "tập luyện phòng gym",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985,
+          "merged_from": [
+            "Health club exercise"
+          ]
+        },
+        {
+          "name": "Ski machine",
+          "vn_name": "máy trượt tuyết",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Ski machine"
+          ]
+        },
+        {
+          "name": "Stair machine",
+          "vn_name": "máy leo cầu thang",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925,
+          "merged_from": [
+            "Stair machine"
+          ]
+        },
+        {
+          "name": "Weight lifting",
+          "vn_name": "nâng tạ",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 316,
+            "82_kg": 368,
+            "93_kg": 418
+          },
+          "calories_per_kg": 0.9261400835820899,
+          "merged_from": [
+            "Weight lifting, body building, vigorous",
+            "Weight lifting, light workout"
+          ]
+        }
+      ]
+    },
+    "Water_Sports": {
+      "category": "Thể Thao Nước",
+      "activities": [
+        {
+          "name": "Boating",
+          "vn_name": "chèo thuyền",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Boating"
+          ]
+        },
+        {
+          "name": "Canoeing",
+          "vn_name": "canoeing",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.3382656507462691,
+          "merged_from": [
+            "Canoeing, camping trip",
+            "Canoeing, rowing, light",
+            "Canoeing, rowing, moderate",
+            "Canoeing, rowing, vigorous"
+          ]
+        },
+        {
+          "name": "Crew",
+          "vn_name": "crew",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239,
+          "merged_from": [
+            "Crew"
+          ]
+        },
+        {
+          "name": "Diving",
+          "vn_name": "nhảy cầu",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Diving"
+          ]
+        },
+        {
+          "name": "Kayaking",
+          "vn_name": "kayaking",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Kayaking"
+          ]
+        },
+        {
+          "name": "Paddle boat",
+          "vn_name": "thuyền chèo",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Paddle boat"
+          ]
+        },
+        {
+          "name": "Rowing machine",
+          "vn_name": "máy chèo",
+          "calories": {
+            "59_kg": 458,
+            "70_kg": 545,
+            "82_kg": 634,
+            "93_kg": 721
+          },
+          "calories_per_kg": 1.5960345373134346,
+          "merged_from": [
+            "Rowing machine, light",
+            "Rowing machine, moderate",
+            "Rowing machine, very vigorous",
+            "Rowing machine, vigorous"
+          ]
+        },
+        {
+          "name": "Sailing",
+          "vn_name": "buồm",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 282,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.8235741313432849,
+          "merged_from": [
+            "Sailing, competition",
+            "Sailing, yachting, ocean sailing"
+          ]
+        },
+        {
+          "name": "Skiing",
+          "vn_name": "Skiing",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Skiing"
+          ]
+        },
+        {
+          "name": "Skin diving",
+          "vn_name": "lặn tự do",
+          "calories": {
+            "59_kg": 698,
+            "70_kg": 833,
+            "82_kg": 967,
+            "93_kg": 1101
+          },
+          "calories_per_kg": 2.4369850786069667,
+          "merged_from": [
+            "Skin diving, fast",
+            "Skin diving, moderate",
+            "Skin diving, scuba diving"
+          ]
+        },
+        {
+          "name": "Snorkeling",
+          "vn_name": "lặn ống thở",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Snorkeling"
+          ]
+        },
+        {
+          "name": "Surfing",
+          "vn_name": "lướt sóng",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Surfing"
+          ]
+        },
+        {
+          "name": "Swimming",
+          "vn_name": "bơi",
+          "calories": {
+            "59_kg": 478,
+            "70_kg": 570,
+            "82_kg": 662,
+            "93_kg": 754
+          },
+          "calories_per_kg": 1.6679999546268665,
+          "merged_from": [
+            "Swimming backstroke",
+            "Swimming breaststroke",
+            "Swimming butterfly",
+            "Swimming laps, freestyle, fast",
+            "Swimming laps, freestyle, slow",
+            "Swimming leisurely, not laps",
+            "Swimming sidestroke",
+            "Swimming synchronized",
+            "Swimming, treading water, fast, vigorous",
+            "Swimming, treading water, moderate"
+          ]
+        },
+        {
+          "name": "Water aerobics",
+          "vn_name": "aerobic nước",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Water aerobics",
+            "Water aerobics, water calisthenics"
+          ]
+        },
+        {
+          "name": "Water jogging",
+          "vn_name": "chạy nước",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Water jogging"
+          ]
+        },
+        {
+          "name": "Water polo",
+          "vn_name": "bóng nước",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Water polo"
+          ]
+        },
+        {
+          "name": "Whitewater rafting",
+          "vn_name": "chèo thuyền nước trắng",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Whitewater rafting"
+          ]
+        },
+        {
+          "name": "Windsurfing",
+          "vn_name": "lướt gió",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Windsurfing"
+          ]
+        }
+      ]
+    },
+    "Cardio_Aerobics_Dance": {
+      "category": "Cardio, Aerobic & Dance",
+      "activities": [
+        {
+          "name": "Aerobics",
+          "vn_name": "aerobic",
+          "calories": {
+            "59_kg": 398,
+            "70_kg": 475,
+            "82_kg": 552,
+            "93_kg": 628
+          },
+          "calories_per_kg": 1.3900563791044802,
+          "merged_from": [
+            "Aerobics, general",
+            "Aerobics, high impact",
+            "Aerobics, low impact",
+            "Aerobics, step aerobics"
+          ]
+        },
+        {
+          "name": "Ballet",
+          "vn_name": "ba lê",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239,
+          "merged_from": [
+            "Ballet"
+          ]
+        },
+        {
+          "name": "Ballroom dancing",
+          "vn_name": "khiêu vũ nhảy múa",
+          "calories": {
+            "59_kg": 251,
+            "70_kg": 299,
+            "82_kg": 347,
+            "93_kg": 396
+          },
+          "calories_per_kg": 0.875026358208955,
+          "merged_from": [
+            "Ballroom dancing, fast",
+            "Ballroom dancing, slow"
+          ]
+        },
+        {
+          "name": "Jazzercise",
+          "vn_name": "jazzercise",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Jazzercise"
+          ]
+        },
+        {
+          "name": "Mild stretching",
+          "vn_name": "co giãn nhẹ",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Mild stretching"
+          ]
+        },
+        {
+          "name": "Stretching",
+          "vn_name": "co giãn",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Stretching"
+          ]
+        }
+      ]
+    },
+    "Outdoor_Leisure": {
+      "category": "Thể Thao Ngoài Trời & Giải Trí",
+      "activities": [
+        {
+          "name": "Archery",
+          "vn_name": "bắn cung",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Archery"
+          ]
+        },
+        {
+          "name": "Backpacking",
+          "vn_name": "ba lô",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Backpacking"
+          ]
+        },
+        {
+          "name": "Billiards",
+          "vn_name": "bida",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Billiards"
+          ]
+        },
+        {
+          "name": "Bird watching",
+          "vn_name": "Bird watching",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Bird watching"
+          ]
+        },
+        {
+          "name": "Bowling",
+          "vn_name": "ném bóng",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Bowling"
+          ]
+        },
+        {
+          "name": "Children's games",
+          "vn_name": "trẻ em's games",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Children's games"
+          ]
+        },
+        {
+          "name": "Croquet",
+          "vn_name": "croquet",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Croquet"
+          ]
+        },
+        {
+          "name": "Curling",
+          "vn_name": "curling",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Curling"
+          ]
+        },
+        {
+          "name": "Darts (wall or lawn)",
+          "vn_name": "phi tiêu (tường or sân)",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Darts (wall or lawn)"
+          ]
+        },
+        {
+          "name": "Frisbee",
+          "vn_name": "frisbee",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Frisbee"
+          ]
+        },
+        {
+          "name": "Frisbee playing",
+          "vn_name": "frisbee chơi",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Frisbee playing"
+          ]
+        },
+        {
+          "name": "Golf",
+          "vn_name": "golf",
+          "calories": {
+            "59_kg": 224,
+            "70_kg": 268,
+            "82_kg": 310,
+            "93_kg": 354
+          },
+          "calories_per_kg": 0.7827282845771147,
+          "merged_from": [
+            "Golf, driving range",
+            "Golf, general",
+            "Golf, miniature golf",
+            "Golf, using power cart",
+            "Golf, walking and carrying clubs",
+            "Golf, walking and pulling clubs"
+          ]
+        },
+        {
+          "name": "Hacky sack",
+          "vn_name": "hacky sack",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Hacky sack"
+          ]
+        },
+        {
+          "name": "Hockey",
+          "vn_name": "khúc côn cầu",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Hockey, field hockey",
+            "Hockey, ice hockey"
+          ]
+        },
+        {
+          "name": "Horesback riding",
+          "vn_name": "Horesback riding",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Horesback riding"
+          ]
+        },
+        {
+          "name": "Horse racing",
+          "vn_name": "đua ngựa",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Horse racing"
+          ]
+        },
+        {
+          "name": "Horseback riding",
+          "vn_name": "cưỡi ngựa",
+          "calories": {
+            "59_kg": 246,
+            "70_kg": 293,
+            "82_kg": 340,
+            "93_kg": 388
+          },
+          "calories_per_kg": 0.8582141174129362,
+          "merged_from": [
+            "Horseback riding, grooming horse",
+            "Horseback riding, trotting",
+            "Horseback riding, walking"
+          ]
+        },
+        {
+          "name": "Horseshoe pitching",
+          "vn_name": "ném móng ngựa",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Horseshoe pitching"
+          ]
+        },
+        {
+          "name": "Instructing aerobic class",
+          "vn_name": "hướng dẫn lớp aerobic",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Instructing aerobic class"
+          ]
+        },
+        {
+          "name": "Juggling",
+          "vn_name": "múa trò",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Juggling"
+          ]
+        },
+        {
+          "name": "Jumping rope",
+          "vn_name": "nhảy dây",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.059443080597017,
+          "merged_from": [
+            "Jumping rope, fast",
+            "Jumping rope, moderate",
+            "Jumping rope, slow"
+          ]
+        },
+        {
+          "name": "Kickball",
+          "vn_name": "bóng đá tay",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Kickball"
+          ]
+        },
+        {
+          "name": "Marching",
+          "vn_name": "Marching",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254,
+          "merged_from": [
+            "Marching"
+          ]
+        },
+        {
+          "name": "Orienteering",
+          "vn_name": "định hướng",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925,
+          "merged_from": [
+            "Orienteering"
+          ]
+        },
+        {
+          "name": "Polo",
+          "vn_name": "polo",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Polo"
+          ]
+        },
+        {
+          "name": "Pushing a wheelchair",
+          "vn_name": "đẩy xe lăn",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Pushing a wheelchair"
+          ]
+        },
+        {
+          "name": "Pushing stroller or walking with children",
+          "vn_name": "đẩy xe công or đi bộ with trẻ em",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Pushing stroller or walking with children"
+          ]
+        },
+        {
+          "name": "Riding a horse",
+          "vn_name": "Riding a ngựa",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Riding a horse"
+          ]
+        },
+        {
+          "name": "Rock climbing",
+          "vn_name": "leo đá",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 736,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.8536341731343267,
+          "merged_from": [
+            "Rock climbing, ascending rock",
+            "Rock climbing, mountain climbing",
+            "Rock climbing, rappelling"
+          ]
+        },
+        {
+          "name": "Roller blading",
+          "vn_name": "trượt inline",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239,
+          "merged_from": [
+            "Roller blading"
+          ]
+        },
+        {
+          "name": "Roller skating",
+          "vn_name": "trượt patin",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Roller skating"
+          ]
+        },
+        {
+          "name": "Shuffleboard",
+          "vn_name": "shuffleboard",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Shuffleboard"
+          ]
+        },
+        {
+          "name": "Skateboarding",
+          "vn_name": "trượt ván",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Skateboarding"
+          ]
+        },
+        {
+          "name": "Ski mobiling",
+          "vn_name": "xe tuyết",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Ski mobiling"
+          ]
+        },
+        {
+          "name": "Sky diving",
+          "vn_name": "nhảy dù",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Sky diving"
+          ]
+        },
+        {
+          "name": "Tai chi",
+          "vn_name": "thái cực",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Tai chi"
+          ]
+        },
+        {
+          "name": "Teach physical education",
+          "vn_name": "Teach physical education",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Teach physical education"
+          ]
+        },
+        {
+          "name": "Trampoline",
+          "vn_name": "sàn nhún",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Trampoline"
+          ]
+        },
+        {
+          "name": "Walking",
+          "vn_name": "đi bộ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Walking"
+          ]
+        },
+        {
+          "name": "Walking 2.0 mph, slow",
+          "vn_name": "đi bộ 3.2 km/h, chậm",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Walking 2.0 mph, slow"
+          ]
+        },
+        {
+          "name": "Walking 2.5 mph",
+          "vn_name": "đi bộ 4 km/h",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Walking 2.5 mph"
+          ]
+        },
+        {
+          "name": "Walking 3.0 mph, moderate",
+          "vn_name": "đi bộ 4.8 km/h, vừa phải",
+          "calories": {
+            "59_kg": 195,
+            "70_kg": 232,
+            "82_kg": 270,
+            "93_kg": 307
+          },
+          "calories_per_kg": 0.679710997014925,
+          "merged_from": [
+            "Walking 3.0 mph, moderate"
+          ]
+        },
+        {
+          "name": "Walking 3.5 mph, brisk pace",
+          "vn_name": "đi bộ 5.6 km/h, tốc độ nhanh",
+          "calories": {
+            "59_kg": 224,
+            "70_kg": 267,
+            "82_kg": 311,
+            "93_kg": 354
+          },
+          "calories_per_kg": 0.782615450746269,
+          "merged_from": [
+            "Walking 3.5 mph, brisk pace"
+          ]
+        },
+        {
+          "name": "Walking 3.5 mph, uphill",
+          "vn_name": "đi bộ 5.6 km/h, lên dốc",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Walking 3.5 mph, uphill"
+          ]
+        },
+        {
+          "name": "Walking 4.0 mph, very brisk",
+          "vn_name": "đi bộ 6.4 km/h, rất nhanh",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Walking 4.0 mph, very brisk"
+          ]
+        },
+        {
+          "name": "Walking 4.5 mph",
+          "vn_name": "đi bộ 7.2 km/h",
+          "calories": {
+            "59_kg": 372,
+            "70_kg": 443,
+            "82_kg": 515,
+            "93_kg": 586
+          },
+          "calories_per_kg": 1.29713771940299,
+          "merged_from": [
+            "Walking 4.5 mph"
+          ]
+        },
+        {
+          "name": "Walking 5.0 mph",
+          "vn_name": "đi bộ 8 km/h",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Walking 5.0 mph"
+          ]
+        },
+        {
+          "name": "Walking downstairs",
+          "vn_name": "đi bộ xuống cầu thang",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Walking downstairs"
+          ]
+        },
+        {
+          "name": "Walking the dog",
+          "vn_name": "đi bộ với chó",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Walking the dog"
+          ]
+        },
+        {
+          "name": "Walking using crutches",
+          "vn_name": "đi bộ sử dụng nạng",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Walking using crutches"
+          ]
+        },
+        {
+          "name": "Walking, under 2.0 mph, very slow",
+          "vn_name": "đi bộ, dưới 3.2 km/h, very chậm",
+          "calories": {
+            "59_kg": 118,
+            "70_kg": 141,
+            "82_kg": 163,
+            "93_kg": 186
+          },
+          "calories_per_kg": 0.411617814925373,
+          "merged_from": [
+            "Walking, under 2.0 mph, very slow"
+          ]
+        },
+        {
+          "name": "Wallyball",
+          "vn_name": "tườngyball",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Wallyball"
+          ]
+        }
+      ]
+    },
+    "Running_Track": {
+      "category": "Chạy Bộ & Điền Kinh",
+      "activities": [
+        {
+          "name": "Hiking",
+          "vn_name": "đi bộ đường dài",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Hiking"
+          ]
+        },
+        {
+          "name": "Race walking",
+          "vn_name": "bước chạy tốc độ",
+          "calories": {
+            "59_kg": 384,
+            "70_kg": 457,
+            "82_kg": 531,
+            "93_kg": 605
+          },
+          "calories_per_kg": 1.33843490149254,
+          "merged_from": [
+            "Race walking"
+          ]
+        },
+        {
+          "name": "Running",
+          "vn_name": "chạy bộ",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.0594430805970143,
+          "merged_from": [
+            "Running, cross country",
+            "Running, general",
+            "Running, on a track, team practice",
+            "Running, stairs, up",
+            "Running, training, pushing wheelchair"
+          ]
+        },
+        {
+          "name": "Running, 10 mph (6 min mile)",
+          "vn_name": "chạy bộ, 16 km/h (dặm 6 phút)",
+          "calories": {
+            "59_kg": 944,
+            "70_kg": 1126,
+            "82_kg": 1308,
+            "93_kg": 1489
+          },
+          "calories_per_kg": 3.29497352835821,
+          "merged_from": [
+            "Running, 10 mph (6 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 10.9 mph (5.5 min mile)",
+          "vn_name": "chạy bộ, 17.5 km/h (dặm 5.5 phút)",
+          "calories": {
+            "59_kg": 1062,
+            "70_kg": 1267,
+            "82_kg": 1471,
+            "93_kg": 1675
+          },
+          "calories_per_kg": 3.70659134328358,
+          "merged_from": [
+            "Running, 10.9 mph (5.5 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 5 mph (12 minute mile)",
+          "vn_name": "chạy bộ, 8 km/h (dặm 12 phút)",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Running, 5 mph (12 minute mile)"
+          ]
+        },
+        {
+          "name": "Running, 5.2 mph (11.5 minute mile)",
+          "vn_name": "chạy bộ, 8.4 km/h (dặm 11.5 phút)",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925,
+          "merged_from": [
+            "Running, 5.2 mph (11.5 minute mile)"
+          ]
+        },
+        {
+          "name": "Running, 6 mph (10 min mile)",
+          "vn_name": "chạy bộ, 9.6 km/h (dặm 10 phút)",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Running, 6 mph (10 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 6.7 mph (9 min mile)",
+          "vn_name": "chạy bộ, 10.8 km/h (dặm 9 phút)",
+          "calories": {
+            "59_kg": 649,
+            "70_kg": 774,
+            "82_kg": 899,
+            "93_kg": 1024
+          },
+          "calories_per_kg": 2.2652519880597,
+          "merged_from": [
+            "Running, 6.7 mph (9 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 7 mph (8.5 min mile)",
+          "vn_name": "chạy bộ, 11.3 km/h (dặm 8.5 phút)",
+          "calories": {
+            "59_kg": 679,
+            "70_kg": 809,
+            "82_kg": 940,
+            "93_kg": 1070
+          },
+          "calories_per_kg": 2.36815644179104,
+          "merged_from": [
+            "Running, 7 mph (8.5 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 7.5mph (8 min mile)",
+          "vn_name": "chạy bộ, 12 km/h (dặm 8 phút)",
+          "calories": {
+            "59_kg": 738,
+            "70_kg": 880,
+            "82_kg": 1022,
+            "93_kg": 1163
+          },
+          "calories_per_kg": 2.57464235223881,
+          "merged_from": [
+            "Running, 7.5mph (8 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 8 mph (7.5 min mile)",
+          "vn_name": "chạy bộ, 12.9 km/h (dặm 7.5 phút)",
+          "calories": {
+            "59_kg": 797,
+            "70_kg": 950,
+            "82_kg": 1103,
+            "93_kg": 1256
+          },
+          "calories_per_kg": 2.77977425671642,
+          "merged_from": [
+            "Running, 8 mph (7.5 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 8.6 mph (7 min mile)",
+          "vn_name": "chạy bộ, 13.8 km/h (dặm 7 phút)",
+          "calories": {
+            "59_kg": 826,
+            "70_kg": 985,
+            "82_kg": 1144,
+            "93_kg": 1303
+          },
+          "calories_per_kg": 2.88267871044776,
+          "merged_from": [
+            "Running, 8.6 mph (7 min mile)"
+          ]
+        },
+        {
+          "name": "Running, 9 mph (6.5 min mile)",
+          "vn_name": "chạy bộ, 14.5 km/h (dặm 6.5 phút)",
+          "calories": {
+            "59_kg": 885,
+            "70_kg": 1056,
+            "82_kg": 1226,
+            "93_kg": 1396
+          },
+          "calories_per_kg": 3.08916462089552,
+          "merged_from": [
+            "Running, 9 mph (6.5 min mile)"
+          ]
+        },
+        {
+          "name": "Track and field (high jump",
+          "vn_name": "điền kinh (nhảy cao",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Track and field (high jump"
+          ]
+        },
+        {
+          "name": "Track and field (hurdles)",
+          "vn_name": "điền kinh (chạy vượt rào)",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Track and field (hurdles)"
+          ]
+        },
+        {
+          "name": "Track and field (shot",
+          "vn_name": "điền kinh (ném tạ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Track and field (shot"
+          ]
+        }
+      ]
+    },
+    "Racquet_Sports": {
+      "category": "Thể Thao Vợt",
+      "activities": [
+        {
+          "name": "Badminton",
+          "vn_name": "cầu lông",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239,
+          "merged_from": [
+            "Badminton"
+          ]
+        },
+        {
+          "name": "Paddleball",
+          "vn_name": "bóng vợt",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Paddleball"
+          ]
+        },
+        {
+          "name": "Playing paddleball",
+          "vn_name": "chơi bóng vợt",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Playing paddleball"
+          ]
+        },
+        {
+          "name": "Playing racquetball",
+          "vn_name": "chơi racquetball",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Playing racquetball"
+          ]
+        },
+        {
+          "name": "Playing tennis",
+          "vn_name": "chơi tennis",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Playing tennis"
+          ]
+        },
+        {
+          "name": "Racquetball",
+          "vn_name": "racquetball",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Racquetball"
+          ]
+        },
+        {
+          "name": "Squash",
+          "vn_name": "squash",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239,
+          "merged_from": [
+            "Squash"
+          ]
+        },
+        {
+          "name": "Table tennis",
+          "vn_name": "bóng bàn",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Table tennis"
+          ]
+        },
+        {
+          "name": "Tennis",
+          "vn_name": "tennis",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 492,
+            "82_kg": 572,
+            "93_kg": 652
+          },
+          "calories_per_kg": 1.4413393552238798,
+          "merged_from": [
+            "Tennis, doubles",
+            "Tennis, singles"
+          ]
+        }
+      ]
+    },
+    "Team_Ball_Sports": {
+      "category": "Thể Thao Bóng Tập Thể",
+      "activities": [
+        {
+          "name": "Basketball",
+          "vn_name": "Basketball",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.2357561154228864,
+          "merged_from": [
+            "Basketball, officiating",
+            "Basketball, shooting baskets",
+            "Basketball, wheelchair"
+          ]
+        },
+        {
+          "name": "Basketball game",
+          "vn_name": "trận bóng rổ",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Basketball game"
+          ]
+        },
+        {
+          "name": "Coaching: football",
+          "vn_name": "huấn luyện: bóng đá Mỹ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Coaching: football"
+          ]
+        },
+        {
+          "name": "Cricket (batting",
+          "vn_name": "cricket (đánh bóng",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Cricket (batting"
+          ]
+        },
+        {
+          "name": "Football",
+          "vn_name": "bóng đá Mỹ",
+          "calories": {
+            "59_kg": 502,
+            "70_kg": 598,
+            "82_kg": 694,
+            "93_kg": 792
+          },
+          "calories_per_kg": 1.7503912179104448,
+          "merged_from": [
+            "Football, competitive",
+            "Football, touch, flag, general"
+          ]
+        },
+        {
+          "name": "Football or baseball",
+          "vn_name": "bóng đá Mỹ or bóng chày",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Football or baseball"
+          ]
+        },
+        {
+          "name": "Handball",
+          "vn_name": "bóng ném",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 818,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.059443080597015,
+          "merged_from": [
+            "Handball",
+            "Handball, team"
+          ]
+        },
+        {
+          "name": "Jai alai",
+          "vn_name": "jai alai",
+          "calories": {
+            "59_kg": 708,
+            "70_kg": 844,
+            "82_kg": 981,
+            "93_kg": 1117
+          },
+          "calories_per_kg": 2.47106089552239,
+          "merged_from": [
+            "Jai alai"
+          ]
+        },
+        {
+          "name": "Lacrosse",
+          "vn_name": "lacrosse",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Lacrosse"
+          ]
+        },
+        {
+          "name": "Playing basketball",
+          "vn_name": "chơi bóng rổ",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Playing basketball"
+          ]
+        },
+        {
+          "name": "Playing soccer",
+          "vn_name": "chơi bóng đá",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Playing soccer"
+          ]
+        },
+        {
+          "name": "Playing volleyball",
+          "vn_name": "chơi bóng chuyền",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Playing volleyball"
+          ]
+        },
+        {
+          "name": "Rugby",
+          "vn_name": "rugby",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Rugby"
+          ]
+        },
+        {
+          "name": "Soccer",
+          "vn_name": "bóng đá",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Soccer"
+          ]
+        },
+        {
+          "name": "Softball",
+          "vn_name": "bóng mềm",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 408,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.029044537313433,
+          "merged_from": [
+            "Softball, officiating",
+            "Softball, pitching"
+          ]
+        },
+        {
+          "name": "Softball or baseball",
+          "vn_name": "bóng mềm or bóng chày",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Softball or baseball"
+          ]
+        },
+        {
+          "name": "Volleyball",
+          "vn_name": "bóng chuyền",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Volleyball, beach",
+            "Volleyball, competitive"
+          ]
+        },
+        {
+          "name": "Water volleyball",
+          "vn_name": "bóng chuyền nước",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Water volleyball"
+          ]
+        }
+      ]
+    },
+    "Combat_Sports": {
+      "category": "Thể Thao Võ",
+      "activities": [
+        {
+          "name": "Boxing",
+          "vn_name": "quyền anh",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.8529571701492535,
+          "merged_from": [
+            "Boxing, in ring",
+            "Boxing, punching bag",
+            "Boxing, sparring"
+          ]
+        },
+        {
+          "name": "Fencing",
+          "vn_name": "kiếm",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Fencing"
+          ]
+        },
+        {
+          "name": "Krav maga training",
+          "vn_name": "tập luyện krav maga",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Krav maga training"
+          ]
+        },
+        {
+          "name": "Martial arts",
+          "vn_name": "võ thuật",
+          "calories": {
+            "59_kg": 590,
+            "70_kg": 704,
+            "82_kg": 817,
+            "93_kg": 931
+          },
+          "calories_per_kg": 2.05944308059702,
+          "merged_from": [
+            "Martial arts, judo, karate, jujitsu",
+            "Martial arts, kick boxing",
+            "Martial arts, tae kwan do"
+          ]
+        },
+        {
+          "name": "Wrestling",
+          "vn_name": "đấu vật",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Wrestling"
+          ]
+        }
+      ]
+    },
+    "Household_Yard": {
+      "category": "Công Việc Nhà & Vườn",
+      "activities": [
+        {
+          "name": "Bagging grass",
+          "vn_name": "xếp cỏ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Bagging grass"
+          ]
+        },
+        {
+          "name": "Bathing dog",
+          "vn_name": "tắm chó",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Bathing dog"
+          ]
+        },
+        {
+          "name": "Carpentry",
+          "vn_name": "carpentry",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Carpentry"
+          ]
+        },
+        {
+          "name": "Carrying 16 to 24 lbs, upstairs",
+          "vn_name": "Carrying 16 to 24 lbs, lên cầu thang",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Carrying 16 to 24 lbs, upstairs"
+          ]
+        },
+        {
+          "name": "Carrying 25 to 49 lbs, upstairs",
+          "vn_name": "Carrying 25 to 49 lbs, lên cầu thang",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Carrying 25 to 49 lbs, upstairs"
+          ]
+        },
+        {
+          "name": "Carrying heavy loads",
+          "vn_name": "mang nặng",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Carrying heavy loads"
+          ]
+        },
+        {
+          "name": "Carrying infant",
+          "vn_name": "mang trẻ sơ sinh",
+          "calories": {
+            "59_kg": 251,
+            "70_kg": 299,
+            "82_kg": 348,
+            "93_kg": 396
+          },
+          "calories_per_kg": 0.875364859701494,
+          "merged_from": [
+            "Carrying infant, level ground",
+            "Carrying infant, upstairs"
+          ]
+        },
+        {
+          "name": "Carrying moderate loads upstairs",
+          "vn_name": "mang vừa phải lên cầu thang",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Carrying moderate loads upstairs"
+          ]
+        },
+        {
+          "name": "Carrying small children",
+          "vn_name": "Carrying small trẻ em",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Carrying small children"
+          ]
+        },
+        {
+          "name": "Cleaning",
+          "vn_name": "lau chùi",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Cleaning"
+          ]
+        },
+        {
+          "name": "Cleaning gutters",
+          "vn_name": "lau rươi",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Cleaning gutters"
+          ]
+        },
+        {
+          "name": "Climbing hills, carrying 10 to 20 lb",
+          "vn_name": "leo đồi, carrying 10 to 20 lb",
+          "calories": {
+            "59_kg": 443,
+            "70_kg": 528,
+            "82_kg": 613,
+            "93_kg": 698
+          },
+          "calories_per_kg": 1.5449208119403,
+          "merged_from": [
+            "Climbing hills, carrying 10 to 20 lb"
+          ]
+        },
+        {
+          "name": "Climbing hills, carrying 21 to 42 lb",
+          "vn_name": "leo đồi, carrying 21 to 42 lb",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Climbing hills, carrying 21 to 42 lb"
+          ]
+        },
+        {
+          "name": "Climbing hills, carrying over 42 lb",
+          "vn_name": "leo đồi, carrying over 42 lb",
+          "calories": {
+            "59_kg": 531,
+            "70_kg": 633,
+            "82_kg": 735,
+            "93_kg": 838
+          },
+          "calories_per_kg": 1.85295717014925,
+          "merged_from": [
+            "Climbing hills, carrying over 42 lb"
+          ]
+        },
+        {
+          "name": "Climbing hills, carrying up to 9 lbs",
+          "vn_name": "leo đồi, carrying up to 9 lbs",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Climbing hills, carrying up to 9 lbs"
+          ]
+        },
+        {
+          "name": "Gardening",
+          "vn_name": "làm vườn",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Gardening"
+          ]
+        },
+        {
+          "name": "General cleaning",
+          "vn_name": "vệ sinh chung",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "General cleaning"
+          ]
+        },
+        {
+          "name": "General housework",
+          "vn_name": "công việc nhà nói chung",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "General housework"
+          ]
+        },
+        {
+          "name": "Horse grooming",
+          "vn_name": "ngựa chải",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Horse grooming"
+          ]
+        },
+        {
+          "name": "Loading",
+          "vn_name": "xếp hàng",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Loading"
+          ]
+        },
+        {
+          "name": "Mowing lawn",
+          "vn_name": "cắt cỏ",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 282,
+            "82_kg": 326,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.8239126328358205,
+          "merged_from": [
+            "Mowing lawn, riding mower",
+            "Mowing lawn, walk, power mower"
+          ]
+        },
+        {
+          "name": "Painting",
+          "vn_name": "sơn",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239,
+          "merged_from": [
+            "Painting"
+          ]
+        },
+        {
+          "name": "Raking lawn",
+          "vn_name": "cào cỏ",
+          "calories": {
+            "59_kg": 254,
+            "70_kg": 303,
+            "82_kg": 351,
+            "93_kg": 400
+          },
+          "calories_per_kg": 0.885519904477612,
+          "merged_from": [
+            "Raking lawn"
+          ]
+        },
+        {
+          "name": "Sit",
+          "vn_name": "Sit",
+          "calories": {
+            "59_kg": 148,
+            "70_kg": 176,
+            "82_kg": 204,
+            "93_kg": 233
+          },
+          "calories_per_kg": 0.515199271641791,
+          "merged_from": [
+            "Sit"
+          ]
+        },
+        {
+          "name": "Standing",
+          "vn_name": "Standing",
+          "calories": {
+            "59_kg": 165,
+            "70_kg": 197,
+            "82_kg": 229,
+            "93_kg": 261
+          },
+          "calories_per_kg": 0.576806543283582,
+          "merged_from": [
+            "Standing"
+          ]
+        },
+        {
+          "name": "Taking out trash",
+          "vn_name": "vứt rác",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Taking out trash"
+          ]
+        },
+        {
+          "name": "Walk / run",
+          "vn_name": "đi bộ / run",
+          "calories": {
+            "59_kg": 236,
+            "70_kg": 281,
+            "82_kg": 327,
+            "93_kg": 372
+          },
+          "calories_per_kg": 0.823235629850746,
+          "merged_from": [
+            "Walk / run"
+          ]
+        },
+        {
+          "name": "Walk/run",
+          "vn_name": "đi bộ/run",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 316,
+            "82_kg": 368,
+            "93_kg": 418
+          },
+          "calories_per_kg": 0.926478585074628,
+          "merged_from": [
+            "Walk/run, playing with children, moderate",
+            "Walk/run, playing with children, vigorous"
+          ]
+        },
+        {
+          "name": "Watering lawn or garden",
+          "vn_name": "tưới sân or garden",
+          "calories": {
+            "59_kg": 89,
+            "70_kg": 106,
+            "82_kg": 123,
+            "93_kg": 140
+          },
+          "calories_per_kg": 0.310067367164179,
+          "merged_from": [
+            "Watering lawn or garden"
+          ]
+        },
+        {
+          "name": "Weeding",
+          "vn_name": "nhổ cỏ",
+          "calories": {
+            "59_kg": 266,
+            "70_kg": 317,
+            "82_kg": 368,
+            "93_kg": 419
+          },
+          "calories_per_kg": 0.927494089552239,
+          "merged_from": [
+            "Weeding"
+          ]
+        }
+      ]
+    },
+    "Winter_Sports": {
+      "category": "Thể Thao Mùa Đông",
+      "activities": [
+        {
+          "name": "Cross country skiing",
+          "vn_name": "trượt xuyên quốc gia",
+          "calories": {
+            "59_kg": 701,
+            "70_kg": 836,
+            "82_kg": 970,
+            "93_kg": 1106
+          },
+          "calories_per_kg": 2.44533478208955,
+          "merged_from": [
+            "Cross country skiing, moderate",
+            "Cross country skiing, racing",
+            "Cross country skiing, uphill",
+            "Cross country skiing, vigorous"
+          ]
+        },
+        {
+          "name": "Cross country snow skiing",
+          "vn_name": "xuyên quốc gia snow skiing",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Cross country snow skiing"
+          ]
+        },
+        {
+          "name": "Downhill snow skiing",
+          "vn_name": "Downhill snow skiing",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 492,
+            "82_kg": 572,
+            "93_kg": 652
+          },
+          "calories_per_kg": 1.4413393552238798,
+          "merged_from": [
+            "Downhill snow skiing, moderate",
+            "Downhill snow skiing, racing"
+          ]
+        },
+        {
+          "name": "Ice skating",
+          "vn_name": "trượt băng",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 744
+          },
+          "calories_per_kg": 1.647148262686565,
+          "merged_from": [
+            "Ice skating, average speed",
+            "Ice skating, rapidly"
+          ]
+        },
+        {
+          "name": "Ice skating, < 9 mph",
+          "vn_name": "trượt băng, < 14.5 km/h",
+          "calories": {
+            "59_kg": 325,
+            "70_kg": 387,
+            "82_kg": 449,
+            "93_kg": 512
+          },
+          "calories_per_kg": 1.13262599402985,
+          "merged_from": [
+            "Ice skating, < 9 mph"
+          ]
+        },
+        {
+          "name": "Riding",
+          "vn_name": "Riding",
+          "calories": {
+            "59_kg": 177,
+            "70_kg": 211,
+            "82_kg": 245,
+            "93_kg": 279
+          },
+          "calories_per_kg": 0.61742672238806,
+          "merged_from": [
+            "Riding"
+          ]
+        },
+        {
+          "name": "Shoveling snow by hand",
+          "vn_name": "xúc tuyết tay",
+          "calories": {
+            "59_kg": 354,
+            "70_kg": 422,
+            "82_kg": 490,
+            "93_kg": 558
+          },
+          "calories_per_kg": 1.23485344477612,
+          "merged_from": [
+            "Shoveling snow by hand"
+          ]
+        },
+        {
+          "name": "Sledding",
+          "vn_name": "trượt thuyền",
+          "calories": {
+            "59_kg": 413,
+            "70_kg": 493,
+            "82_kg": 572,
+            "93_kg": 651
+          },
+          "calories_per_kg": 1.44133935522388,
+          "merged_from": [
+            "Sledding"
+          ]
+        },
+        {
+          "name": "Snow shoeing",
+          "vn_name": "đi bộ tuyết",
+          "calories": {
+            "59_kg": 472,
+            "70_kg": 563,
+            "82_kg": 654,
+            "93_kg": 745
+          },
+          "calories_per_kg": 1.64782526567164,
+          "merged_from": [
+            "Snow shoeing"
+          ]
+        },
+        {
+          "name": "Snow skiing",
+          "vn_name": "Snow skiing",
+          "calories": {
+            "59_kg": 295,
+            "70_kg": 352,
+            "82_kg": 409,
+            "93_kg": 465
+          },
+          "calories_per_kg": 1.02972154029851,
+          "merged_from": [
+            "Snow skiing"
+          ]
+        },
+        {
+          "name": "Snowmobiling",
+          "vn_name": "xe tuyết",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Snowmobiling"
+          ]
+        },
+        {
+          "name": "Speed skating",
+          "vn_name": "trượt tốc độ",
+          "calories": {
+            "59_kg": 885,
+            "70_kg": 1056,
+            "82_kg": 1226,
+            "93_kg": 1396
+          },
+          "calories_per_kg": 3.08916462089552,
+          "merged_from": [
+            "Speed skating"
+          ]
+        },
+        {
+          "name": "Walking",
+          "vn_name": "đi bộ",
+          "calories": {
+            "59_kg": 207,
+            "70_kg": 246,
+            "82_kg": 286,
+            "93_kg": 326
+          },
+          "calories_per_kg": 0.721008179104478,
+          "merged_from": [
+            "Walking"
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "weight_categories": [
+      "59 kg",
+      "70 kg",
+      "82 kg",
+      "93 kg"
+    ],
+    "weight_categories_original_lb": [
+      "130 lb",
+      "155 lb",
+      "180 lb",
+      "205 lb"
+    ],
+    "total_activities": 184,
+    "original_total_activities": 248
+  }
+}

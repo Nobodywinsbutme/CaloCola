@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateIntakeDto , UpdateIntakeDto , DeleteIntakeDto , IntakeResponseDto } from './dto/index';
+import { CreateIntakeDto , UpdateIntakeDto , DeleteIntakeDto , IntakeResponseDto, CreateWaterIntakeDto } from './dto/index';
 
 
 
@@ -9,24 +9,23 @@ export class DailyTrackingService {
   constructor(private prisma: PrismaService) {}
 
   async addIntake(userId: string, data: CreateIntakeDto): Promise<IntakeResponseDto> {
+    const intakeDate = this.normalizeDate(data.intakeDate);
     // Create intake record
     const intake = await this.prisma.dailyIntake.create({
       data: {
         userId,
         ...data,
-        intakeDate: new Date(data.intakeDate),
+        intakeDate,
       },
     });
 
     // Recalculate daily totals
-    await this.recalculateDailyTotals(userId, data.intakeDate);
+    await this.recalculateDailyTotals(userId, intakeDate);
 
     return this.toIntakeResponse(intake);
   }
 
   async updateIntake(userId: string, intakeId: string, data: UpdateIntakeDto): Promise<IntakeResponseDto | null> {
-    const intakeDate = data.intakeDate;
-
     const existingIntake = await this.prisma.dailyIntake.findFirst({
       where: {
         id: intakeId,
@@ -38,19 +37,19 @@ export class DailyTrackingService {
       return null;
     }
 
-    const previousDate = existingIntake.intakeDate.toISOString().slice(0, 10);
+    const previousDate = this.normalizeDate(existingIntake.intakeDate);
+    const nextDate = data.intakeDate ? this.normalizeDate(data.intakeDate) : previousDate;
 
     const intake = await this.prisma.dailyIntake.update({
       where: { id: intakeId },
       data: {
         ...data,
-        intakeDate: intakeDate ? new Date(intakeDate) : existingIntake.intakeDate,
+        intakeDate: nextDate,
       },
     });
 
-    const nextDate = intakeDate ?? previousDate;
     await this.recalculateDailyTotals(userId, previousDate);
-    if (nextDate !== previousDate) {
+    if (nextDate.getTime() !== previousDate.getTime()) {
       await this.recalculateDailyTotals(userId, nextDate);
     }
 
@@ -73,28 +72,44 @@ export class DailyTrackingService {
       where: { id: intakeId },
     });
 
-    const date = existingIntake.intakeDate.toISOString().slice(0, 10);
+    const date = this.normalizeDate(existingIntake.intakeDate);
     await this.recalculateDailyTotals(userId, date);
 
     return this.toIntakeResponse(deleted);
   }
 
   async getDailyTotals(userId: string, date: string) {
+    const targetDate = this.normalizeDate(date);
+    const totals = await this.prisma.dailyTotal.findUnique({
+      where: {
+        userId_trackDate: {
+          userId,
+          trackDate: targetDate,
+        },
+      },
+    });
+
+    if (totals) {
+      return totals;
+    }
+
+    await this.recalculateDailyTotals(userId, targetDate);
     return this.prisma.dailyTotal.findUnique({
       where: {
         userId_trackDate: {
           userId,
-          trackDate: new Date(date),
+          trackDate: targetDate,
         },
       },
     });
   }
 
   async getIntakes(userId: string, date: string) {
+    const targetDate = this.normalizeDate(date);
     return this.prisma.dailyIntake.findMany({
       where: {
         userId,
-        intakeDate: new Date(date),
+        intakeDate: targetDate,
       },
       include: {
         food: true,
@@ -102,11 +117,71 @@ export class DailyTrackingService {
     });
   }
 
-  private async recalculateDailyTotals(userId: string, date: string) {
+  async addWaterIntake(userId: string, data: CreateWaterIntakeDto) {
+    const intakeDate = this.normalizeDate(data.intakeDate);
+    const intake = await this.prisma.waterIntake.create({
+      data: {
+        userId,
+        intakeDate,
+        amountMl: data.amountMl,
+      },
+    });
+
+    await this.recalculateDailyTotals(userId, intakeDate);
+
+    return intake;
+  }
+
+  async deleteLatestWaterIntake(userId: string, date: string) {
+    if (!date) {
+      return null;
+    }
+    const targetDate = this.normalizeDate(date);
+    const latest = await this.prisma.waterIntake.findFirst({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    if (!latest) {
+      return null;
+    }
+
+    const deleted = await this.prisma.waterIntake.delete({
+      where: { id: latest.id },
+    });
+
+    await this.recalculateDailyTotals(userId, targetDate);
+
+    return deleted;
+  }
+
+  async getWaterIntakes(userId: string, date: string) {
+    if (!date) {
+      return [];
+    }
+    const targetDate = this.normalizeDate(date);
+    return this.prisma.waterIntake.findMany({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
+  private async recalculateDailyTotals(userId: string, date: string | Date) {
+    const targetDate = this.normalizeDate(date);
     const intakes = await this.prisma.dailyIntake.findMany({
       where: {
         userId,
-        intakeDate: new Date(date),
+        intakeDate: targetDate,
       },
       include: {
         food: true,
@@ -129,11 +204,23 @@ export class DailyTrackingService {
       }
     }
 
+    const waterIntakes = await this.prisma.waterIntake.findMany({
+      where: {
+        userId,
+        intakeDate: targetDate,
+      },
+    });
+
+    let totalWaterMl = 0;
+    for (const intake of waterIntakes) {
+      totalWaterMl += intake.amountMl;
+    }
+
     await this.prisma.dailyTotal.upsert({
       where: {
         userId_trackDate: {
           userId,
-          trackDate: new Date(date),
+          trackDate: targetDate,
         },
       },
       update: {
@@ -141,16 +228,23 @@ export class DailyTrackingService {
         totalProtein,
         totalFat,
         totalCarbs,
+        totalWaterMl,
       },
       create: {
         userId,
-        trackDate: new Date(date),
+        trackDate: targetDate,
         totalCalories,
         totalProtein,
         totalFat,
         totalCarbs,
+        totalWaterMl,
       },
     });
+  }
+
+  private normalizeDate(input: string | Date): Date {
+    const dt = input instanceof Date ? input : new Date(input);
+    return new Date(Date.UTC(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate()));
   }
 
   private toIntakeResponse(intake: {

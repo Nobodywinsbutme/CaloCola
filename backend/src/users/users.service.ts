@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -21,57 +21,109 @@ export class UsersService {
   }
 
   async updateProfile(userId: string, data: any) {
-    // Preserve original string values (they get overwritten by the numeric calculations below)
-    const activityLevelStr = data.activityLevel;
-    const goalStr = data.goal;
-
-    // 1. Calculate BMR (Mifflin-St Jeor Equation)
-    let bmr = (10 * data.weight) + (6.25 * data.height) - (5 * data.age);
-    bmr += (data.gender === 'Male' ? 5 : -161);
-    bmr = Math.round(bmr);
-
-    // 2. Calculate TDEE based on activity level
-    let multiplier = 1.2; // Sedentary default
-    if (activityLevelStr === 'Lightly Active') multiplier = 1.375;
-    else if (activityLevelStr === 'Moderately Active') multiplier = 1.55;
-    else if (activityLevelStr === 'Very Active') multiplier = 1.725;
-
-    const tdee = Math.round(bmr * multiplier);
-
-    // 3. Calculate Calorie Target based on goal
-    let calorieTarget = tdee;
-    if (goalStr === 'Lose') calorieTarget -= 500;
-    if (goalStr === 'Gain') calorieTarget += 500;
-
-    // 4. Calculate Macro Targets (30% Protein, 35% Carbs, 35% Fat)
-    const proteinTarget = Math.round((calorieTarget * 0.30) / 4); // 4 calories per gram of protein
-    const carbTarget = Math.round((calorieTarget * 0.35) / 4);    // 4 calories per gram of carbs
-    const fatTarget = Math.round((calorieTarget * 0.35) / 9);     // 9 calories per gram of fat
-
-    // 5. Construct the full profile data object
-    const profileData = {
-      age: data.age,
-      height: data.height,
-      weight: data.weight,
-      gender: data.gender,
-      activityLevel: activityLevelStr,
-      goal: goalStr,
-      bmr: bmr,
-      tdee: tdee,
-      calorieTarget: calorieTarget,
-      proteinTarget: proteinTarget,
-      fatTarget: fatTarget,
-      carbTarget: carbTarget,
-    };
-
-    // 6. Save to database
-    return this.prisma.userProfile.upsert({
+    const existing = await this.prisma.userProfile.findUnique({
       where: { userId },
-      update: profileData,
-      create: { 
-        userId, 
-        ...profileData 
+    });
+
+    if (existing) {
+      return this.prisma.userProfile.update({
+        where: { userId },
+        data,
+      });
+    }
+
+    const height = Number(data.height);
+    const weight = Number(data.weight);
+    const age = Number(data.age);
+    const gender = data.gender;
+    const activityLevel = data.activityLevel;
+    const goal = data.goal;
+
+    if (!height || !weight || !age || !gender || !activityLevel || !goal) {
+      throw new BadRequestException(
+        'Missing required fields to create profile: height, weight, age, gender, activityLevel, goal.'
+      );
+    }
+
+    const activityFactor = this.getActivityFactor(activityLevel);
+    const goalOffset = this.getGoalOffset(goal);
+    const bmr = Number.isFinite(data.bmr) ? Number(data.bmr) : this.calcBmr(height, weight, age, gender);
+    const tdee = Number.isFinite(data.tdee) ? Number(data.tdee) : this.calcTdee(bmr, activityFactor, goalOffset);
+    const calorieTarget = Number.isFinite(data.calorieTarget) ? Number(data.calorieTarget) : tdee;
+
+    const macros = this.calcMacros(tdee, weight);
+    const proteinTarget = Number.isFinite(data.proteinTarget) ? Number(data.proteinTarget) : macros.protein;
+    const fatTarget = Number.isFinite(data.fatTarget) ? Number(data.fatTarget) : macros.fat;
+    const carbTarget = Number.isFinite(data.carbTarget) ? Number(data.carbTarget) : macros.carbs;
+
+    const waterTarget = Number.isFinite(data.waterTarget)
+      ? Number(data.waterTarget)
+      : Math.round(weight * 30);
+
+    const cupSizeMl = Number.isFinite(data.cupSizeMl) ? Number(data.cupSizeMl) : 250;
+
+    return this.prisma.userProfile.create({
+      data: {
+        userId,
+        height,
+        weight,
+        age,
+        gender,
+        activityLevel,
+        goal,
+        bmr,
+        tdee,
+        calorieTarget,
+        proteinTarget,
+        fatTarget,
+        carbTarget,
+        waterTarget,
+        cupSizeMl,
       },
     });
+  }
+
+  private getActivityFactor(level: string) {
+    switch (level) {
+      case 'Lightly Active':
+        return 1.375;
+      case 'Moderately Active':
+        return 1.55;
+      case 'Very Active':
+        return 1.725;
+      case 'Extremely Active':
+        return 1.9;
+      case 'Sedentary':
+      default:
+        return 1.2;
+    }
+  }
+
+  private getGoalOffset(goal: string) {
+    switch (goal) {
+      case 'Lose':
+        return -500;
+      case 'Gain':
+        return 300;
+      case 'Maintain':
+      default:
+        return 0;
+    }
+  }
+
+  private calcBmr(height: number, weight: number, age: number, gender: string) {
+    const base = 10 * weight + 6.25 * height - 5 * age;
+    return gender === 'Female' ? base - 161 : base + 5;
+  }
+
+  private calcTdee(bmr: number, activityFactor: number, goalOffset: number) {
+    return Math.round(bmr * activityFactor + goalOffset);
+  }
+
+  private calcMacros(tdee: number, weight: number) {
+    const protein = Math.round(weight * 1.5);
+    const fat = Math.round((tdee * 0.3) / 9);
+    const carbs = Math.round((tdee - protein * 4 - fat * 9) / 4);
+    return { protein, fat, carbs };
   }
 }

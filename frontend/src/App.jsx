@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom' // <-- Import useLocation
 import { AppProvider, useApp } from './context/AppContext'
 import Navbar from './components/ui/Navbar'
+import ToastHost from './components/ui/ToastHost'
 import Explorer from './pages/Explorer'
 import Strategy from './pages/Strategy'
 import Analysis from './pages/Analysis'
@@ -36,6 +37,7 @@ function AppRoutes() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+      <ToastHost />
     </div>
   )
 }

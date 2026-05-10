@@ -45,6 +45,18 @@ export class UpdateProfileDto {
   @IsNumber()
   tdee?: number;
 
+  //Water Target
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  waterTarget?: number; // ml
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  @Min(1)
+  cupSizeMl?: number; // ml per cup
+
   // Daily targets
   @IsOptional()
   @Type(() => Number)

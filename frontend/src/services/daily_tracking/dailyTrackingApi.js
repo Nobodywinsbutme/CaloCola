@@ -100,3 +100,53 @@ export async function getIntakes(token, date) {
     },
   })
 }
+
+/**
+ * Add a water intake
+ * POST /daily-tracking/water
+ * @param {string} token - JWT token
+ * @param {Object} waterData - { amountMl, intakeDate }
+ * @returns {Promise<Object>} Created water intake record
+ */
+export async function addWaterIntake(token, waterData) {
+  return fetchJson(`${API_BASE}/daily-tracking/water`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify(waterData),
+  })
+}
+
+/**
+ * Delete latest water intake for a date
+ * DELETE /daily-tracking/water/latest?date=YYYY-MM-DD
+ * @param {string} token - JWT token
+ * @param {string} date - Date in YYYY-MM-DD format
+ * @returns {Promise<Object|null>} Deleted water intake record
+ */
+export async function deleteLatestWaterIntake(token, date) {
+  return fetchJson(`${API_BASE}/daily-tracking/water/latest?date=${date}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+}
+
+/**
+ * Get all water intakes for a specific date
+ * GET /daily-tracking/water?date=YYYY-MM-DD
+ * @param {string} token - JWT token
+ * @param {string} date - Date in YYYY-MM-DD format
+ * @returns {Promise<Array>} Array of water intake records
+ */
+export async function getWaterIntakes(token, date) {
+  return fetchJson(`${API_BASE}/daily-tracking/water?date=${date}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+}

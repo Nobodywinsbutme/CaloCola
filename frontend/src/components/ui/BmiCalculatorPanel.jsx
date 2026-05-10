@@ -1,15 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { bmiLabel, calcBmi, calcBmr, calcMacros, calcTdee } from '../../utils/calculations'
-import { useAuth } from '../../context/AppContext'
+import { useApp } from '../../context/AppContext'
 import { updateUserProfile } from '../../services/user_profile/userProfileApi'
 
 const RANGES = { height: { min: 100, max: 250 }, weight: { min: 30, max: 200 }, age: { min: 10, max: 120 } }
+const ACTIVITY_LEVEL_VALUES = {
+  'Sedentary': 1.2,
+  'Lightly Active': 1.375,
+  'Moderately Active': 1.55,
+  'Very Active': 1.725,
+  'Extremely Active': 1.9,
+}
+const ACTIVITY_LEVEL_LABELS = {
+  1.2: 'Sedentary',
+  1.375: 'Lightly Active',
+  1.55: 'Moderately Active',
+  1.725: 'Very Active',
+  1.9: 'Extremely Active',
+}
 
 export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
-  const { user, isLoggedIn, token, refreshUserProfile } = useAuth()
+  const { isAuthenticated, token, userProfile, refreshUserProfile } = useApp()
   const [loading, setLoading] = useState(false)
-
+  const [error, setError] = useState(null)
+  const [success, setSuccess] = useState(false)
   const [form, setForm] = useState({
+    
     height: '',
     weight: '',
     age: '',
@@ -48,6 +64,20 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
     }
   }, [result, isValid, onUpdate])
 
+  useEffect(() => {
+    if (!isAuthenticated || !userProfile?.profile) return
+
+    const profile = userProfile.profile
+    setForm({
+      height: profile.height?.toString() || '',
+      weight: profile.weight?.toString() || '',
+      age: profile.age?.toString() || '',
+      gender: profile.gender === 'Female' ? 'f' : 'm',
+      activityLevel: ACTIVITY_LEVEL_VALUES[profile.activityLevel] || '',
+      goal: profile.goal === 'Lose' ? -500 : profile.goal === 'Gain' ? 300 : 0,
+    })
+  }, [isAuthenticated, userProfile])
+
   const update = (name, value) => {
     setForm(prev => ({ ...prev, [name]: value }))
     // When goal changes, immediately notify parent with a string label
@@ -76,46 +106,55 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
   }
 
   const handleSave = async (e) => {
-    e.preventDefault();
-    if (!isLoggedIn) return
+    e.preventDefault()
+    if (!isAuthenticated && !token) return
     setLoading(true)
+    setError(null)
+    setSuccess(false)
 
-    const weight = parseFloat(form.weight)
-    const height = parseFloat(form.height)
-    const age = parseInt(form.age, 10)
+    try {
+      const weight = parseFloat(form.weight)
+      const height = parseFloat(form.height)
+      const age = parseInt(form.age, 10)
+      const activityLevelLabel = ACTIVITY_LEVEL_LABELS[Number(form.activityLevel)] || 'Sedentary'
+      const goalLabel = Number(form.goal) < 0 ? 'Lose' : Number(form.goal) > 0 ? 'Gain' : 'Maintain'
+      const genderLabel = form.gender === 'f' ? 'Female' : 'Male'
 
-    // Calculate BMR
-    let bmr = (10 * weight) + (6.25 * height) - (5 * age);
-    bmr += (form.gender === 'm' ? 5 : -161);
+      // Calculate BMR
+      let bmr = (10 * weight) + (6.25 * height) - (5 * age)
+      bmr += (form.gender === 'm' ? 5 : -161)
 
-    let calculatedTdee = Math.round(bmr * Number(form.activityLevel));
-    calculatedTdee += Number(form.goal);
+      let calculatedTdee = Math.round(bmr * Number(form.activityLevel))
+      calculatedTdee += Number(form.goal)
 
-    // Calculate Macros
-    const protein = Math.round((calculatedTdee * 0.30) / 4);
-    const carbs = Math.round((calculatedTdee * 0.35) / 4);
-    const fat = Math.round((calculatedTdee * 0.35) / 9);
+      // Calculate Macros
+      const protein = Math.round((calculatedTdee * 0.30) / 4)
+      const carbs = Math.round((calculatedTdee * 0.35) / 4)
+      const fat = Math.round((calculatedTdee * 0.35) / 9)
 
-    onUpdate({ tdee: calculatedTdee, protein, fat, carbs });
+      onUpdate?.({ tdee: calculatedTdee, protein, fat, carbs })
 
-    if (user && token) {
-      try {
+      if (token) {
         await updateUserProfile(token, {
-          age: age,
-          height: height,
-          weight: weight,
-          gender: form.gender,
-          activityLevel: form.activityLevel,
-          goal: form.goal
-        });
+          age,
+          height,
+          weight,
+          gender: genderLabel,
+          activityLevel: activityLevelLabel,
+          goal: goalLabel,
+        })
 
-        await refreshUserProfile();
-      } catch (error) {
-        console.error("Failed to save profile:", error);
+        await refreshUserProfile()
+        setSuccess(true)
+        setError(null)
+        setTimeout(() => setSuccess(false), 2500)
       }
+    } catch (error) {
+      console.error('Failed to save profile:', error)
+      setError(error instanceof Error ? error.message : 'Could not save your profile. Please try again.')
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
   }
 
   return (
@@ -123,8 +162,8 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
 
       <div className="card card-lg">
         <div className="section-title">Your Profile Input</div>
-        <form className="form-grid" onSubmit={handleSave}>
-          <div className="form-field">
+        <form className="form-grid" onSubmit={handleSave} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12, alignItems: 'start' }}>
+          <div className="form-field" style={{ minWidth: 0 }}>
             <label>Height (cm)</label>
             <input
               type="number"
@@ -135,7 +174,7 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
             />
             {touched.height && errors.height && <span className="field-error">{errors.height}</span>}
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ minWidth: 0 }}>
             <label>Weight (kg)</label>
             <input
               type="number"
@@ -146,7 +185,7 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
             />
             {touched.weight && errors.weight && <span className="field-error">{errors.weight}</span>}
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ minWidth: 0 }}>
             <label>Age</label>
             <input
               type="number"
@@ -157,24 +196,24 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
             />
             {touched.age && errors.age && <span className="field-error">{errors.age}</span>}
           </div>
-          <div className="form-field">
+          <div className="form-field" style={{ minWidth: 0 }}>
             <label>Gender</label>
             <select value={form.gender} onChange={e => update('gender', e.target.value)}>
               <option value="m">Male</option>
               <option value="f">Female</option>
             </select>
           </div>
-        </form>
-        <div className="form-field" style={{ marginTop: 12 }}>
+        <div className="form-field" style={{ marginTop: 12, minWidth: 0 }}>
           <label>Activity Level</label>
           <select value={form.activityLevel} onChange={e => update('activityLevel', Number(e.target.value))}>
             <option value={1.2}>Sedentary</option>
             <option value={1.375}>Light (1–3 days/week)</option>
             <option value={1.55}>Moderate (3–5 days/week)</option>
             <option value={1.725}>Very Active</option>
+            <option value={1.9}>Extremely Active</option>
           </select>
         </div>
-        <div className="form-field" style={{ marginTop: 12 }}>
+        <div className="form-field" style={{ marginTop: 12, minWidth: 0 }}>
           <label>Goal</label>
           <select value={form.goal} onChange={e => update('goal', Number(e.target.value))}>
             <option value={-500}>Lose weight (−500 kcal/day)</option>
@@ -182,18 +221,21 @@ export default function BmiCalculatorPanel({ onUpdate, onGoalChange }) {
             <option value={300}>Gain muscle (+300 kcal/day)</option>
           </select>
         </div>
-        
-        {isLoggedIn && (
-          <button
-            type="submit"
-            className="btn btn-hi btn-full"
-            style={{ marginTop: 16 }}
-            disabled={!isValid || loading}
-            onClick={handleSave}
-          >
-            {loading ? 'Saving...' : 'Save'}
-          </button>
+        {isAuthenticated && (
+          <div style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 8, marginTop: 6, paddingTop: 4 }}>
+            {error && <div className="auth-error">{error}</div>}
+            {success && <div className="auth-success">Profile updated!</div>}
+            <button
+              type="submit"
+              className="btn btn-hi"
+              style={{ minWidth: 150, justifyContent: 'center' }}
+              disabled={loading}
+            >
+              {loading ? 'Saving...' : 'Save'}
+            </button>
+          </div>
         )}
+        </form>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

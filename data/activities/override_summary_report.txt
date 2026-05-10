@@ -1,0 +1,177 @@
+OVERRIDE / MERGE SUMMARY REPORT
+================================================================================
+Merged activities: 31
+Total original rows represented by merged items: 95
+
+BY CATEGORY (number of merged activities)
+--------------------------------------------------------------------------------
+- Thể Thao Nước: 6
+- Thể Thao Bóng Tập Thể: 5
+- Thể Thao Ngoài Trời & Giải Trí: 5
+- Công Việc Nhà & Vườn: 3
+- Thể Thao Mùa Đông: 3
+- Cardio, Aerobic & Dance: 2
+- Phòng Tập & Nâng Tạ: 2
+- Thể Thao Võ: 2
+- Chạy Bộ & Điền Kinh: 1
+- Thể Thao Vợt: 1
+- Đạp Xe: 1
+
+DETAILS
+--------------------------------------------------------------------------------
+[Cardio, Aerobic & Dance] Aerobics  <-- merged from 4 originals
+  - Aerobics, general
+  - Aerobics, high impact
+  - Aerobics, low impact
+  - Aerobics, step aerobics
+
+[Cardio, Aerobic & Dance] Ballroom dancing  <-- merged from 2 originals
+  - Ballroom dancing, fast
+  - Ballroom dancing, slow
+
+[Chạy Bộ & Điền Kinh] Running  <-- merged from 5 originals
+  - Running, cross country
+  - Running, general
+  - Running, on a track, team practice
+  - Running, stairs, up
+  - Running, training, pushing wheelchair
+
+[Công Việc Nhà & Vườn] Carrying infant  <-- merged from 2 originals
+  - Carrying infant, level ground
+  - Carrying infant, upstairs
+
+[Công Việc Nhà & Vườn] Mowing lawn  <-- merged from 2 originals
+  - Mowing lawn, riding mower
+  - Mowing lawn, walk, power mower
+
+[Công Việc Nhà & Vườn] Walk/run  <-- merged from 2 originals
+  - Walk/run, playing with children, moderate
+  - Walk/run, playing with children, vigorous
+
+[Phòng Tập & Nâng Tạ] Calisthenics  <-- merged from 2 originals
+  - Calisthenics, light
+  - Calisthenics, vigorous, pushups, situps…
+
+[Phòng Tập & Nâng Tạ] Weight lifting  <-- merged from 2 originals
+  - Weight lifting, body building, vigorous
+  - Weight lifting, light workout
+
+[Thể Thao Bóng Tập Thể] Basketball  <-- merged from 3 originals
+  - Basketball, officiating
+  - Basketball, shooting baskets
+  - Basketball, wheelchair
+
+[Thể Thao Bóng Tập Thể] Football  <-- merged from 2 originals
+  - Football, competitive
+  - Football, touch, flag, general
+
+[Thể Thao Bóng Tập Thể] Handball  <-- merged from 2 originals
+  - Handball
+  - Handball, team
+
+[Thể Thao Bóng Tập Thể] Softball  <-- merged from 2 originals
+  - Softball, officiating
+  - Softball, pitching
+
+[Thể Thao Bóng Tập Thể] Volleyball  <-- merged from 2 originals
+  - Volleyball, beach
+  - Volleyball, competitive
+
+[Thể Thao Mùa Đông] Cross country skiing  <-- merged from 4 originals
+  - Cross country skiing, moderate
+  - Cross country skiing, racing
+  - Cross country skiing, uphill
+  - Cross country skiing, vigorous
+
+[Thể Thao Mùa Đông] Downhill snow skiing  <-- merged from 2 originals
+  - Downhill snow skiing, moderate
+  - Downhill snow skiing, racing
+
+[Thể Thao Mùa Đông] Ice skating  <-- merged from 2 originals
+  - Ice skating, average speed
+  - Ice skating, rapidly
+
+[Thể Thao Ngoài Trời & Giải Trí] Golf  <-- merged from 6 originals
+  - Golf, driving range
+  - Golf, general
+  - Golf, miniature golf
+  - Golf, using power cart
+  - Golf, walking and carrying clubs
+  - Golf, walking and pulling clubs
+
+[Thể Thao Ngoài Trời & Giải Trí] Hockey  <-- merged from 2 originals
+  - Hockey, field hockey
+  - Hockey, ice hockey
+
+[Thể Thao Ngoài Trời & Giải Trí] Horseback riding  <-- merged from 3 originals
+  - Horseback riding, grooming horse
+  - Horseback riding, trotting
+  - Horseback riding, walking
+
+[Thể Thao Ngoài Trời & Giải Trí] Jumping rope  <-- merged from 3 originals
+  - Jumping rope, fast
+  - Jumping rope, moderate
+  - Jumping rope, slow
+
+[Thể Thao Ngoài Trời & Giải Trí] Rock climbing  <-- merged from 3 originals
+  - Rock climbing, ascending rock
+  - Rock climbing, mountain climbing
+  - Rock climbing, rappelling
+
+[Thể Thao Nước] Canoeing  <-- merged from 4 originals
+  - Canoeing, camping trip
+  - Canoeing, rowing, light
+  - Canoeing, rowing, moderate
+  - Canoeing, rowing, vigorous
+
+[Thể Thao Nước] Rowing machine  <-- merged from 4 originals
+  - Rowing machine, light
+  - Rowing machine, moderate
+  - Rowing machine, very vigorous
+  - Rowing machine, vigorous
+
+[Thể Thao Nước] Sailing  <-- merged from 2 originals
+  - Sailing, competition
+  - Sailing, yachting, ocean sailing
+
+[Thể Thao Nước] Skin diving  <-- merged from 3 originals
+  - Skin diving, fast
+  - Skin diving, moderate
+  - Skin diving, scuba diving
+
+[Thể Thao Nước] Swimming  <-- merged from 10 originals
+  - Swimming backstroke
+  - Swimming breaststroke
+  - Swimming butterfly
+  - Swimming laps, freestyle, fast
+  - Swimming laps, freestyle, slow
+  - Swimming leisurely, not laps
+  - Swimming sidestroke
+  - Swimming synchronized
+  - Swimming, treading water, fast, vigorous
+  - Swimming, treading water, moderate
+
+[Thể Thao Nước] Water aerobics  <-- merged from 2 originals
+  - Water aerobics
+  - Water aerobics, water calisthenics
+
+[Thể Thao Võ] Boxing  <-- merged from 3 originals
+  - Boxing, in ring
+  - Boxing, punching bag
+  - Boxing, sparring
+
+[Thể Thao Võ] Martial arts  <-- merged from 3 originals
+  - Martial arts, judo, karate, jujitsu
+  - Martial arts, kick boxing
+  - Martial arts, tae kwan do
+
+[Thể Thao Vợt] Tennis  <-- merged from 2 originals
+  - Tennis, doubles
+  - Tennis, singles
+
+[Đạp Xe] Stationary cycling  <-- merged from 5 originals
+  - Stationary cycling, light
+  - Stationary cycling, moderate
+  - Stationary cycling, very light
+  - Stationary cycling, very vigorous
+  - Stationary cycling, vigorous

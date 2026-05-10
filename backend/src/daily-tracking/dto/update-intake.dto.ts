@@ -14,7 +14,7 @@ export class UpdateIntakeDto {
 
 	@IsOptional()
 	@IsString()
-	@IsIn(['Breakfast', 'Lunch', 'Dinner', 'Snack'])
+	@IsIn(['Uncategorized', 'Breakfast', 'Lunch', 'Dinner', 'Snack'])
 	mealType?: string;
 
 	@IsOptional()

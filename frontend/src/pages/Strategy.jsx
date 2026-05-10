@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import BmiCalculatorPanel from '../components/ui/BmiCalculatorPanel'
 import PyramidChart from '../components/charts/PyramidChart'
-import { useAuth } from '../context/AppContext'
+import { useApp } from '../context/AppContext'
 import { useFoodRecommendations } from '../hooks/useFoodRecommendations'
 import { PYRAMID_TIERS } from '../config/foodCategories'
 
@@ -14,7 +14,7 @@ const GOAL_LABELS = {
 
 // ── Strategy page ─────────────────────────────────────────────
 export default function Strategy() {
-  const { macros, tdee, updateTargets, user, foods } = useAuth()
+  const { macros, tdee, updateTargets, user, foods } = useApp()
 
   // ── Live goal from the BMI panel dropdown (updates without Save) ──
   // Initialized from the saved user profile if available, otherwise null.

@@ -1,18 +1,11 @@
 import { useMemo, useState } from 'react'
 import BeeswarmPlot from '../components/charts/BeeswarmPlot'
+import ExerciseHeatmap from '../components/charts/ExerciseHeatmap'
 import { useApp } from '../context/AppContext'
 import {buildColorMap} from '../config/categoryColors'
 
 
-const WEEK = [
-  { day: 'Sat', h: 72, col: 'var(--hi)' },
-  { day: 'Sun', h: 88, col: 'var(--red)' },
-  { day: 'Mon', h: 55, col: 'var(--hi)' },
-  { day: 'Tue', h: 62, col: 'var(--hi)' },
-  { day: 'Wed', h: 17, col: 'var(--amber)', today: true },
-  { day: 'Thu', h: 0, col: 'var(--ink4)' },
-  { day: 'Fri', h: 0, col: 'var(--ink4)' },
-]
+
 
 export default function Explorer() {
   const { foods, loading, error } = useApp()
@@ -108,6 +101,17 @@ export default function Explorer() {
         </div>
       </div>
 
+      {/* Exercise Heatmap Card */}
+      <div className="card card-lg" style={{ marginTop: 24 }}>
+        <div className="card-head">
+          <div>
+            <div className="section-title" style={{ marginBottom: 2 }}>Exercise Calorie Heatmap — Energy by Activity & Body Weight</div>
+            <div style={{ fontSize: 11, color: 'var(--t3)' }}>Hover cells for details · Darker colors = more calories burned · Top 25 activities shown</div>
+          </div>
+        </div>
+        <ExerciseHeatmap/>
+      </div>
+
       {/* Bottom row */}
       <div className="grid-two">
         {/* Category avg bars */}
@@ -136,31 +140,6 @@ export default function Explorer() {
           })}
         </div>
 
-        {/* Daily snapshot */}
-        <div className="card">
-          <div className="section-title">Daily Snapshot - UPDATING - IN COMMING </div>
-          <div className="stat-grid">
-            <div className="stat-card"><div className="stat-label">Calories Today</div><div><span className="stat-value">375</span><span className="stat-unit">kcal</span></div></div>
-            <div className="stat-card"><div className="stat-label">Daily Goal</div><div><span className="stat-value">2,213</span><span className="stat-unit">kcal</span></div></div>
-            <div className="stat-card"><div className="stat-label">Protein</div><div><span className="stat-value info">15</span><span className="stat-unit">/ 84g</span></div></div>
-            <div className="stat-card accent"><div className="stat-label">Remaining</div><div><span className="stat-value accent">1,838</span><span className="stat-unit">kcal</span></div></div>
-          </div>
-
-          <div className="section-title" style={{ marginTop: 4 }}>This Week</div>
-          <div className="week-bars">
-            {WEEK.map(w => (
-              <div key={w.day} className="week-col">
-                <div className="week-bar" style={{ background: w.col, height: `${w.h}%` }} />
-                <div className={`week-day${w.today ? ' today' : ''}`}>{w.day}</div>
-              </div>
-            ))}
-          </div>
-          <div className="snap-legend" style={{ marginTop: 8 }}>
-            <span className="snap-dot" style={{ background: 'var(--hi)' }} /> <span style={{ fontSize: 10.5 }}>Within goal</span>
-            <span className="snap-dot" style={{ background: 'var(--red)' }} /> <span style={{ fontSize: 10.5 }}>Exceeded</span>
-            <span className="snap-dot" style={{ background: 'var(--amber)' }} /> <span style={{ fontSize: 10.5 }}>In progress</span>
-          </div>
-        </div>
       </div>
     </section>
   )

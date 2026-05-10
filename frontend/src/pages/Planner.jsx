@@ -1,200 +1,435 @@
-import { useState } from 'react'
-import ProgressRing from '../components/charts/ProgressRing'
-import RadarChart from '../components/charts/RadarChart'
+import { useEffect, useMemo, useState } from 'react'
+import AddFoodModal from '../components/ui/AddFoodModal'
+import EnergySummary from '../components/ui/EnergySummary'
+import WaterSettingsModal from '../components/ui/WaterSettingsModal'
 import { useApp } from '../context/AppContext'
+import { addWaterIntake, deleteIntake, deleteLatestWaterIntake, updateIntake } from '../services/daily_tracking/dailyTrackingApi'
 
-const MEAL_LOG = [
-  {
-    id: 'breakfast', label: 'Breakfast', kcal: 148, color: 'var(--amber)', open: true,
-    foods: [
-      { name: 'Spinach (50g)', kcal: '12 kcal', macro: 'P:1.4 F:0.2 C:1.7g', col: '#6effc4' },
-      { name: 'Oatmeal (100g)', kcal: '136 kcal', macro: 'P:4.7 F:2.6 C:24g', col: '#ffd766' },
-    ]
-  },
-  {
-    id: 'lunch', label: 'Lunch', kcal: 227, color: 'var(--teal)', open: true,
-    foods: [
-      { name: 'Phở Bò (350g)', kcal: '227 kcal', macro: 'P:18 F:6 C:26g', col: '#2ee8c8' },
-    ]
-  },
-  {
-    id: 'dinner', label: 'Dinner', kcal: 0, color: 'var(--blue)', open: false, foods: [] },
-]
 
-const RECS = [
-  { name: 'Chicken Breast', sub: '+38g protein · 165 kcal' },
-  { name: 'Brown Rice', sub: '+45g carbs · 123 kcal' },
-  { name: 'Cơm tấm (200g)', sub: '+32g carbs · 280 kcal' },
-  { name: 'Greek Yogurt', sub: '+17g protein · 97 kcal' },
-  { name: 'Almonds (30g)', sub: '+6g protein · 173 kcal' },
-]
-
-const ALMOND_RADAR = [80, 65, 30, 88, 20, 95, 55, 40]
 
 export default function Planner() {
-  const { consumed, macros, tdee } = useApp()
-  const remaining = Math.max(0, tdee - consumed.kcal)
-  const [openMeals, setOpenMeals] = useState(() => {
-    const state = {}
-    MEAL_LOG.forEach(m => { state[m.id] = m.open })
-    return state
-  })
+  const {
+    intakes,
+    token,
+    refreshDailyTotals,
+    refreshDailyIntakes,
+    userProfile,
+    waterTotalMl,
+    notify,
+    applyWaterDelta,
+  } = useApp()
+  const [isAddFoodOpen, setIsAddFoodOpen] = useState(false)
+  const [isWaterSettingsOpen, setIsWaterSettingsOpen] = useState(false)
+  const [dateOffset, setDateOffset] = useState(0)
+  const [editingId, setEditingId] = useState(null)
+  const [editQuantity, setEditQuantity] = useState('')
+  const [editMealType, setEditMealType] = useState('Breakfast')
+  const [actionError, setActionError] = useState('')
+  const [actionLoading, setActionLoading] = useState(false)
+  const [waterLoading, setWaterLoading] = useState(false)
+  const MEAL_ORDER = ['Uncategorized', 'Breakfast', 'Lunch', 'Dinner', 'Snack']
+  const MEAL_COLORS = {
+    Uncategorized: 'var(--line2)',
+    Breakfast: 'var(--blue)',
+    Lunch: 'var(--pink)',
+    Dinner: 'var(--teal)',
+    Snack: 'var(--amber)',
+  }
 
-  const toggleMeal = id => setOpenMeals(prev => ({ ...prev, [id]: !prev[id] }))
+  const selectedDate = useMemo(() => {
+    const base = new Date()
+    base.setHours(12, 0, 0, 0)
+    base.setDate(base.getDate() + dateOffset)
+    return base
+  }, [dateOffset])
 
-  const macroPairs = [
-    { label: 'Protein', val: consumed.protein, max: macros.protein, col: 'var(--blue)' },
-    { label: 'Fat', val: consumed.fat, max: macros.fat, col: 'var(--amber)' },
-    { label: 'Carbs', val: consumed.carbs, max: macros.carbs, col: 'var(--pink)' },
-  ]
+  const selectedDateIso = selectedDate.toISOString().split('T')[0]
+
+  const waterTargetMl = useMemo(() => {
+    const profile = userProfile?.profile
+    const weight = Number(profile?.weight || 0)
+    const fallbackTarget = weight ? Math.round(weight * 30) : 2000
+    const target = Number(profile?.waterTarget || 0)
+    return Math.round(target || fallbackTarget)
+  }, [userProfile])
+
+  const cupSizeMl = useMemo(() => {
+    const profile = userProfile?.profile
+    const size = Number(profile?.cupSizeMl || 0)
+    return Math.round(size || 250)
+  }, [userProfile])
+
+  const totalWaterMl = Math.max(0, Math.round(Number(waterTotalMl || 0)))
+  const totalCups = Math.max(1, Math.ceil(waterTargetMl / cupSizeMl))
+  const filledCups = Math.min(totalCups, Math.floor(totalWaterMl / cupSizeMl))
+  const waterPercent = waterTargetMl ? Math.min(100, Math.round((totalWaterMl / waterTargetMl) * 100)) : 0
+
+  const dateLabel = useMemo(() => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const compare = new Date(selectedDate)
+    compare.setHours(0, 0, 0, 0)
+    const diffDays = Math.round((compare - today) / 86400000)
+
+    if (diffDays === 0) return 'Today'
+    if (diffDays === -1) return 'Yesterday'
+    if (diffDays === 1) return 'Tomorrow'
+    return selectedDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    })
+  }, [selectedDate])
+
+  const meals = useMemo(() => {
+    const map = new Map()
+    MEAL_ORDER.forEach((label) => {
+      map.set(label, {
+        id: label,
+        label,
+        kcal: 0,
+        protein: 0,
+        fat: 0,
+        carbs: 0,
+        foods: [],
+      })
+    })
+
+    intakes.forEach((intake) => {
+      const mealLabel = MEAL_ORDER.includes(intake.mealType) ? intake.mealType : 'Uncategorized'
+      const meal = map.get(mealLabel)
+      const food = intake.food || intake.foodItem || {}
+      const qty = Number(intake.quantity || 0)
+      const ratio = qty ? qty / 100 : 1
+      const kcal = Math.round((Number(food.calories) || 0) * ratio)
+      const protein = Math.round((Number(food.protein) || 0) * ratio)
+      const fat = Math.round((Number(food.fat) || 0) * ratio)
+      const carbs = Math.round((Number(food.carbs) || 0) * ratio)
+
+      meal.kcal += kcal
+      meal.protein += protein
+      meal.fat += fat
+      meal.carbs += carbs
+
+      meal.foods.push({
+        intakeId: intake.id,
+        name: food.name || intake.foodName || 'Food',
+        qty: qty ? `${qty} g` : '-',
+        quantity: qty || 0,
+        mealType: mealLabel,
+        kcal,
+        protein,
+        carbs,
+        fats: fat,
+        col: MEAL_COLORS[mealLabel],
+      })
+    })
+
+    return MEAL_ORDER.map((label) => {
+      const meal = map.get(label)
+      return {
+        ...meal,
+        macro: `${meal.protein}p · ${meal.fat}f · ${meal.carbs}c`,
+      }
+    })
+  }, [intakes])
+
+  const [openMeals, setOpenMeals] = useState({})
+  useEffect(() => {
+    setOpenMeals((prev) => {
+      const next = { ...prev }
+      meals.forEach((meal) => {
+        if (next[meal.id] === undefined) next[meal.id] = true
+      })
+      return next
+    })
+  }, [meals])
+
+  const toggleMeal = (id) => setOpenMeals((prev) => ({ ...prev, [id]: !prev[id] }))
+
+  useEffect(() => {
+    refreshDailyTotals(selectedDateIso)
+    refreshDailyIntakes(selectedDateIso)
+  }, [selectedDateIso, refreshDailyTotals, refreshDailyIntakes])
+
+  const handleEdit = (food) => {
+    setEditingId(food.intakeId)
+    setEditQuantity(food.quantity)
+    // Only allow valid meal types for the edit control (server accepts Breakfast, Lunch, Dinner, Snack)
+    const allowed = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
+    setEditMealType(allowed.includes(food.mealType) ? food.mealType : 'Breakfast')
+    setActionError('')
+  }
+
+  const handleCancelEdit = () => {
+    setEditingId(null)
+    setEditQuantity('')
+    setEditMealType('Breakfast')
+    setActionError('')
+  }
+
+  const handleSaveEdit = async (intakeId) => {
+    if (!token) return
+    const qty = Number(editQuantity)
+    if (!qty || qty <= 0) {
+      setActionError('Quantity must be greater than 0.')
+      return
+    }
+    setActionLoading(true)
+    setActionError('')
+    try {
+      await updateIntake(token, intakeId, {
+        quantity: qty,
+        mealType: editMealType,
+      })
+      await refreshDailyTotals(selectedDateIso)
+      await refreshDailyIntakes(selectedDateIso)
+      handleCancelEdit()
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Failed to update intake.')
+    } finally {
+      setActionLoading(false)
+    }
+  }
+
+  const handleDelete = async (intakeId) => {
+    if (!token) return
+    setActionLoading(true)
+    setActionError('')
+    try {
+      await deleteIntake(token, intakeId)
+      await refreshDailyTotals(selectedDateIso)
+      await refreshDailyIntakes(selectedDateIso)
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Failed to delete intake.')
+    } finally {
+      setActionLoading(false)
+    }
+  }
+
+  const handleAddWater = async (amountMl) => {
+    if (!token) {
+      notify({ type: 'error', message: 'Please sign in to add water.' })
+      return false
+    }
+    if (!amountMl || amountMl <= 0) {
+      notify({ type: 'error', message: 'Water amount must be greater than 0.' })
+      return false
+    }
+    setWaterLoading(true)
+    applyWaterDelta(amountMl)
+    try {
+      await addWaterIntake(token, { amountMl, intakeDate: selectedDateIso })
+      await refreshDailyTotals(selectedDateIso)
+      return true
+    } catch (err) {
+      applyWaterDelta(-amountMl)
+      notify({ type: 'error', message: err instanceof Error ? err.message : 'Failed to add water.' })
+      return false
+    } finally {
+      setWaterLoading(false)
+    }
+  }
+
+  const handleRemoveWater = async () => {
+    if (!token) {
+      notify({ type: 'error', message: 'Please sign in to remove water.' })
+      return
+    }
+    if (totalWaterMl <= 0) return
+    const amountMl = Math.min(cupSizeMl, totalWaterMl)
+    setWaterLoading(true)
+    applyWaterDelta(-amountMl)
+    try {
+      await deleteLatestWaterIntake(token, selectedDateIso)
+      await refreshDailyTotals(selectedDateIso)
+    } catch (err) {
+      applyWaterDelta(amountMl)
+      notify({ type: 'error', message: err instanceof Error ? err.message : 'Failed to remove water.' })
+    } finally {
+      setWaterLoading(false)
+    }
+  }
+
+  const handleSaveCustomWater = async (amountMl) => {
+    const ok = await handleAddWater(amountMl)
+    return ok
+  }
+
 
   return (
-    <section className="page">
+    <section className="page planner-page">
       <div className="page-head">
         <div>
-          <h1>Automated Meal Construction & Food Detail</h1>
-          <p>Gap-filling algorithm · food detail deep dive · stretch goal AI integration mockup</p>
+          <h1>Planner</h1>
+          <p>Daily log and nutrition targets overview.</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button className="btn btn-ghost" style={{ padding: '5px 10px' }}>←</button>
-          <div style={{ fontSize: 17, fontWeight: 800 }}>Wednesday, 23 Apr 2026</div>
-          <button className="btn btn-ghost" style={{ padding: '5px 10px' }}>→</button>
-          <span className="badge warn" style={{ marginLeft: 8 }}>🔥 5 day streak</span>
+          <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev - 1)}>←</button>
+          <div style={{ fontSize: 17, fontWeight: 800 }}>{dateLabel}</div>
+          <button className="btn btn-ghost" style={{ padding: '5px 10px' }} onClick={() => setDateOffset((prev) => prev + 1)}>→</button>
         </div>
       </div>
 
-      {/* Top row: ring + macros + AI */}
-      <div className="grid-three">
-        {/* Progress ring */}
-        <div className="card">
-          <div className="section-title">Daily Progress Ring</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <ProgressRing value={consumed.kcal} max={tdee} size={96} stroke={10} color="var(--amber)" />
+      {/* Dashboard summary */}
+      <div className="planner-summary">
+        <EnergySummary />
+      </div>
+
+      <div className="planner-grid">
+        <div className="planner-main">
+          <div className="card planner-log">
+            <div className="planner-log-toolbar">
+              <div className="planner-tabs">
+                <button type="button" className="tab active">Food</button>
+                <button type="button" className="tab">Exercise</button>
+              </div>
+              <div className="planner-actions">
+                <button type="button" className="btn btn-ghost" onClick={() => setIsAddFoodOpen(true)}>+ Add food</button>
+                <button type="button" className="btn btn-ghost">+ Add exercise</button>
+              </div>
+            </div>
+
+            {actionError && <div className="meal-error">{actionError}</div>}
+
             <div>
-              <div style={{ fontSize: 12.5, color: 'var(--t2)' }}>Goal: <b style={{ color: 'var(--t1)' }}>{tdee} kcal</b></div>
-              <div style={{ color: 'var(--hi)', fontSize: 13, fontWeight: 700, marginTop: 3 }}>{remaining} remaining</div>
-              <div style={{ fontSize: 11, color: 'var(--t3)', marginTop: 4 }}>{Math.round(consumed.kcal / tdee * 100)}% complete</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Live macro bars */}
-        <div className="card">
-          <div className="section-title">Live Macro Progress</div>
-          {macroPairs.map(m => {
-            const pct = Math.round(m.val / m.max * 100)
-            const over = pct > 100
-            return (
-              <div key={m.label} className="bar-row">
-                <div className="bar-meta">
-                  <span style={{ color: m.col }}>{m.label}</span>
-                  <span style={{ color: over ? 'var(--red)' : 'inherit' }}>{m.val}/{m.max}g · {pct}%</span>
-                </div>
-                <div className="bar-track">
-                  <div className="bar-fill" style={{ background: over ? 'var(--red)' : m.col, width: `${Math.min(pct, 100)}%` }} />
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* AI mockup */}
-        <div className="card">
-          <div className="section-title">Future AI Integration (Stretch Goal)</div>
-          <div className="ai-box">
-            <div className="ai-icon">📷</div>
-            <div className="ai-title">Snap Your Plate</div>
-            <div className="ai-text">AI food recognition will detect items and auto-fill your tracker</div>
-            <div className="ai-cta">Coming Soon — Upload Photo</div>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 10 }}>
-            <span className="itag">🤖 OpenCV / YOLO architecture planned</span>
-            <span className="itag">📱 mobile camera integration</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main log + recommendations */}
-      <div className="grid-planner">
-        {/* Left: meal log + food detail */}
-        <div>
-          <div className="section-title" style={{ marginBottom: 10 }}>Meal Log</div>
-          {MEAL_LOG.map(meal => (
-            <div key={meal.id} className="meal-section">
-              <div className="meal-header" onClick={() => toggleMeal(meal.id)}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: meal.color }} />
-                <div className="meal-name">{meal.label}</div>
-                <div className="meal-kcal">{meal.kcal} kcal</div>
-                <div className={`meal-chevron${openMeals[meal.id] ? ' open' : ''}`}>▼</div>
-              </div>
-              {openMeals[meal.id] && (
-                <div className="meal-body">
-                  {meal.foods.map(food => (
-                    <div key={food.name} className="food-row">
-                      <div className="food-dot" style={{ background: food.col }} />
-                      <div className="food-name">{food.name}</div>
-                      <div className="food-cals">{food.kcal} · {food.macro}</div>
-                    </div>
-                  ))}
-                  <input type="text" placeholder={`+ Add food to ${meal.label}…`} style={{ marginTop: 4, fontSize: 12 }} />
-                </div>
-              )}
-            </div>
-          ))}
-
-          <hr className="divider" />
-
-          {/* Food detail */}
-          <div className="section-title" style={{ marginBottom: 10 }}>Food Detail — Almonds</div>
-          <div className="grid-two" style={{ gap: 12 }}>
-            <div className="card">
-              <div className="badge" style={{ background: 'rgba(224,123,26,.18)', color: '#e07b1a', marginBottom: 8 }}>
-                <div className="bdot" style={{ background: '#e07b1a' }} /> Nuts
-              </div>
-              <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: -.3, marginBottom: 2 }}>Almonds</div>
-              <div style={{ color: '#e07b1a', fontSize: 22, fontWeight: 800 }}>5.76 <span style={{ fontSize: 12, color: 'var(--t2)', fontWeight: 400 }}>cal/g</span></div>
-              <hr className="divider" />
-              <div style={{ fontSize: 11, color: 'var(--t2)', marginBottom: 8 }}>
-                Serving: <b style={{ color: 'var(--hi)' }}>100g</b> = <b>576 kcal</b>
-              </div>
-              <button className="btn btn-hi btn-full" style={{ marginTop: 4 }}>+ Add to Today</button>
-            </div>
-            <div className="card">
-              <div className="section-title">In Nuts Category</div>
-              <div className="grid-two" style={{ gap: 7 }}>
-                {[['Cashews', '5.53', '-0.23', 'var(--hi)'], ['Walnuts', '6.54', '+0.78', 'var(--red)'], ['Peanuts', '5.67', '-0.09', 'var(--hi)'], ['Pistachio', '5.57', '-0.19', 'var(--hi)']].map(([n, v, d, c]) => (
-                  <div key={n} className="sim-card">
-                    <div className="sim-name">{n}</div>
-                    <div className="sim-val">{v} <span style={{ color: c }}>{d}</span></div>
+              {meals.map((meal) => (
+                <div key={meal.id} className="meal-section">
+                  <div className="meal-header" onClick={() => toggleMeal(meal.id)}>
+                    <span className="meal-name">{meal.label}</span>
+                    <span className="meal-macro">{meal.kcal} kcal · {meal.macro}</span>
+                    <span className={`meal-chevron ${openMeals[meal.id] ? 'open' : ''}`}>▾</span>
                   </div>
+                  {openMeals[meal.id] && (
+                    <div className="meal-body">
+                      {meal.foods.length === 0 ? (
+                        <div className="meal-empty">No entries yet.</div>
+                      ) : (
+                        meal.foods.map((food, idx) => (
+                          <div key={`${meal.id}-${idx}`} className="food-row">
+                            <span className="food-dot" style={{ background: food.col }} />
+                            <span className="food-name">{food.name}</span>
+                            {editingId === food.intakeId ? (
+                              <div className="food-edit">
+                                <input
+                                  type="number"
+                                  min="1"
+                                  value={editQuantity}
+                                  onChange={(e) => setEditQuantity(e.target.value)}
+                                />
+                                <select value={editMealType} onChange={(e) => setEditMealType(e.target.value)}>
+                                  <option value="Uncategorized">Uncategorized</option>
+                                  <option value="Breakfast">Breakfast</option>
+                                  <option value="Lunch">Lunch</option>
+                                  <option value="Dinner">Dinner</option>
+                                  <option value="Snack">Snack</option>
+                                </select>
+                                <button type="button" className="btn btn-hi" onClick={() => handleSaveEdit(food.intakeId)} disabled={actionLoading}>Save</button>
+                                <button type="button" className="btn btn-ghost" onClick={handleCancelEdit} disabled={actionLoading}>Cancel</button>
+                              </div>
+                            ) : (
+                              <>
+                                <span className="food-qty">{food.qty}</span>
+                                <span className="food-cals">{food.kcal} kcal</span>
+                                <span className="food-cals">{food.carbs} g</span>
+                                <span className="food-cals">{food.protein} g</span>
+                                <span className="food-cals">{food.fats} g</span>
+                                {food.intakeId && (
+                                  <span className="food-actions">
+                                    <button type="button" className="btn btn-ghost" onClick={() => handleEdit(food)}>Edit</button>
+                                    <button type="button" className="btn btn-ghost" onClick={() => handleDelete(food.intakeId)} disabled={actionLoading}>Delete</button>
+                                  </span>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <aside className="planner-side">
+          <div className="card planner-date">
+            <button type="button" className="btn btn-ghost" onClick={() => setDateOffset((prev) => prev - 1)}>←</button>
+            <div className="planner-date-label">{dateLabel}</div>
+            <button type="button" className="btn btn-ghost" onClick={() => setDateOffset((prev) => prev + 1)}>→</button>
+          </div>
+
+          <div className="card planner-targets">
+            <div className="planner-targets-title">Daily Target Editor</div>
+            <div className="planner-targets-sub">Thu - Default Macronutrient Targets</div>
+          </div>
+
+          <div className="card planner-water">
+            <div className="planner-water-head">
+              <div>
+                <div className="planner-water-title">Water</div>
+                <div className="planner-water-sub">{filledCups} / {totalCups} cups</div>
+              </div>
+            </div>
+
+            <div className="planner-water-row">
+              <div
+                className="planner-water-cups"
+                style={{ gridTemplateColumns: `repeat(${totalCups}, 1fr)` }}
+              >
+                {Array.from({ length: totalCups }).map((_, idx) => (
+                  <div key={`water-cup-${idx}`} className={`water-cup ${idx < filledCups ? 'full' : ''}`} />
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right: recommendations + radar */}
-        <div>
-          <div className="section-title" style={{ marginBottom: 10 }}>Algorithmic Recommendations</div>
-          {RECS.map(rec => (
-            <div key={rec.name} className="rec-card">
-              <div className="rec-info">
-                <div className="rec-name">{rec.name}</div>
-                <div className="rec-sub">{rec.sub}</div>
+              <div className="planner-water-controls">
+                <button type="button" className="btn btn-ghost" onClick={handleRemoveWater} disabled={waterLoading || totalWaterMl <= 0}>-</button>
+                <button type="button" className="btn btn-ghost" onClick={() => handleAddWater(cupSizeMl)} disabled={waterLoading}>+</button>
               </div>
-              <button className="rec-add">+ Add</button>
             </div>
-          ))}
 
-          <hr className="divider" />
-          <div className="section-title" style={{ marginBottom: 8 }}>Food Detail Radar</div>
-          <RadarChart values={ALMOND_RADAR} color="#ff79b0" fillColor="rgba(255,121,176,0.2)" />
-          <div style={{ display: 'flex', gap: 10, justifyContent: 'center', fontSize: 10.5, marginTop: 6 }}>
-            <span style={{ color: 'var(--pink)' }}>■ Almonds</span>
-            <span style={{ color: 'var(--teal)' }}>-- RDI</span>
+            <div className="planner-water-tip">
+              Water added here will contribute to your total water target.
+            </div>
+
+            <div className="planner-water-total">
+              <span>Total Water - {totalWaterMl} / {waterTargetMl} ml</span>
+              <span>{waterPercent}%</span>
+            </div>
+            <div className="bar-track">
+              <div className="bar-fill" style={{ width: `${waterPercent}%`, background: 'var(--blue)' }} />
+            </div>
+
+            <div className="planner-water-actions">
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => {
+                  setIsWaterSettingsOpen(true)
+                }}
+                disabled={waterLoading}
+              >
+                Water settings
+              </button>
+            </div>
           </div>
-        </div>
+        </aside>
+      </div>
+
+      <div>
+        <AddFoodModal
+          isOpen={isAddFoodOpen}
+          onClose={() => setIsAddFoodOpen(false)}
+          intakeDate={selectedDateIso}
+        />
+        <WaterSettingsModal
+          isOpen={isWaterSettingsOpen}
+          onClose={() => setIsWaterSettingsOpen(false)}
+          defaultTarget={waterTargetMl}
+          defaultCupSize={cupSizeMl}
+        />
       </div>
     </section>
-  )
+    )
 }
