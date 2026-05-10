@@ -1,9 +1,7 @@
-// src/components/layout/Navbar.jsx
-import { useState, useRef } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { useAuth } from '../../context/AppContext'
-import UserProfilePopup from '../ui/UserProfilePopup'
-import AccountSettingsModal from '../ui/AccountSettingsModal' // Import the new modal
+import { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useApp } from '../../context/AppContext'
+import EditProfile from '../../pages/EditProfile'
 
 const NAV_ITEMS = [
   { to: '/', label: 'Density Explorer', end: true },
@@ -13,10 +11,32 @@ const NAV_ITEMS = [
 ]
 
 export default function Navbar() {
-  const { isLoggedIn, getInitials } = useAuth()
+  const { user, isAuthenticated, logout } = useApp()
   const [showProfile, setShowProfile] = useState(false)
-  const [showSettings, setShowSettings] = useState(false) // New state for modal
-  const avatarRef = useRef(null)
+  const navigate = useNavigate()
+
+  const handleAvatarClick = () => {
+    if (isAuthenticated) {
+      setShowProfile(true)
+    }
+  }
+
+  const handleLogout = () => {
+    logout()
+    //Navigate to the current page to trigger a re-render and update the UI immediately after logout
+    navigate(0)
+
+  }
+
+  const getInitials = (name) => {
+    if (!name) return '?'
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2)
+  }
 
   return (
     <>
@@ -43,27 +63,22 @@ export default function Navbar() {
                 onClick={handleAvatarClick}
                 title={user?.email}
               >
-                {getInitials()}
+                {getInitials(user?.name)}
+              </div>
+              <button className="nav-logout" onClick={handleLogout}>
+                Logout
               </button>
-              {showProfile && (
-                <UserProfilePopup 
-                  onClose={() => setShowProfile(false)} 
-                  onOpenSettings={() => setShowSettings(true)} // Pass the trigger function
-                />
-              )}
             </div>
           ) : (
-            <Link to="/login" id="nav-login-btn" className="nav-login-btn">
-              Login
-            </Link>
+            <div className="nav-auth">
+              <NavLink to="/login" className="nav-link">Login</NavLink>
+              <NavLink to="/register" className="nav-link nav-link-primary">Sign Up</NavLink>
+            </div>
           )}
         </div>
       </header>
 
-      {/* Render the modal outside the header flow */}
-      {showSettings && (
-        <AccountSettingsModal onClose={() => setShowSettings(false)} />
-      )}
+      {showProfile && <EditProfile onClose={() => setShowProfile(false)} />}
     </>
   )
 }

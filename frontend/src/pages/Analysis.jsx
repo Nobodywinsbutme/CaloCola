@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import RadarChart from '../components/charts/RadarChart'
 import ProgressRing from '../components/charts/ProgressRing'
-import { useAuth } from '../context/AppContext'
+import { useApp } from '../context/AppContext'
 
 // Data matched to the 8 spokes: PROTEIN, VITAMIN A, IRON, FATS, FIBER, CALCIUM, MAGNESIUM, CARBS
 const MEAL_DATA = [
@@ -173,7 +173,7 @@ function RDIAlignment({ values }) {
 }
 
 export default function Analysis() {
-  const { isLoggedIn } = useAuth()
+  const {  isAuthenticated } = useApp()
   const [mealIdx, setMealIdx] = useState(2)
   const values = MEAL_DATA[mealIdx]
   const MEAL_LABELS = ['Breakfast', 'Lunch', 'Dinner', 'Full Day']
@@ -185,7 +185,7 @@ export default function Analysis() {
           <h1 style={{ margin: '0 0 8px 0', fontSize: '24px' }}>Meal Balance Analysis</h1>
           <p style={{ margin: 0, color: '#9ca3af', fontSize: '14px' }}>
             Multivariate nutritional profiling · 8-spoke radar · 7-day calorie trend
-            {!isLoggedIn && (
+            {!isAuthenticated && (
               <span style={{ marginLeft: 10, color: '#ffc147', fontSize: 12 }}>
                 — Guest Mode: charts show sample data only
               </span>
@@ -216,7 +216,7 @@ export default function Analysis() {
 
       {/* Radar + RDI — guest sees no-data placeholder */}
       <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '24px', marginBottom: '24px' }}>
-        {isLoggedIn ? (
+        {isAuthenticated ? (
           <>
             <RadarChart values={values} />
             <RDIAlignment values={values} />
@@ -234,7 +234,7 @@ export default function Analysis() {
         {/* 7-Day Trend */}
         <div style={{ background: '#0b0f19', padding: '24px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
           <div style={{ fontSize: '16px', fontWeight: 600, color: '#e5e7eb', marginBottom: '16px' }}>7-Day Calorie Trend</div>
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>
               <LineChart />
               <div style={{ display: 'flex', gap: 14, marginTop: 16, fontSize: 11, color: '#9ca3af' }}>
@@ -250,7 +250,7 @@ export default function Analysis() {
         {/* Macro snapshot */}
         <div style={{ background: '#0b0f19', padding: '24px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
           <div style={{ fontSize: '16px', fontWeight: 600, color: '#e5e7eb', marginBottom: '16px' }}>Macro Balance Snapshot</div>
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <>
               <div style={{ marginBottom: 24, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {MACROS.map(m => {
