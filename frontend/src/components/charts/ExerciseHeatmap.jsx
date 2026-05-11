@@ -4,15 +4,13 @@ import exerciseData from '../../../../data/activities/exercise_dataset.json'
 const ExerciseHeatmap = () => {
   const [hoveredBar, setHoveredBar] = useState(null)
   const categories = useMemo(() => Object.keys(exerciseData.exercises || {}), [])
-  const [activeCategory, setActiveCategory] = useState(categories.includes('Cardio') ? 'Cardio' : (categories[0] || ''))
-
-  const categoryInfo = {
-    'Gym & Strength': { vn_name: 'Tập Luyện Phòng Gym', color: '#6366f1', icon: '💪' },
-    'Cardio': { vn_name: 'Cardio - Tim Mạch', color: '#ef4444', icon: '🏃' },
-    'Team Sports': { vn_name: 'Thể Thao Tập Thể', color: '#8b5cf6', icon: '⚽' },
-    'Individual Sports': { vn_name: 'Thể Thao Cá Nhân', color: '#10b981', icon: '🎾' },
-    'Housework': { vn_name: 'Công Việc Nhà', color: '#f59e0b', icon: '🧹' },
-  }
+  const categoryMeta = useMemo(() => {
+    const exercises = exerciseData.exercises || {}
+    return Object.fromEntries(
+      categories.map(cat => [cat, exercises[cat] || { category: cat }])
+    )
+  }, [categories])
+  const [activeCategory, setActiveCategory] = useState(categories[0] || '')
 
   const weights = ['59_kg', '70_kg', '82_kg', '93_kg']
   const weightLabels = { '59_kg': '59kg', '70_kg': '70kg', '82_kg': '82kg', '93_kg': '93kg' }
@@ -64,16 +62,12 @@ const ExerciseHeatmap = () => {
   }
 
   const heatmapColor = (value) => {
-    const baseHex = (categoryInfo[activeCategory]?.color) || '#3b82f6'
-    const hex = baseHex.replace('#', '')
-    const rgb = parseInt(hex.length === 3 ? hex.split('').map(c => c + c).join('') : hex, 16)
-    const r = (rgb >> 16) & 255
-    const g = (rgb >> 8) & 255
-    const b = rgb & 255
     const t = Math.max(0, Math.min(1, Number(value || 0) / (processedData.maxValue || 1)))
-    const nr = 255 * (1 - t * 0.85) + r * (t * 0.85)
-    const ng = 255 * (1 - t * 0.85) + g * (t * 0.85)
-    const nb = 255 * (1 - t * 0.85) + b * (t * 0.85)
+    const low = { r: 255, g: 242, b: 242 }
+    const high = { r: 185, g: 28, b: 28 }
+    const nr = low.r + (high.r - low.r) * t
+    const ng = low.g + (high.g - low.g) * t
+    const nb = low.b + (high.b - low.b) * t
     return `rgb(${Math.round(nr)}, ${Math.round(ng)}, ${Math.round(nb)})`
   }
 
@@ -108,14 +102,14 @@ const ExerciseHeatmap = () => {
               className={`pill${activeCategory === cat ? ' active' : ''}`}
               onClick={() => setActiveCategory(cat)}
             >
-              {cat}
+              {categoryMeta[cat]?.category || cat}
             </button>
           ))}
         </div>
       </div>
 
       <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--t1)', marginBottom: 8 }}>
-        {categoryInfo[activeCategory]?.icon} {activeCategory} — {categoryInfo[activeCategory]?.vn_name}
+        {categoryMeta[activeCategory]?.category || activeCategory}
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
@@ -135,14 +129,14 @@ const ExerciseHeatmap = () => {
               <tbody>
                 {processedData.activities.map((activity, idx) => (
                   <tr key={idx} style={{ borderBottom: '1px solid var(--ink4)' }}>
-                    <td style={{ padding: '8px 10px', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--t1)', fontSize: 10, fontWeight: 600 }} title={activity.name}>
-                      {activity.name}
+                    <td style={{ padding: '8px 10px', maxWidth: 220, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--t1)', fontSize: 15, fontWeight: 450 }} title={activity.vn_name}>
+                      {activity.vn_name}
                     </td>
                     {weights.map(w => {
                       const val = Number(activity.calories[w] || 0)
                       const bg = heatmapColor(val)
                       return (
-                        <td key={w} style={{ padding: '8px 6px', textAlign: 'center', background: bg, color: getTextColor(bg), fontWeight: 700, fontSize: 10 }}>
+                        <td key={w} style={{ padding: '8px 6px', textAlign: 'center', background: bg, color: getTextColor(bg), fontWeight: 600, fontSize: 15 }}>
                           {val.toFixed(0)}
                         </td>
                       )

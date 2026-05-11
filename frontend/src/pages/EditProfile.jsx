@@ -4,7 +4,7 @@ import { updateUserProfile } from '../services/user_profile/userProfileApi'
 import '../styles/auth.css'
 
 export default function EditProfile({ onClose }) {
-  const { user, token } = useApp()
+  const { userProfile, token } = useApp()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [success, setSuccess] = useState(false)
@@ -20,6 +20,35 @@ export default function EditProfile({ onClose }) {
   const [fatTarget, setFatTarget] = useState('')
   const [carbTarget, setCarbTarget] = useState('')
 
+
+  useEffect(() => {
+    const src = userProfile?.profile || userProfile
+    if (!src) return
+
+    const {
+      height: h,
+      weight: w,
+      age: a,
+      gender: g,
+      activityLevel: al,
+      goal: gl,
+      calorieTarget: ct,
+      proteinTarget: pt,
+      fatTarget: ft,
+      carbTarget: cb,
+    } = src
+
+    setHeight(h ?? '')
+    setWeight(w ?? '')
+    setAge(a ?? '')
+    setGender(g ?? 'Male')
+    setActivityLevel(al ?? 'Moderately Active')
+    setGoal(gl ?? 'Maintain')
+    setCalorieTarget(ct ?? '')
+    setProteinTarget(pt ?? '')
+    setFatTarget(ft ?? '')
+    setCarbTarget(cb ?? '')
+  }, [userProfile])
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)

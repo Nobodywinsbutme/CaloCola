@@ -144,3 +144,7 @@ playwright/.cache/
 .pytest_cache/
 htmlcov/
 .coverage
+
+Dataset
+
+backend/.env.example

@@ -23,7 +23,9 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout()
-    navigate('/')
+    //Navigate to the current page to trigger a re-render and update the UI immediately after logout
+    navigate(0)
+
   }
 
   const getInitials = (name) => {
