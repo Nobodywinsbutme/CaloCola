@@ -1,8 +1,9 @@
 /**
  * foodsApi.js
  * Central place for all food-related API calls.
- * Uses the Vite proxy route: /api -> http://localhost:8000
  */
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 
 async function fetchJson(url, options) {
   const res = await fetch(url, options)
@@ -19,12 +20,11 @@ async function fetchJson(url, options) {
 /**
  * Get all foods (optionally filtered by category).
  * Backend supports: GET /foods?category=...
- * Frontend calls:   GET /api/foods?category=...
  */
 export async function getFoods({ category } = {}) {
   const params = new URLSearchParams()
   if (category) params.set('category', category)
 
-  const url = params.toString() ? `/api/foods?${params}` : `/api/foods`
+  const url = params.toString() ? `${API_BASE}/foods?${params}` : `${API_BASE}/foods`
   return fetchJson(url)
 }
