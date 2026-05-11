@@ -1,0 +1,514 @@
+{
+  "info": {
+    "_postman_id": "d2c6cffd-3e6b-4d80-88fe-5c425baf48e6",
+    "name": "CaloCola",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50604278",
+    "_collection_link": "https://go.postman.co/collection/50604278-d2c6cffd-3e6b-4d80-88fe-5c425baf48e6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Food",
+      "item": [
+        {
+          "name": "Get all food",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/foods",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "foods"
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "Get all food filter by category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/foods?category=Cơm",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "foods"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Cơm"
+                }
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\" : \"student1@example.com\",\r\n    \"password\" : \"password123\",\r\n    \"name\" : \"Khanh\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/auth/register",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\" : \"student1@example.com\",\r\n    \"password\" : \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/auth/login",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{backend}}/users/profile",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upsert Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"height\": 175,\r\n    \"weight\": 70,\r\n    \"age\": 20,\r\n    \"gender\": \"Male\",\r\n    \"activityLevel\": \"Moderately Active\",\r\n    \"goal\": \"Maintain\",\r\n    \"waterTarget\" : 210,\r\n    \"bmr\": 1600,\r\n    \"tdee\": 2400,\r\n    \"calorieTarget\": 2500,\r\n    \"proteinTarget\": 120,\r\n    \"cupSizeMl\": 30,\r\n    \"fatTarget\": 70,\r\n    \"carbTarget\": 300\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/users/profile",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upsert Profile Cup and Amount",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"waterTarget\" : 210,\r\n    \"cupSizeMl\": 40\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/users/profile",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Daily Track",
+      "item": [
+        {
+          "name": "Add Intake",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"foodId\": \"2\",\n  \"quantity\": 150,\n  \"mealType\": \"Breakfast\",\n  \"intakeDate\": \"2026-05-06\"\n}"
+            },
+            "url": {
+              "raw": "{{backend}}/daily-tracking/intake",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "intake"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Intake",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"foodId\": \"1\",\n  \"quantity\": 100,\n  \"mealType\": \"Lunch\",\n  \"intakeDate\": \"2026-05-06\"\n}"
+            },
+            "url": {
+              "raw": "{{backend}}/daily-tracking/intake/{{intakeId}}",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "intake",
+                "{{intakeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Intake",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{backend}}/daily-tracking/intake/{{intakeId}}",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "intake",
+                "{{intakeId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Daily Totals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{backend}}/daily-tracking/totals?date={{date}} ",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "totals"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}} "
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Intakes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{backend}}/daily-tracking/intakes?date={{date}}",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "intakes"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Water Intake",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amountMl\": 100,\n  \"intakeDate\": \"2026-05-08\"\n}"
+            },
+            "url": {
+              "raw": "{{backend}}/daily-tracking/water",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "water"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Latest Water Intake",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{backend}}/daily-tracking/water/latest?date={{date}}",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "water",
+                "latest"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Water Intake",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{backend}}/daily-tracking/water?date={{date}}",
+              "host": [
+                "{{backend}}"
+              ],
+              "path": [
+                "daily-tracking",
+                "water"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
