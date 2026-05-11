@@ -6,7 +6,6 @@ import EditProfile from '../../pages/EditProfile'
 const NAV_ITEMS = [
   { to: '/', label: 'Density Explorer', end: true },
   { to: '/strategy', label: 'Dietary Strategy', end: false },
-  { to: '/analysis', label: 'Meal Balance', end: false },
   { to: '/planner', label: 'Planner & AI', end: false },
 ]
 

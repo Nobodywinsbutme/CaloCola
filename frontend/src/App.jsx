@@ -4,7 +4,6 @@ import Navbar from './components/ui/Navbar'
 import ToastHost from './components/ui/ToastHost'
 import Explorer from './pages/Explorer'
 import Strategy from './pages/Strategy'
-import Analysis from './pages/Analysis'
 import Planner from './pages/Planner'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -30,7 +29,6 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={<Explorer />} />
           <Route path="/strategy" element={<Strategy />} />
-          <Route path="/analysis" element={<Analysis />} />
           <Route path="/planner" element={<ProtectedRoute element={<Planner />} />} />
           <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" replace />} />
           <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/" replace />} />

@@ -112,35 +112,7 @@ export default function Explorer() {
         <ExerciseHeatmap/>
       </div>
 
-      {/* Bottom row */}
-      <div className="grid-two">
-        {/* Category avg bars */}
-        <div className="card">
-          <div className="section-title">Average Cal/100g by Category</div>
-          {categories.map(cat => {
-            const fs = foods.filter(f => f.category === cat)
-            const avg = fs.reduce((s, f) => s + f.calories, 0) / (fs.length || 1)
-            const max = 500
-            const col = colorMap[cat]  
-            return (
-              <div
-                key={cat}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, cursor: 'pointer' }}
-                onClick={() => setFilterCategory(prev => prev === cat ? 'all' : cat)}
-              >
-                <div style={{ width: 70, fontSize: 10.5, color: col, textAlign: 'right', fontWeight: 600 }}>{cat}</div>
-                <div style={{ flex: 1, height: 14, background: 'var(--ink4)', borderRadius: 99, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', background: col, borderRadius: 99, width: `${(avg / max) * 100}%`, transition: 'width 1s ease' }} />
-                </div> 
-                <div style={{ width: 45, fontSize: 10, color: 'var(--t2)', fontFamily: 'var(--fm)', whiteSpace: 'nowrap' }}>
-                  {avg.toFixed(0)} / 500
-                </div>
-              </div>
-            )
-          })}
-        </div>
-
-      </div>
+      
     </section>
   )
 }
